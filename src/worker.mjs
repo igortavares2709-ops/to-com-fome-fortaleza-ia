@@ -788,6 +788,7 @@ export default {
       if (url.pathname === "/styles.css") return assetResponse("styles.css", "text/css");
       if (url.pathname === "/app.js") return assetResponse("app.js", "text/javascript");
       if (url.pathname === "/favicon.svg") return assetResponse("favicon.svg", "image/svg+xml");
+      if (url.pathname === "/favicon.ico") return assetResponse("favicon.svg", "image/svg+xml");
       if (url.pathname === "/data/fortaleza-basemap.json") {
         return assetResponse("data/fortaleza-basemap.json", "application/json");
       }

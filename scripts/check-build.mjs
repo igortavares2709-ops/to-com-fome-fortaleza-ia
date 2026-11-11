@@ -43,6 +43,10 @@ assert.equal(templateResponse.status, 200);
 assert.match(templateResponse.headers.get("content-type") ?? "", /text\/csv/);
 assert.match(await templateResponse.text(), /^name,price,description,category,available,currency/m);
 
+const fallbackFavicon = await worker.fetch(new Request("https://build.local/favicon.ico"), {});
+assert.equal(fallbackFavicon.status, 200);
+assert.match(fallbackFavicon.headers.get("content-type") ?? "", /image\/svg\+xml/);
+
 const metaResponse = await worker.fetch(new Request("https://build.local/api/meta"), {});
 assert.equal(metaResponse.status, 200);
 const meta = await metaResponse.json();
