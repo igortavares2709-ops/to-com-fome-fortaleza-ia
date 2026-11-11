@@ -1,0 +1,15 @@
+:root {
+  color-scheme: light;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  color: #172b2f;
+  background: #fffdf8;
+}
+
+body { margin: 0; }
+main { width: min(100% - 32px, 760px); margin: 0 auto; padding: 56px 0 80px; }
+a { color: #0d5b63; }
+.back { display: inline-block; margin-bottom: 30px; font-weight: 700; text-decoration: none; }
+h1 { margin: 0 0 12px; font: 600 clamp(34px, 7vw, 56px) Georgia, serif; }
+h2 { margin-top: 34px; font-size: 20px; }
+p, li { color: #52645f; line-height: 1.7; }
+.updated { color: #66665f; font-size: 13px; }

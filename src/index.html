@@ -264,10 +264,13 @@
             <span>CADASTRO DA FONTE</span>
             <strong>Enviar cardápio para análise</strong>
           </div>
-          <label for="partner-restaurant">Restaurante em Fortaleza</label>
-          <select id="partner-restaurant" required>
-            <option value="">Selecione o restaurante</option>
+          <label for="partner-restaurant-search">Buscar restaurante em Fortaleza</label>
+          <input id="partner-restaurant-search" type="search" maxlength="100" autocomplete="off" aria-describedby="partner-restaurant-hint" placeholder="Digite nome, bairro, endereço ou ID" />
+          <label for="partner-restaurant">Unidade encontrada</label>
+          <select id="partner-restaurant" required disabled aria-describedby="partner-restaurant-hint">
+            <option value="">Digite pelo menos 2 letras acima</option>
           </select>
+          <small id="partner-restaurant-hint" class="partner-field-hint" role="status" aria-live="polite">A busca diferencia unidades pelo bairro, endereço e ID do OpenStreetMap.</small>
 
           <label for="partner-source-url">URL pública do cardápio</label>
           <input id="partner-source-url" type="url" required maxlength="1000" placeholder="https://docs.google.com/.../pub?output=csv" />
@@ -280,7 +283,7 @@
           </select>
 
           <label for="partner-notes">Observações <span>(opcional)</span></label>
-          <textarea id="partner-notes" maxlength="500" rows="3" placeholder="Como podemos confirmar a autorização?"></textarea>
+          <textarea id="partner-notes" maxlength="500" rows="3" placeholder="Como confirmar a autorização? Não informe telefone, e-mail, documento, senha ou token."></textarea>
 
           <label class="partner-consent">
             <input id="partner-authorization" type="checkbox" required />
@@ -288,6 +291,7 @@
           </label>
 
           <button type="submit">Continuar no GitHub <span aria-hidden="true">↗</span></button>
+          <button id="partner-meta-retry" class="partner-retry" type="button" hidden>Carregar restaurantes novamente</button>
           <p class="partner-form-note">A solicitação será aberta no repositório público para revisão. É necessário entrar no GitHub e confirmar o envio.</p>
           <p id="partner-form-status" class="partner-form-status" role="status" aria-live="polite"></p>
         </form>

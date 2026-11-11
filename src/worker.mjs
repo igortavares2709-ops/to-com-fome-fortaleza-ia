@@ -4,7 +4,11 @@ import menuData from "../data/menu-items.json" with { type: "json" };
 const ASSETS = /*__ASSETS__*/ null;
 const RESTAURANTS = dataset.restaurants;
 const OFFICIAL_MENUS = menuData.menus || {};
+const MENU_SUBMISSION_REPOSITORY = "igortavares2709-ops/to-com-fome-fortaleza-ia";
 const GOOGLE_PLACES_ENDPOINT = "https://places.googleapis.com/v1/places:searchText";
+const SEARCH_RATE_LIMIT = new Map();
+const SEARCH_RATE_WINDOW_MS = 60_000;
+const SEARCH_RATE_MAX = 30;
 const GOOGLE_PLACES_FIELD_MASK = [
   "places.id",
   "places.displayName",
@@ -668,6 +672,28 @@ function json(data, status = 200) {
   });
 }
 
+function rateLimited(request, now = Date.now()) {
+  const address = request.headers.get("CF-Connecting-IP");
+  if (!address) return false;
+  const current = SEARCH_RATE_LIMIT.get(address);
+  if (!current || now - current.startedAt >= SEARCH_RATE_WINDOW_MS) {
+    SEARCH_RATE_LIMIT.set(address, { startedAt: now, count: 1 });
+  } else {
+    current.count += 1;
+    if (current.count > SEARCH_RATE_MAX) return true;
+  }
+  if (SEARCH_RATE_LIMIT.size > 5_000) {
+    for (const [key, value] of SEARCH_RATE_LIMIT) {
+      if (now - value.startedAt >= SEARCH_RATE_WINDOW_MS) SEARCH_RATE_LIMIT.delete(key);
+    }
+  }
+  return false;
+}
+
+function headResponse(response) {
+  return new Response(null, { status: response.status, headers: response.headers });
+}
+
 function assetResponse(name, mime) {
   const asset = ASSETS?.[name];
   if (!asset) return json({ error: "Recurso não encontrado." }, 404);
@@ -777,13 +803,18 @@ async function readJson(request) {
   }
 }
 
-export default {
+const worker = {
   async fetch(request, env = {}) {
     const url = new URL(request.url);
+    if (request.method === "HEAD") {
+      const getRequest = new Request(request, { method: "GET" });
+      return headResponse(await worker.fetch(getRequest, env));
+    }
     if (request.method === "GET") {
       if (url.pathname === "/" || url.pathname === "/index.html") return assetResponse("index.html", "text/html");
       if (url.pathname === "/terms.html") return assetResponse("terms.html", "text/html");
       if (url.pathname === "/privacy.html") return assetResponse("privacy.html", "text/html");
+      if (url.pathname === "/policy.css") return assetResponse("policy.css", "text/css");
       if (url.pathname === "/templates/cardapio.csv") return assetResponse("templates/cardapio.csv", "text/csv");
       if (url.pathname === "/styles.css") return assetResponse("styles.css", "text/css");
       if (url.pathname === "/app.js") return assetResponse("app.js", "text/javascript");
@@ -814,8 +845,9 @@ export default {
           ...dataset.meta,
           neighborhoods: knownNeighborhoods().sort((a, b) => a.localeCompare(b)),
           cuisines: knownCuisines(),
-          restaurant_options: RESTAURANTS.map(({ id, name, neighborhood }) => ({ id, name, neighborhood }))
+          restaurant_options: RESTAURANTS.map(({ id, name, neighborhood, address }) => ({ id, name, neighborhood, address }))
             .sort((a, b) => a.name.localeCompare(b.name, "pt-BR")),
+          menu_submission_repository: MENU_SUBMISSION_REPOSITORY,
           coverage: {
             opening_hours: RESTAURANTS.filter((item) => item.opening_hours).length,
             delivery: RESTAURANTS.filter((item) => item.delivery).length,
@@ -835,13 +867,12 @@ export default {
     if (request.method !== "POST" || url.pathname !== "/api/search")
       return json({ error: "Método não permitido." }, 405);
     const origin = request.headers.get("Origin");
-    if (origin && origin !== url.origin) return json({ error: "Origem não permitida." }, 403);
+    const staticPagesBridge = origin === null && url.hostname === "pages.local";
+    if (origin !== url.origin && !staticPagesBridge) return json({ error: "Origem não permitida." }, 403);
+    if (rateLimited(request)) return json({ error: "Muitas buscas em pouco tempo. Aguarde um minuto." }, 429);
 
     try {
       const body = await readJson(request);
-      if (body.useGooglePlaces === true && origin !== url.origin) {
-        return json({ error: "Origem não permitida para a consulta externa." }, 403);
-      }
       const query = typeof body.query === "string" ? body.query.trim().slice(0, 300) : "";
       const fallback = parseIntent(query);
       const [interpreted, googlePlaces] = await Promise.all([
@@ -892,3 +923,5 @@ export default {
     }
   },
 };
+
+export default worker;

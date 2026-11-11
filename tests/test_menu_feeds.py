@@ -50,6 +50,60 @@ class MenuFeedTests(unittest.TestCase):
         items, _ = menu_feeds.parse_jsonld_menu(body, "https://example.com/menu")
         self.assertEqual([item["name"] for item in items], ["Peixe"])
 
+    def test_unavailable_values_are_not_published_as_available(self):
+        for value in ("unavailable", "sold out", "indisponivel", "esgotado", "não disponível", "discontinued"):
+            self.assertFalse(menu_feeds.truthy(value), value)
+        for availability in (
+            "https://schema.org/SoldOut",
+            "https://schema.org/SoldOut ",
+            "schema:SoldOut",
+            "https://schema.org/OutOfStock?x=1",
+        ):
+            body = f'''<script type="application/ld+json">{{"@type":"MenuItem","name":"Peixe","offers":{{"@type":"Offer","price":"39.90","priceCurrency":"BRL","availability":"{availability}"}}}}</script>'''.encode()
+            items, _ = menu_feeds.parse_jsonld_menu(body, "https://example.com/menu")
+            self.assertFalse(items[0]["available"], availability)
+
+    def test_rejects_credentials_ifood_trailing_dot_and_nonstandard_ports(self):
+        for url, message in [
+            ("https://alice:secret@example.com/menu.csv", "credentials"),
+            ("https://www.ifood.com.br./delivery/menu", "iFood"),
+            ("https://example.com:8443/menu.csv", "standard HTTPS port"),
+            ("https://example.com/menu.csv#private", "fragment"),
+            ("https://example.com/menu.csv?access_token=supersecret", "credentials"),
+            ("https://example.com/menu.csv?X-Amz-Signature=supersecret", "credentials"),
+            ("https://example.com/menu.csv?X-Goog-Credential=supersecret", "credentials"),
+            ("https://example.com/menu\n.csv", "whitespace"),
+            ("https://www.ifood.com.br。/delivery/menu", "iFood"),
+        ]:
+            with self.subTest(url=url), self.assertRaisesRegex(ValueError, message):
+                menu_feeds.validate_public_https(url)
+
+    def test_connection_uses_the_public_address_it_validated(self):
+        address_info = [
+            (socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP, "", ("93.184.216.34", 443))
+        ]
+        fake_socket = mock.Mock()
+        with mock.patch.object(menu_feeds.socket, "getaddrinfo", return_value=address_info), mock.patch.object(
+            menu_feeds.socket, "socket", return_value=fake_socket
+        ):
+            result = menu_feeds.create_public_connection(("example.com", 443), timeout=3)
+        self.assertIs(result, fake_socket)
+        fake_socket.settimeout.assert_called_once_with(3)
+        fake_socket.connect.assert_called_once_with(("93.184.216.34", 443))
+
+    def test_proxy_requires_an_explicit_trust_signal(self):
+        with mock.patch.dict(menu_feeds.os.environ, {}, clear=True):
+            direct = menu_feeds.public_https_opener()
+        self.assertTrue(any(isinstance(handler, menu_feeds.PublicHTTPSHandler) for handler in direct.handlers))
+
+        with mock.patch.dict(
+            menu_feeds.os.environ,
+            {"HTTPS_PROXY": "http://proxy.example:8080", "MENU_FEED_TRUSTED_PROXY": "1"},
+            clear=True,
+        ):
+            proxied = menu_feeds.public_https_opener()
+        self.assertFalse(any(isinstance(handler, menu_feeds.PublicHTTPSHandler) for handler in proxied.handlers))
+
     def test_empty_configuration_is_stable(self):
         result = menu_feeds.update({"feeds": []}, {"n1"}, {"menus": {}})
         self.assertEqual(result["meta"]["feed_count"], 0)
@@ -128,6 +182,55 @@ class MenuFeedTests(unittest.TestCase):
         self.assertTrue(result["menus"]["n1"]["stale"])
         self.assertEqual([item["price_cents"] for item in result["menus"]["n1"]["items"]], [2500])
 
+    def test_suspicious_menu_shrink_preserves_previous_prices(self):
+        feed = {
+            "feeds": [
+                {
+                    "restaurant_id": "n1",
+                    "url": "https://example.com/menu.json",
+                    "format": "json_v1",
+                    "permission_basis": "restaurant_public_feed",
+                }
+            ]
+        }
+        previous_items = [
+            {"name": f"Prato {index}", "price_cents": 2500}
+            for index in range(100)
+        ]
+        previous = {"menus": {"n1": {"source_url": "https://example.com/menu.json", "items": previous_items}}}
+        body = b'{"items":[{"name":"Resposta parcial","price":"20"}]}'
+        with mock.patch.object(menu_feeds, "validate_public_https", side_effect=lambda url: url), mock.patch.object(
+            menu_feeds, "fetch", return_value=body
+        ):
+            result = menu_feeds.update(feed, {"n1"}, previous)
+
+        self.assertEqual(result["meta"]["successful_feeds"], 0)
+        self.assertTrue(result["menus"]["n1"]["stale"])
+        self.assertEqual(len(result["menus"]["n1"]["items"]), 100)
+
+        duplicate_body = json.dumps({
+            "items": [{"name": "Resposta repetida", "price": "20"}] * 35
+        }).encode()
+        with mock.patch.object(menu_feeds, "validate_public_https", side_effect=lambda url: url), mock.patch.object(
+            menu_feeds, "fetch", return_value=duplicate_body
+        ):
+            duplicate_result = menu_feeds.update(feed, {"n1"}, previous)
+        self.assertEqual(duplicate_result["meta"]["successful_feeds"], 0)
+        self.assertEqual(len(duplicate_result["menus"]["n1"]["items"]), 100)
+
+        replacement_body = json.dumps({
+            "items": [
+                {"name": f"Produto novo {index}", "price": "20"}
+                for index in range(40)
+            ]
+        }).encode()
+        with mock.patch.object(menu_feeds, "validate_public_https", side_effect=lambda url: url), mock.patch.object(
+            menu_feeds, "fetch", return_value=replacement_body
+        ):
+            replacement_result = menu_feeds.update(feed, {"n1"}, previous)
+        self.assertEqual(replacement_result["meta"]["successful_feeds"], 0)
+        self.assertEqual(len(replacement_result["menus"]["n1"]["items"]), 100)
+
     def test_historical_osm_id_resolves_to_current_restaurant(self):
         restaurants = [
             {
@@ -176,6 +279,18 @@ class MenuFeedTests(unittest.TestCase):
                 "Found",
                 {},
                 "http://example.com/private",
+            )
+
+    def test_redirect_to_ifood_is_rejected(self):
+        request = mock.Mock(full_url="https://restaurant.example/menu")
+        with self.assertRaisesRegex(ValueError, "iFood"):
+            menu_feeds.PublicHttpsRedirectHandler().redirect_request(
+                request,
+                None,
+                302,
+                "Found",
+                {},
+                "https://www.ifood.com.br./delivery/menu",
             )
 
     def test_atomic_json_write(self):

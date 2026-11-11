@@ -17,7 +17,7 @@ body:
     id: restaurant_id
     attributes:
       label: ID do restaurante
-      description: Identificador exibido pelo formulário do aplicativo, como n123456.
+      description: Identificador exibido ao lado da unidade no formulário do aplicativo, como n123456. O nome deve corresponder exatamente ao ID.
     validations:
       required: true
   - type: input
@@ -51,4 +51,4 @@ body:
     id: notes
     attributes:
       label: Observações
-      description: Informe, se necessário, como a autorização pode ser confirmada.
+      description: Informe apenas dados comerciais necessários à revisão. Não publique telefone, e-mail, documento, senha, token nem cabeçalhos iniciados por ###.

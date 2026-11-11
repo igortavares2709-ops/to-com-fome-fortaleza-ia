@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import dataset from "../data/restaurants.json" with { type: "json" };
 import menuData from "../data/menu-items.json" with { type: "json" };
 import worker, {
@@ -167,6 +168,7 @@ test("API expõe metadados e busca estruturada", async () => {
   assert.ok(meta.coverage.menus >= 15);
   assert.equal(meta.restaurant_options.length, dataset.restaurants.length);
   assert.ok(meta.restaurant_options.every((item) => item.id && item.name));
+  assert.equal(meta.menu_submission_repository, "igortavares2709-ops/to-com-fome-fortaleza-ia");
 
   const searchResponse = await worker.fetch(new Request("https://example.test/api/search", {
     method: "POST",
@@ -252,14 +254,31 @@ test("Google Places permanece desativado sem opção ou sem chave", async () => 
   }
 });
 
-test("consulta externa exige origem do próprio aplicativo", async () => {
+test("toda busca exige origem do próprio aplicativo", async () => {
   const response = await worker.fetch(new Request("https://example.test/api/search", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query: "pizza", useGooglePlaces: true }),
   }), { GOOGLE_PLACES_API_KEY: "secret" });
   assert.equal(response.status, 403);
-  assert.equal((await response.json()).error, "Origem não permitida para a consulta externa.");
+  assert.equal((await response.json()).error, "Origem não permitida.");
+});
+
+test("API limita buscas por endereço no Worker", async () => {
+  let response;
+  for (let index = 0; index < 31; index += 1) {
+    response = await worker.fetch(new Request("https://example.test/api/search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Origin: "https://example.test",
+        "CF-Connecting-IP": "203.0.113.77",
+      },
+      body: JSON.stringify({ query: "pizza" }),
+    }));
+  }
+  assert.equal(response.status, 429);
+  assert.equal((await response.json()).error, "Muitas buscas em pouco tempo. Aguarde um minuto.");
 });
 
 test("falha do Google Places não interrompe a busca local", async () => {
@@ -381,4 +400,17 @@ test("proxy do mapa limita a área e conserva o cache da fonte", async () => {
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test("workflow diário trata a URL externa como dado e restringe a publicação", () => {
+  const workflow = fs.readFileSync(new URL("../.github/workflows/daily-update.yml", import.meta.url), "utf8");
+  assert.match(workflow, /if: github\.ref == 'refs\/heads\/main'/);
+  assert.match(workflow, /release_pattern='\^https:\/\/download\\\.geofabrik\\\.de/);
+  assert.match(workflow, /RELEASE_URL: \$\{\{ steps\.release\.outputs\.url \}\}/);
+  assert.doesNotMatch(workflow, /(?:url=|--source-url )"?\$\{\{ steps\.release\.outputs\.url \}\}/);
+  assert.match(workflow, /--proto '=https'/);
+  assert.match(workflow, /update-menus:\n\s+needs: update-osm\n\s+if: always\(\)/);
+  assert.match(workflow, /deploy-pages:[\s\S]+permissions:\n\s+contents: read\n\s+pages: write\n\s+id-token: write/);
+  assert.match(workflow, /ref: \$\{\{ needs\.update-menus\.outputs\.revision \}\}/);
+  assert.match(workflow, /--retry-max-time 900/);
 });

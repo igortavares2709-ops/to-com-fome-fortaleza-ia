@@ -6,25 +6,24 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: read
 
 concurrency:
   group: restaurant-data-write
   cancel-in-progress: false
 
 jobs:
-  update-and-deploy:
+  update-osm:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: main
 
       - uses: actions/setup-node@v4
         with:
@@ -40,14 +39,17 @@ jobs:
         run: |
           set -euo pipefail
           latest="https://download.geofabrik.de/south-america/brazil/nordeste-latest.osm.pbf"
-          resolved="$(curl --fail --silent --show-error --location --head \
+          resolved="$(curl --fail --silent --show-error --head \
+            --proto '=https' \
             --connect-timeout 20 --max-time 120 --retry 4 --retry-all-errors \
-            --output /dev/null --write-out '%{url_effective}' "$latest")"
-          filename="${resolved##*/}"
-          if [[ ! "$filename" =~ ^nordeste-([0-9]{2})([0-9]{2})([0-9]{2})\.osm\.pbf$ ]]; then
+            --retry-max-time 120 \
+            --output /dev/null --write-out '%{redirect_url}' "$latest")"
+          release_pattern='^https://download\.geofabrik\.de/south-america/brazil/nordeste-([0-9]{2})([0-9]{2})([0-9]{2})\.osm\.pbf$'
+          if [[ ! "$resolved" =~ $release_pattern ]]; then
             echo "Unexpected Geofabrik release: $resolved" >&2
             exit 1
           fi
+          filename="nordeste-${BASH_REMATCH[1]}${BASH_REMATCH[2]}${BASH_REMATCH[3]}.osm.pbf"
           snapshot="20${BASH_REMATCH[1]}-${BASH_REMATCH[2]}-${BASH_REMATCH[3]}"
           current="$(node -p 'JSON.parse(require("fs").readFileSync("data/restaurants.json","utf8")).meta.source_url')"
           mkdir -p work
@@ -63,20 +65,25 @@ jobs:
           key: geofabrik-${{ steps.release.outputs.filename }}
 
       - name: Baixar e verificar PBF
+        id: download
         if: steps.release.outputs.changed == 'true' && steps.cache.outputs.cache-hit != 'true'
         shell: bash
+        env:
+          RELEASE_URL: ${{ steps.release.outputs.url }}
+          RELEASE_FILENAME: ${{ steps.release.outputs.filename }}
         run: |
           set -euo pipefail
-          url="${{ steps.release.outputs.url }}"
-          file="work/${{ steps.release.outputs.filename }}"
-          curl --fail --show-error --location --retry 4 --retry-all-errors \
-            --connect-timeout 30 --max-time 1800 --output "$file" "$url"
-          curl --fail --show-error --location --retry 4 --retry-all-errors \
-            --connect-timeout 20 --max-time 120 --output "$file.md5" "$url.md5"
-          (cd work && md5sum --check "${{ steps.release.outputs.filename }}.md5")
+          file="work/${RELEASE_FILENAME}"
+          curl --fail --show-error --proto '=https' --retry 4 --retry-all-errors \
+            --retry-max-time 900 --connect-timeout 30 --max-time 900 \
+            --output "$file" "$RELEASE_URL"
+          curl --fail --show-error --proto '=https' --retry 4 --retry-all-errors \
+            --retry-max-time 120 --connect-timeout 20 --max-time 120 \
+            --output "$file.md5" "${RELEASE_URL}.md5"
+          (cd work && md5sum --check "${RELEASE_FILENAME}.md5")
 
       - name: Salvar PBF em cache
-        if: steps.release.outputs.changed == 'true' && steps.cache.outputs.cache-hit != 'true'
+        if: steps.download.outcome == 'success'
         uses: actions/cache/save@v4
         with:
           path: work/${{ steps.release.outputs.filename }}
@@ -89,25 +96,27 @@ jobs:
       - name: Atualizar restaurantes do OSM
         if: steps.release.outputs.changed == 'true'
         shell: bash
+        env:
+          RELEASE_URL: ${{ steps.release.outputs.url }}
+          RELEASE_FILENAME: ${{ steps.release.outputs.filename }}
+          RELEASE_SNAPSHOT: ${{ steps.release.outputs.snapshot }}
         run: |
           set -euo pipefail
           cp data/restaurants.json work/restaurants.previous.json
           python scripts/extract_geofabrik.py \
-            --pbf "work/${{ steps.release.outputs.filename }}" \
+            --pbf "work/${RELEASE_FILENAME}" \
             --boundary data/fortaleza-boundary.geojson \
-            --snapshot-date "${{ steps.release.outputs.snapshot }}" \
-            --source-url "${{ steps.release.outputs.url }}"
+            --snapshot-date "$RELEASE_SNAPSHOT" \
+            --source-url "$RELEASE_URL"
           python scripts/extract_basemap.py \
-            --pbf "work/${{ steps.release.outputs.filename }}" \
+            --pbf "work/${RELEASE_FILENAME}" \
             --boundary data/fortaleza-boundary.geojson \
-            --snapshot-date "${{ steps.release.outputs.snapshot }}" \
-            --source-url "${{ steps.release.outputs.url }}"
+            --snapshot-date "$RELEASE_SNAPSHOT" \
+            --source-url "$RELEASE_URL"
           node scripts/check-drift.mjs work/restaurants.previous.json data/restaurants.json
 
-      - name: Atualizar cardápios e preços oficiais
-        run: python scripts/update_menu_feeds.py
-
-      - name: Validar
+      - name: Validar snapshot do OpenStreetMap
+        if: steps.release.outputs.changed == 'true'
         run: |
           python -m py_compile scripts/*.py
           npm test
@@ -117,40 +126,151 @@ jobs:
           npm run build:pages
           npm run check:build
 
-      - name: Registrar dados alterados
-        id: commit
+      - name: Registrar snapshot alterado
+        if: steps.release.outputs.changed == 'true'
         shell: bash
+        env:
+          RELEASE_SNAPSHOT: ${{ steps.release.outputs.snapshot }}
         run: |
           set -euo pipefail
-          if git diff --quiet -- data/restaurants.json data/menu-items.json data/fortaleza-basemap.json; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            exit 0
+          validated_revision="$(git rev-parse HEAD)"
+          git fetch --no-tags origin main
+          remote_revision="$(git rev-parse origin/main)"
+          if [[ "$validated_revision" != "$remote_revision" ]]; then
+            echo "O branch remoto avançou durante a validação; atualização OSM cancelada." >&2
+            exit 1
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/restaurants.json data/menu-items.json data/fortaleza-basemap.json
-          git commit -m "Atualiza dados locais (${{ steps.release.outputs.snapshot }})"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
-          echo "changed=true" >> "$GITHUB_OUTPUT"
+          git add data/restaurants.json data/fortaleza-basemap.json
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração OSM para registrar."
+            exit 0
+          fi
+          git commit -m "Atualiza restaurantes de Fortaleza (${RELEASE_SNAPSHOT})"
+          git push origin HEAD:main
 
-      - name: Confirmar revisão publicada
+  update-menus:
+    needs: update-osm
+    if: always() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    outputs:
+      revision: ${{ steps.revision.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Atualizar cardápios e preços oficiais
+        run: python scripts/update_menu_feeds.py
+
+      - name: Validar projeto
+        run: |
+          python -m py_compile scripts/*.py
+          npm test
+          npm run test:python
+          npm run check:data
+          npm run build
+          npm run build:pages
+          npm run check:build
+
+      - name: Registrar cardápios alterados
         shell: bash
         run: |
           set -euo pipefail
-          git fetch --no-tags origin "${GITHUB_REF_NAME}"
+          if git diff --quiet -- data/menu-items.json; then
+            echo "Nenhuma alteração de cardápio para registrar."
+            exit 0
+          fi
+          validated_revision="$(git rev-parse HEAD)"
+          git fetch --no-tags origin main
+          remote_revision="$(git rev-parse origin/main)"
+          if [[ "$validated_revision" != "$remote_revision" ]]; then
+            echo "O branch remoto avançou durante a validação; atualização de cardápios cancelada." >&2
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/menu-items.json
+          git commit -m "Atualiza cardápios oficiais (coleta diária)"
+          git push origin HEAD:main
+
+      - name: Fixar revisão validada
+        id: revision
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
           local_revision="$(git rev-parse HEAD)"
-          remote_revision="$(git rev-parse "origin/${GITHUB_REF_NAME}")"
+          remote_revision="$(git rev-parse origin/main)"
           if [[ "$local_revision" != "$remote_revision" ]]; then
-            echo "O branch remoto avançou durante a validação; publicação cancelada." >&2
+            echo "O branch remoto avançou após a validação; deploy cancelado." >&2
+            exit 1
+          fi
+          echo "sha=${local_revision}" >> "$GITHUB_OUTPUT"
+
+  deploy-pages:
+    needs: update-menus
+    if: needs.update-menus.result == 'success' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.update-menus.outputs.revision }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Verificar se o GitHub Pages está habilitado
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if output="$(gh api "repos/${GITHUB_REPOSITORY}/pages" 2>&1)"; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          elif grep -q '(HTTP 404)' <<< "$output"; then
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::GitHub Pages ainda não está habilitado; os dados foram atualizados sem publicar a página."
+          else
+            echo "$output" >&2
             exit 1
           fi
 
+      - name: Gerar site estático
+        if: steps.pages.outputs.enabled == 'true'
+        run: npm run build:pages
+
       - uses: actions/configure-pages@v5
+        if: steps.pages.outputs.enabled == 'true'
 
       - uses: actions/upload-pages-artifact@v3
+        if: steps.pages.outputs.enabled == 'true'
         with:
           path: pages
 
       - name: Publicar no GitHub Pages
         id: deployment
+        if: steps.pages.outputs.enabled == 'true'
         uses: actions/deploy-pages@v4

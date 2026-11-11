@@ -12,6 +12,7 @@ for (const relative of [
   "pages/index.html",
   "pages/terms.html",
   "pages/privacy.html",
+  "pages/policy.css",
   "pages/templates/cardapio.csv",
   "pages/favicon.svg",
   "pages/data/fortaleza-basemap.json",
@@ -38,6 +39,11 @@ for (const policyPath of ["/terms.html", "/privacy.html"]) {
   assert.match(policyResponse.headers.get("content-type") ?? "", /text\/html/);
 }
 
+const policyCssResponse = await worker.fetch(new Request("https://build.local/policy.css"), {});
+assert.equal(policyCssResponse.status, 200);
+assert.match(policyCssResponse.headers.get("content-type") ?? "", /text\/css/);
+assert.doesNotMatch(read("src/terms.html") + read("src/privacy.html"), /<style(?:\s|>)/i);
+
 const templateResponse = await worker.fetch(new Request("https://build.local/templates/cardapio.csv"), {});
 assert.equal(templateResponse.status, 200);
 assert.match(templateResponse.headers.get("content-type") ?? "", /text\/csv/);
@@ -46,6 +52,41 @@ assert.match(await templateResponse.text(), /^name,price,description,category,av
 const fallbackFavicon = await worker.fetch(new Request("https://build.local/favicon.ico"), {});
 assert.equal(fallbackFavicon.status, 200);
 assert.match(fallbackFavicon.headers.get("content-type") ?? "", /image\/svg\+xml/);
+
+for (const publicPath of [
+  "/",
+  "/index.html",
+  "/terms.html",
+  "/privacy.html",
+  "/policy.css",
+  "/templates/cardapio.csv",
+  "/styles.css",
+  "/app.js",
+  "/favicon.svg",
+  "/favicon.ico",
+  "/data/fortaleza-basemap.json",
+  "/assets/hero-fortaleza.webp",
+  "/assets/comida-regional.webp",
+  "/assets/pizza-artesanal.webp",
+  "/assets/prato-vegano.webp",
+  "/assets/moqueca-fortaleza.webp",
+  "/assets/sobremesas-tropicais.webp",
+  "/assets/google-maps-attribution.png",
+  "/vendor/leaflet/leaflet.js",
+  "/vendor/leaflet/leaflet.css",
+  "/vendor/leaflet/LICENSE",
+  "/vendor/leaflet/images/layers.png",
+  "/vendor/leaflet/images/layers-2x.png",
+  "/vendor/leaflet/images/marker-icon.png",
+  "/vendor/leaflet/images/marker-icon-2x.png",
+  "/vendor/leaflet/images/marker-shadow.png",
+  "/api/health",
+  "/api/meta",
+]) {
+  const response = await worker.fetch(new Request(`https://build.local${publicPath}`, { method: "HEAD" }), {});
+  assert.equal(response.status, 200, `${publicPath} must support HEAD`);
+  assert.equal((await response.arrayBuffer()).byteLength, 0, `${publicPath} HEAD must not return a body`);
+}
 
 const metaResponse = await worker.fetch(new Request("https://build.local/api/meta"), {});
 assert.equal(metaResponse.status, 200);

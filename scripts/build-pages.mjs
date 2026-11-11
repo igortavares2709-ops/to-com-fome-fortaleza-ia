@@ -28,7 +28,7 @@ let worker = read("src/worker.mjs")
   .replace("const ASSETS = /*__ASSETS__*/ null;", "const ASSETS = null;")
   .replaceAll("export async function ", "async function ")
   .replaceAll("export function ", "function ")
-  .replace("export default {", "const worker = {");
+  .replace("export default worker;", "");
 
 if (
   worker.includes("/*__ASSETS__*/") ||
@@ -101,6 +101,7 @@ fs.writeFileSync(path.join(output, "index.html"), html);
 fs.writeFileSync(path.join(output, ".nojekyll"), "");
 fs.copyFileSync(path.join(root, "src/terms.html"), path.join(output, "terms.html"));
 fs.copyFileSync(path.join(root, "src/privacy.html"), path.join(output, "privacy.html"));
+fs.copyFileSync(path.join(root, "src/policy.css"), path.join(output, "policy.css"));
 fs.mkdirSync(path.join(output, "templates"), { recursive: true });
 fs.copyFileSync(path.join(root, "src/templates/cardapio.csv"), path.join(output, "templates/cardapio.csv"));
 fs.copyFileSync(path.join(root, "src/favicon.svg"), path.join(output, "favicon.svg"));

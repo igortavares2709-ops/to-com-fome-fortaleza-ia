@@ -250,14 +250,18 @@ h2 { margin: 8px 0 18px; font: 600 clamp(29px, 3vw, 42px)/1.12 Georgia, serif; l
 .partner-form-heading strong { font: 600 25px Georgia, serif; }
 .partner-form > label:not(.partner-consent) { margin-top: 5px; color: var(--muted); font-size: 10px; font-weight: 750; }
 .partner-form > label span { font-weight: 500; }
-.partner-form select, .partner-form input[type="url"], .partner-form textarea { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 9px; background: white; color: var(--ink); padding: 10px 11px; font-family: inherit; font-size: 12px; line-height: 1.4; }
+.partner-form select, .partner-form input[type="url"], .partner-form input[type="search"], .partner-form textarea { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 9px; background: white; color: var(--ink); padding: 10px 11px; font-family: inherit; font-size: 12px; line-height: 1.4; }
+.partner-form :is(select, input, textarea):disabled { cursor: not-allowed; background: #f1efe9; color: #77756f; }
 .partner-form textarea { min-height: 76px; resize: vertical; }
 .partner-form :is(select, input, textarea):focus { outline: 3px solid rgba(13,91,99,.18); border-color: var(--sea); }
+.partner-field-hint { min-height: 15px; color: var(--muted); font-size: 10px; line-height: 1.45; }
 .partner-consent { display: grid; grid-template-columns: 18px 1fr; gap: 9px; margin: 8px 0 5px; color: var(--muted); font-size: 10px; line-height: 1.45; }
 .partner-consent input { width: 18px; height: 18px; margin: 0; accent-color: var(--sea); }
 .partner-form button { min-height: 48px; border: 0; border-radius: 10px; background: linear-gradient(135deg, var(--coral-deep), #9f2818); color: white; padding: 12px 16px; font-family: inherit; font-size: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 10px 24px rgba(191,53,31,.22); }
+.partner-form .partner-retry { min-height: 42px; border: 1px solid var(--line); background: white; color: var(--sea); box-shadow: none; }
 .partner-form-note { margin: 2px 0 0; color: var(--muted); font-size: 9px; line-height: 1.45; }
 .partner-form-status { min-height: 15px; margin: 0; color: var(--coral-deep); font-size: 10px; }
+.partner-form-status a { color: var(--coral-deep); font-weight: 800; }
 
 .transparency { border-top: 1px solid var(--line); padding: 64px 0 78px; display: grid; grid-template-columns: .7fr 1.3fr; gap: 60px; }
 .transparency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -289,6 +293,7 @@ footer strong { color: var(--ink); font-size: 14px; display: block; }footer span
   .explorer-head { display: block; }.mode-badge { display: inline-block; }.filter-row { grid-template-columns: 1fr; }.interpreted { grid-column: auto; }.explorer-grid { grid-template-columns: 1fr; }.results-panel { max-height: none; }.results-list { max-height: none; overflow: visible; }
   .google-results-section { padding: 18px; }.google-results-head { display: block; }.google-maps-attribution { display: inline-block; margin-top: 14px; }.google-results-list { grid-template-columns: 1fr; }
   .partner-onboarding { padding: 65px 14px; gap: 32px; }.partner-intro h2 { font-size: 41px; }.partner-links { align-items: stretch; }.partner-links a { justify-content: center; flex: 1 1 210px; }.partner-form { padding: 20px 16px; border-radius: 15px; }
+  .partner-form > label:not(.partner-consent) { font-size: 12px; }.partner-form select, .partner-form input[type="url"], .partner-form input[type="search"], .partner-form textarea { font-size: 16px; }.partner-field-hint, .partner-form-status, .partner-form-note { font-size: 11px; }.partner-consent { font-size: 12px; }
   .transparency-grid { grid-template-columns: 1fr; }.transparency { padding: 45px 0; }.evidence-grid { grid-template-columns: 1fr; }footer { display: block; }.attribution { text-align: left; margin-top: 18px; }
 }
 

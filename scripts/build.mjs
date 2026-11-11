@@ -16,6 +16,7 @@ const assets = {
   "privacy.html": read("src/privacy.html"),
   "templates/cardapio.csv": read("src/templates/cardapio.csv"),
   "styles.css": read("src/styles.css"),
+  "policy.css": read("src/policy.css"),
   "app.js": read("src/app.js"),
   "data/fortaleza-basemap.json": read("data/fortaleza-basemap.json"),
   "favicon.svg": read("src/favicon.svg"),

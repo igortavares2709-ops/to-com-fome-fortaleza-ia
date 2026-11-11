@@ -7,6 +7,10 @@ on:
         description: Número do issue de cadastro revisado
         required: true
         type: string
+      reviewed_updated_at:
+        description: updatedAt conferido com gh issue view NUM --json updatedAt --jq .updatedAt
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -20,11 +24,12 @@ jobs:
   approve:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: main
 
       - uses: actions/setup-node@v4
         with:
@@ -39,7 +44,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           ISSUE_NUMBER: ${{ inputs.issue_number }}
-        run: python scripts/import_menu_feed_issue.py --issue-number "$ISSUE_NUMBER"
+          REVIEWED_UPDATED_AT: ${{ inputs.reviewed_updated_at }}
+        run: >-
+          python scripts/import_menu_feed_issue.py
+          --issue-number "$ISSUE_NUMBER"
+          --expected-updated-at "$REVIEWED_UPDATED_AT"
 
       - name: Atualizar cardápios
         run: python scripts/update_menu_feeds.py

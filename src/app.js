@@ -12,6 +12,7 @@ const state = {
   searchSequence: 0,
   hasSearched: false,
   userInteracted: false,
+  metaError: "",
 };
 const $ = (id) => document.getElementById(id);
 const FORTALEZA_CENTER = [-3.7319, -38.5267];
@@ -82,20 +83,62 @@ function formatSnapshot(value) {
     .replace(" de ", " ");
 }
 
+function normalizeSearch(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("pt-BR")
+    .replace(/['’`]/g, "")
+    .replace(/[^a-z0-9+ ]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function populatePartnerRestaurants(query = "") {
+  const select = $("partner-restaurant");
+  const hint = $("partner-restaurant-hint");
+  const normalizedQuery = normalizeSearch(query);
+  select.replaceChildren(option("", normalizedQuery.length < 2
+    ? "Digite pelo menos 2 letras acima"
+    : "Selecione a unidade"));
+  if (normalizedQuery.length < 2 || !state.meta?.restaurant_options) {
+    select.disabled = true;
+    hint.textContent = "A busca diferencia unidades pelo bairro, endereço e ID do OpenStreetMap.";
+    return;
+  }
+  const queryTerms = normalizedQuery.split(" ").filter(Boolean);
+  const matches = state.meta.restaurant_options.filter((restaurant) => {
+    const haystack = normalizeSearch([
+      restaurant.name,
+      restaurant.neighborhood,
+      restaurant.address,
+      restaurant.id,
+    ].filter(Boolean).join(" "));
+    return queryTerms.every((term) => haystack.includes(term));
+  });
+  for (const restaurant of matches.slice(0, 80)) {
+    const place = [restaurant.neighborhood, restaurant.address].filter(Boolean).join(" · ") || "local não informado";
+    select.append(option(restaurant.id, `${restaurant.name} · ${place} · ${restaurant.id}`));
+  }
+  select.disabled = matches.length === 0;
+  hint.textContent = matches.length === 0
+    ? "Nenhum restaurante encontrado. Confira o nome, bairro, endereço ou ID."
+    : matches.length > 80
+      ? `Encontramos ${matches.length.toLocaleString("pt-BR")} unidades. Digite mais detalhes para refinar.`
+      : `${matches.length.toLocaleString("pt-BR")} ${matches.length === 1 ? "unidade encontrada" : "unidades encontradas"}.`;
+}
+
 function populateMeta(meta) {
   state.meta = meta;
   $("stat-restaurants").textContent = meta.record_count.toLocaleString("pt-BR");
   $("stat-neighborhoods").textContent = meta.neighborhoods.length.toLocaleString("pt-BR");
   $("stat-menus").textContent = `${meta.coverage.menus.toLocaleString("pt-BR")} / ${meta.coverage.prices.toLocaleString("pt-BR")}`;
   $("stat-date").textContent = formatSnapshot(meta.snapshot_date);
+  $("neighborhood-filter").replaceChildren(option("", "Todos os bairros"));
+  $("cuisine-filter").replaceChildren(option("", "Todas as culinárias"));
   for (const neighborhood of meta.neighborhoods) $("neighborhood-filter").append(option(neighborhood));
   for (const cuisine of meta.cuisines) $("cuisine-filter").append(option(cuisine, cuisine.replace(/\b\w/g, (letter) => letter.toUpperCase())));
-  for (const restaurant of meta.restaurant_options || []) {
-    $("partner-restaurant").append(option(
-      restaurant.id,
-      `${restaurant.name} · ${restaurant.neighborhood || "bairro não informado"}`,
-    ));
-  }
+  populatePartnerRestaurants($("partner-restaurant-search").value);
   $("google-source-option").hidden = !meta.google_places_available;
 }
 
@@ -578,6 +621,9 @@ for (const button of document.querySelectorAll("[data-query]")) {
 $("neighborhood-filter").addEventListener("change", () => { state.userInteracted = true; search(); });
 $("cuisine-filter").addEventListener("change", () => { state.userInteracted = true; search(); });
 $("google-source").addEventListener("change", () => { state.userInteracted = true; search(); });
+$("partner-restaurant-search").addEventListener("input", (event) => {
+  populatePartnerRestaurants(event.currentTarget.value);
+});
 $("menu-source-form").addEventListener("submit", (event) => {
   event.preventDefault();
   const status = $("partner-form-status");
@@ -588,12 +634,21 @@ $("menu-source-form").addEventListener("submit", (event) => {
   const notes = $("partner-notes").value.trim();
   const authorized = $("partner-authorization").checked;
   const allowedFormats = new Set(["csv_v1", "json_v1", "jsonld_menu"]);
+  const sensitiveQueryNames = new Set([
+    "accesstoken", "apikey", "auth", "authorization", "clientsecret", "credential",
+    "credentials", "googleaccessid", "key", "password", "passwd", "secret", "sig", "signature", "token",
+  ]);
+  const repository = state.meta?.menu_submission_repository;
 
   if (!restaurant) {
     status.textContent = "Selecione um restaurante cadastrado em Fortaleza.";
     return;
   }
   let parsedUrl;
+  if (/[\u0000-\u0020\u007f]/.test(sourceUrl)) {
+    status.textContent = "A URL não pode conter espaços, quebras de linha ou caracteres de controle.";
+    return;
+  }
   try {
     parsedUrl = new URL(sourceUrl);
   } catch {
@@ -605,12 +660,38 @@ $("menu-source-form").addEventListener("submit", (event) => {
     status.textContent = "A fonte precisa usar HTTPS.";
     return;
   }
-  if (hostname === "ifood.com" || hostname.endsWith(".ifood.com") || hostname === "ifood.com.br" || hostname.endsWith(".ifood.com.br")) {
+  if (parsedUrl.username || parsedUrl.password) {
+    status.textContent = "Remova usuário e senha da URL. A solicitação será pública.";
+    return;
+  }
+  if ((parsedUrl.port && parsedUrl.port !== "443") || parsedUrl.hash) {
+    status.textContent = "Use uma URL HTTPS pública, sem porta alternativa nem fragmento.";
+    return;
+  }
+  if ([...parsedUrl.searchParams.keys()].some((name) => {
+    const normalizedName = name.toLowerCase().replace(/[^a-z0-9]/g, "");
+    return sensitiveQueryNames.has(normalizedName) || [
+      "apikey", "credential", "password", "secret", "signature", "token",
+    ].some((suffix) => normalizedName.endsWith(suffix));
+  })) {
+    status.textContent = "Remova tokens, chaves e outras credenciais dos parâmetros da URL.";
+    return;
+  }
+  const normalizedHostname = hostname.replace(/\.+$/, "");
+  if (normalizedHostname === "ifood.com" || normalizedHostname.endsWith(".ifood.com") || normalizedHostname === "ifood.com.br" || normalizedHostname.endsWith(".ifood.com.br")) {
     status.textContent = "Use uma fonte oficial do restaurante; páginas do iFood não são aceitas.";
+    return;
+  }
+  if (/^###\s+/m.test(notes)) {
+    status.textContent = "As observações não podem conter cabeçalhos Markdown iniciados por ###.";
     return;
   }
   if (!allowedFormats.has(format) || !authorized) {
     status.textContent = "Confirme o formato e a autorização da fonte.";
+    return;
+  }
+  if (typeof repository !== "string" || !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repository)) {
+    status.textContent = "O repositório de cadastro está temporariamente indisponível.";
     return;
   }
 
@@ -640,11 +721,12 @@ $("menu-source-form").addEventListener("submit", (event) => {
     "",
     notes || "_No response_",
   ].join("\n");
-  const issueUrl = new URL("https://github.com/igortavares2709-ops/to-com-fome-fortaleza-ia/issues/new");
+  const issueUrl = new URL(`https://github.com/${repository}/issues/new`);
   issueUrl.searchParams.set("title", `Cardápio: ${restaurant.name}`);
   issueUrl.searchParams.set("body", body);
-  status.textContent = "Abrindo a solicitação no GitHub…";
-  window.open(issueUrl.href, "_blank", "noopener,noreferrer");
+  const issueLink = actionLink("Abrir solicitação no GitHub ↗", issueUrl.href);
+  status.replaceChildren("Solicitação pronta. ", issueLink);
+  issueLink.click();
 });
 $("location-button").addEventListener("click", () => {
   state.userInteracted = true;
@@ -667,13 +749,30 @@ $("location-button").addEventListener("click", () => {
   );
 });
 
-$("query").value = "restaurantes com cardápio disponível";
-api("/api/meta")
-  .then((meta) => {
+async function loadMeta() {
+  const retry = $("partner-meta-retry");
+  retry.hidden = true;
+  $("partner-form-status").textContent = "Carregando restaurantes…";
+  try {
+    const meta = await api("/api/meta");
+    if (state.metaError && $("notice").textContent === state.metaError) $("notice").textContent = "";
+    state.metaError = "";
     populateMeta(meta);
-    if (!state.userInteracted && !state.hasSearched) search();
-  })
-  .catch((error) => {
-    if (!state.userInteracted && !state.hasSearched) search();
-    if (!state.hasSearched) $("notice").textContent = error.message;
-  });
+    $("partner-form-status").textContent = "";
+    if (!state.userInteracted && !state.hasSearched) await search();
+  } catch (error) {
+    state.metaError = error.message;
+    $("partner-form-status").textContent = "Não foi possível carregar os restaurantes. Tente novamente.";
+    $("partner-restaurant").disabled = true;
+    retry.hidden = false;
+    const fallbackSearch = !state.userInteracted && !state.hasSearched ? search() : null;
+    $("notice").textContent = state.metaError;
+    fallbackSearch?.finally(() => {
+      if (!state.meta) $("notice").textContent = state.metaError;
+    });
+  }
+}
+
+$("partner-meta-retry").addEventListener("click", loadMeta);
+$("query").value = "restaurantes com cardápio disponível";
+loadMeta();

@@ -25,15 +25,17 @@ As contagens, a data e a origem do snapshot atual ficam nos metadados de `data/r
 
 O workflow `.github/workflows/daily-update.yml` roda diariamente às **06:15 no horário de Fortaleza** e também pode ser iniciado manualmente. Ele:
 
-1. resolve a versão imutável mais recente do extrato Nordeste da Geofabrik;
+1. resolve a versão imutável mais recente do extrato Nordeste da Geofabrik, aceitando somente HTTPS, domínio e caminho esperados;
 2. baixa e verifica o MD5 somente quando a versão do OpenStreetMap mudou;
 3. recorta o município usando `data/fortaleza-boundary.geojson`;
 4. regenera a base vetorial local de limites, cobertura do solo e rede viária;
 5. rejeita variações suspeitas no número de restaurantes;
-6. atualiza cardápios e preços presentes na lista de feeds oficiais;
+6. atualiza cardápios e preços presentes na lista de feeds oficiais com concorrência limitada;
 7. executa os testes e as validações;
 8. registra somente dados realmente alterados;
-9. publica a mesma versão verificada no GitHub Pages.
+9. publica a mesma versão verificada no GitHub Pages quando o recurso já está habilitado no repositório.
+
+Uma indisponibilidade da Geofabrik conserva o snapshot anterior e não impede a coleta dos cardápios. As duas rotinas de escrita compartilham a mesma fila, sempre iniciam a partir da revisão mais recente da `main` e recusam publicar outra branch.
 
 Fortaleza usa UTC−3 durante todo o ano, por isso `09:15 UTC` corresponde a `06:15` local. O PBF de aproximadamente 425 MB é armazenado em cache por versão e nunca é incluído no repositório.
 
@@ -158,16 +160,16 @@ Exemplo de configuração:
 }
 ```
 
-Se uma fonte falhar, `scripts/update_menu_feeds.py` conserva o último preço válido e marca o cardápio como desatualizado. Um feed nunca é substituído por uma lista vazia devido a uma falha temporária.
+Se uma fonte falhar, `scripts/update_menu_feeds.py` conserva o último preço válido e marca o cardápio como desatualizado. Um feed nunca é substituído por uma lista vazia devido a uma falha temporária. Reduções abruptas também entram em quarentena para que uma resposta parcial não apague o cardápio anterior.
 
 ### Cadastro por restaurantes
 
 A seção **Seu restaurante também pode aparecer com preços** oferece um modelo em `src/templates/cardapio.csv`. O restaurante pode publicá-lo como CSV no Google Sheets e preencher o formulário do aplicativo. O navegador abre uma solicitação estruturada no GitHub, sem enviar credenciais ao site.
 
-O cadastro não entra automaticamente na base. O mantenedor confere a autorização e executa manualmente o workflow **Aprovar fonte de cardápio**, informando o número do issue. O workflow:
+O cadastro não entra automaticamente na base. O mantenedor confere a autorização e executa manualmente o workflow **Aprovar fonte de cardápio**, informando o número do issue e o `updatedAt` revisado. O valor pode ser obtido com `gh issue view NUM --json updatedAt --jq .updatedAt`; se o issue mudar enquanto aguarda execução, a aprovação é cancelada. O workflow:
 
 1. confirma que o restaurante existe na base de Fortaleza;
-2. rejeita páginas do iFood, formatos desconhecidos, URLs privadas e solicitações sem as duas declarações de autorização;
+2. vincula nome e ID da unidade e rejeita páginas do iFood, credenciais em URLs, formatos desconhecidos, endereços privados, seções duplicadas e solicitações sem as duas declarações exatas de autorização;
 3. baixa no máximo 2 MB e valida todos os itens antes de alterar a lista permitida;
 4. atualiza os preços, executa os testes e cancela a publicação se o branch remoto tiver avançado;
 5. registra a fonte aprovada e encerra o issue somente após o push bem-sucedido.
@@ -187,7 +189,7 @@ Os testes verificam:
 - bloqueio de requisições POST de outra origem;
 - consistência e limites geográficos do snapshot.
 
-O Worker limita o pedido a 32 KB, restringe a consulta a 300 caracteres, valida coordenadas e aplica uma política CSP. Dados vindos da base são renderizados com `textContent`, sem injeção de HTML.
+O Worker limita o pedido a 32 KB, restringe a consulta a 300 caracteres, valida coordenadas, exige origem do próprio aplicativo, aplica limite por endereço de rede e usa uma política CSP. Dados vindos da base são renderizados com `textContent`, sem injeção de HTML. O coletor conecta ao mesmo endereço público que validou, bloqueando a troca de DNS entre a verificação e a conexão.
 
 Os blocos do mapa passam pelo mesmo domínio da aplicação para evitar bloqueios de rede no navegador. O proxy aceita somente níveis de zoom 10 a 18 e coordenadas que intersectam a região de Fortaleza, preserva os cabeçalhos de cache da fonte e não funciona como proxy aberto. O arquivo `data/fortaleza-basemap.json`, derivado do mesmo snapshot OSM dos restaurantes, oferece limite municipal, cobertura do solo e uma rede viária compacta sem depender de outro domínio. A base usa Canvas e revela mais ruas conforme o zoom, preservando a fluidez.
 
@@ -210,7 +212,7 @@ Monte um conjunto de 30 pedidos com intenção esperada e meça: extração corr
 
 - `src/worker.mjs`: API, interpretação, busca e servidor da aplicação.
 - `src/index.html`, `styles.css`, `app.js`: interface sem frameworks.
-- `src/terms.html`, `src/privacy.html`: documentos públicos exigidos pela integração opcional do Google Maps.
+- `src/terms.html`, `src/privacy.html`, `src/policy.css`: documentos públicos e estilos compatíveis com a CSP.
 - `src/assets`: fotografias gastronômicas ilustrativas em WebP.
 - `THIRD_PARTY_NOTICES.md`: origem e condições dos elementos de terceiros, incluindo a atribuição oficial do Google Maps.
 - `src/vendor/leaflet`: Leaflet 1.9.4 hospedado localmente, sob licença BSD-2-Clause.
