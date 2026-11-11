@@ -90,6 +90,12 @@ function populateMeta(meta) {
   $("stat-date").textContent = formatSnapshot(meta.snapshot_date);
   for (const neighborhood of meta.neighborhoods) $("neighborhood-filter").append(option(neighborhood));
   for (const cuisine of meta.cuisines) $("cuisine-filter").append(option(cuisine, cuisine.replace(/\b\w/g, (letter) => letter.toUpperCase())));
+  for (const restaurant of meta.restaurant_options || []) {
+    $("partner-restaurant").append(option(
+      restaurant.id,
+      `${restaurant.name} · ${restaurant.neighborhood || "bairro não informado"}`,
+    ));
+  }
   $("google-source-option").hidden = !meta.google_places_available;
 }
 
@@ -572,6 +578,74 @@ for (const button of document.querySelectorAll("[data-query]")) {
 $("neighborhood-filter").addEventListener("change", () => { state.userInteracted = true; search(); });
 $("cuisine-filter").addEventListener("change", () => { state.userInteracted = true; search(); });
 $("google-source").addEventListener("change", () => { state.userInteracted = true; search(); });
+$("menu-source-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const status = $("partner-form-status");
+  const restaurantId = $("partner-restaurant").value;
+  const restaurant = state.meta?.restaurant_options?.find((item) => item.id === restaurantId);
+  const sourceUrl = $("partner-source-url").value.trim();
+  const format = $("partner-format").value;
+  const notes = $("partner-notes").value.trim();
+  const authorized = $("partner-authorization").checked;
+  const allowedFormats = new Set(["csv_v1", "json_v1", "jsonld_menu"]);
+
+  if (!restaurant) {
+    status.textContent = "Selecione um restaurante cadastrado em Fortaleza.";
+    return;
+  }
+  let parsedUrl;
+  try {
+    parsedUrl = new URL(sourceUrl);
+  } catch {
+    status.textContent = "Informe uma URL pública válida.";
+    return;
+  }
+  const hostname = parsedUrl.hostname.toLowerCase();
+  if (parsedUrl.protocol !== "https:") {
+    status.textContent = "A fonte precisa usar HTTPS.";
+    return;
+  }
+  if (hostname === "ifood.com" || hostname.endsWith(".ifood.com") || hostname === "ifood.com.br" || hostname.endsWith(".ifood.com.br")) {
+    status.textContent = "Use uma fonte oficial do restaurante; páginas do iFood não são aceitas.";
+    return;
+  }
+  if (!allowedFormats.has(format) || !authorized) {
+    status.textContent = "Confirme o formato e a autorização da fonte.";
+    return;
+  }
+
+  const body = [
+    "### Restaurante",
+    "",
+    restaurant.name,
+    "",
+    "### ID do restaurante",
+    "",
+    restaurant.id,
+    "",
+    "### URL pública do cardápio",
+    "",
+    parsedUrl.href,
+    "",
+    "### Formato",
+    "",
+    format,
+    "",
+    "### Autorização",
+    "",
+    "- [x] Confirmo que represento o restaurante ou tenho autorização para disponibilizar e atualizar esta fonte.",
+    "- [x] Confirmo que a fonte não contém dados pessoais, credenciais nem conteúdo copiado do iFood.",
+    "",
+    "### Observações",
+    "",
+    notes || "_No response_",
+  ].join("\n");
+  const issueUrl = new URL("https://github.com/igortavares2709-ops/to-com-fome-fortaleza-ia/issues/new");
+  issueUrl.searchParams.set("title", `Cardápio: ${restaurant.name}`);
+  issueUrl.searchParams.set("body", body);
+  status.textContent = "Abrindo a solicitação no GitHub…";
+  window.open(issueUrl.href, "_blank", "noopener,noreferrer");
+});
 $("location-button").addEventListener("click", () => {
   state.userInteracted = true;
   if (!navigator.geolocation) {

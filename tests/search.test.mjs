@@ -165,6 +165,8 @@ test("API expõe metadados e busca estruturada", async () => {
   const meta = await metaResponse.json();
   assert.equal(meta.record_count, dataset.restaurants.length);
   assert.ok(meta.coverage.menus >= 15);
+  assert.equal(meta.restaurant_options.length, dataset.restaurants.length);
+  assert.ok(meta.restaurant_options.every((item) => item.id && item.name));
 
   const searchResponse = await worker.fetch(new Request("https://example.test/api/search", {
     method: "POST",

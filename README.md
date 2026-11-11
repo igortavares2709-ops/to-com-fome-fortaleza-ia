@@ -15,6 +15,7 @@ Projeto independente inspirado no ecossistema de delivery. **Sem vínculo com o 
 - Links para a fonte OpenStreetMap e para cardápios públicos quando cadastrados.
 - Consulta complementar opcional e em tempo real à Google Places API, exibida em lista separada e sem copiar o conteúdo para a base pública.
 - Preços vindos de feeds oficiais autorizados, com data da fonte, data da coleta e estado de atualização.
+- Cadastro guiado para restaurantes envia uma planilha CSV, JSON ou página JSON-LD para revisão antes de entrar na coleta diária.
 - Direção visual gastronômica em tela inteira, com fotografias próprias e otimizadas para inspirar buscas por categoria.
 - Interpretador local como fallback e integração opcional com um modelo generativo.
 
@@ -159,6 +160,20 @@ Exemplo de configuração:
 
 Se uma fonte falhar, `scripts/update_menu_feeds.py` conserva o último preço válido e marca o cardápio como desatualizado. Um feed nunca é substituído por uma lista vazia devido a uma falha temporária.
 
+### Cadastro por restaurantes
+
+A seção **Seu restaurante também pode aparecer com preços** oferece um modelo em `src/templates/cardapio.csv`. O restaurante pode publicá-lo como CSV no Google Sheets e preencher o formulário do aplicativo. O navegador abre uma solicitação estruturada no GitHub, sem enviar credenciais ao site.
+
+O cadastro não entra automaticamente na base. O mantenedor confere a autorização e executa manualmente o workflow **Aprovar fonte de cardápio**, informando o número do issue. O workflow:
+
+1. confirma que o restaurante existe na base de Fortaleza;
+2. rejeita páginas do iFood, formatos desconhecidos, URLs privadas e solicitações sem as duas declarações de autorização;
+3. baixa no máximo 2 MB e valida todos os itens antes de alterar a lista permitida;
+4. atualiza os preços, executa os testes e cancela a publicação se o branch remoto tiver avançado;
+5. registra a fonte aprovada e encerra o issue somente após o push bem-sucedido.
+
+Depois da aprovação, o workflow diário existente mantém o cardápio atualizado. O arquivo público deve conter somente dados comerciais do cardápio; informações pessoais e credenciais não devem ser publicadas na planilha ou no issue.
+
 ## Qualidade e segurança
 
 Os testes verificam:
@@ -204,6 +219,8 @@ Monte um conjunto de 30 pedidos com intenção esperada e meça: extração corr
 - `scripts/extract_geofabrik.py`: extração reproduzível do município.
 - `scripts/extract_basemap.py`: extração reproduzível do limite e das vias principais.
 - `scripts/update_menu_feeds.py`: atualização segura de preços oficiais.
+- `scripts/import_menu_feed_issue.py`: validação e importação de uma solicitação de cardápio aprovada.
+- `.github/workflows/approve-menu-feed.yml`: revisão manual e publicação de uma nova fonte autorizada.
 - `.github/workflows/daily-update.yml`: atualização diária e GitHub Pages.
 - `scripts/check-data.mjs`: validação da base.
 - `tests/`: testes de regras e rotas.

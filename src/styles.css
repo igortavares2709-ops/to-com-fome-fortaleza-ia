@@ -217,6 +217,48 @@ h2 { margin: 8px 0 18px; font: 600 clamp(29px, 3vw, 42px)/1.12 Georgia, serif; l
 .google-attributions a { font-size: inherit; font-weight: 600; }
 .google-ranking { margin: 15px 0 0; color: var(--muted); font-size: 10px; }
 
+.partner-onboarding {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(420px, .72fr);
+  gap: clamp(34px, 7vw, 110px);
+  align-items: center;
+  padding: 92px max(20px, calc((100vw - 1280px) / 2));
+  color: white;
+  background:
+    linear-gradient(112deg, rgba(7,38,32,.97), rgba(9,65,54,.88)),
+    url("assets/comida-regional.webp") center / cover no-repeat;
+}
+.partner-intro { max-width: 650px; }
+.partner-intro .step { color: #ffd273; }
+.partner-intro h2 { margin: 10px 0 15px; color: white; font-size: clamp(38px, 5vw, 66px); }
+.partner-intro > p { max-width: 610px; color: rgba(255,255,255,.8); font-size: 15px; line-height: 1.7; }
+.partner-steps { display: grid; gap: 10px; margin: 28px 0; padding: 0; list-style: none; }
+.partner-steps li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start; padding: 13px 15px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; background: rgba(255,255,255,.07); backdrop-filter: blur(8px); }
+.partner-steps b { color: #ffd273; font-size: 11px; letter-spacing: 1px; }
+.partner-steps span { color: rgba(255,255,255,.72); font-size: 11px; line-height: 1.45; }
+.partner-steps strong { display: block; margin-bottom: 2px; color: white; font-size: 13px; }
+.partner-links { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; }
+.partner-links a { display: inline-flex; min-height: 42px; align-items: center; padding: 10px 13px; border: 1px solid rgba(255,255,255,.28); border-radius: 9px; color: white; font-size: 10px; font-weight: 800; text-decoration: none; }
+.partner-links .partner-download { border-color: #ffd273; background: #ffd273; color: #17342d; }
+.partner-form { display: grid; gap: 8px; padding: clamp(22px, 4vw, 34px); border: 1px solid rgba(255,255,255,.55); border-radius: 20px; background: rgba(255,253,248,.96); color: var(--ink); box-shadow: 0 28px 70px rgba(0,0,0,.25); backdrop-filter: blur(14px); }
+.partner-form-heading { display: grid; gap: 4px; margin-bottom: 10px; }
+.partner-form-heading span { color: var(--coral-deep); font-size: 9px; font-weight: 850; letter-spacing: 1.4px; }
+.partner-form-heading strong { font: 600 25px Georgia, serif; }
+.partner-form > label:not(.partner-consent) { margin-top: 5px; color: var(--muted); font-size: 10px; font-weight: 750; }
+.partner-form > label span { font-weight: 500; }
+.partner-form select, .partner-form input[type="url"], .partner-form textarea { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 9px; background: white; color: var(--ink); padding: 10px 11px; font-family: inherit; font-size: 12px; line-height: 1.4; }
+.partner-form textarea { min-height: 76px; resize: vertical; }
+.partner-form :is(select, input, textarea):focus { outline: 3px solid rgba(13,91,99,.18); border-color: var(--sea); }
+.partner-consent { display: grid; grid-template-columns: 18px 1fr; gap: 9px; margin: 8px 0 5px; color: var(--muted); font-size: 10px; line-height: 1.45; }
+.partner-consent input { width: 18px; height: 18px; margin: 0; accent-color: var(--sea); }
+.partner-form button { min-height: 48px; border: 0; border-radius: 10px; background: linear-gradient(135deg, var(--coral-deep), #9f2818); color: white; padding: 12px 16px; font-family: inherit; font-size: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 10px 24px rgba(191,53,31,.22); }
+.partner-form-note { margin: 2px 0 0; color: var(--muted); font-size: 9px; line-height: 1.45; }
+.partner-form-status { min-height: 15px; margin: 0; color: var(--coral-deep); font-size: 10px; }
+
 .transparency { border-top: 1px solid var(--line); padding: 64px 0 78px; display: grid; grid-template-columns: .7fr 1.3fr; gap: 60px; }
 .transparency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .transparency article { background: rgba(255,253,248,.68); border: 1px solid var(--line); border-radius: 14px; padding: 21px; box-shadow: 0 8px 24px rgba(62,45,29,.04); }
@@ -228,6 +270,7 @@ footer strong { color: var(--ink); font-size: 14px; display: block; }footer span
 @media (max-width: 1000px) {
   .hero { min-height: 490px; grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr); gap: 34px; }.explorer-grid { grid-template-columns: 1fr; }.results-panel { max-height: 720px; }
   .google-results-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .partner-onboarding { grid-template-columns: 1fr; }.partner-intro { max-width: 760px; }.partner-form { width: min(100%, 760px); }
   .transparency { grid-template-columns: 1fr; gap: 25px; }.filter-row { grid-template-columns: 1fr 1fr; }.interpreted { grid-column: 1/-1; border-left: 0; padding-left: 0; }
 }
 @media (max-width: 850px) {
@@ -245,6 +288,7 @@ footer strong { color: var(--ink); font-size: 14px; display: block; }footer span
   .numbers { grid-template-columns: 1fr 1fr; margin-bottom: 54px; }.numbers article:nth-child(2) { border-right: 0; }.numbers article:nth-child(-n+2) { border-bottom: 1px solid var(--line); }.numbers article { padding: 18px; }.numbers strong { font-size: 27px; }
   .explorer-head { display: block; }.mode-badge { display: inline-block; }.filter-row { grid-template-columns: 1fr; }.interpreted { grid-column: auto; }.explorer-grid { grid-template-columns: 1fr; }.results-panel { max-height: none; }.results-list { max-height: none; overflow: visible; }
   .google-results-section { padding: 18px; }.google-results-head { display: block; }.google-maps-attribution { display: inline-block; margin-top: 14px; }.google-results-list { grid-template-columns: 1fr; }
+  .partner-onboarding { padding: 65px 14px; gap: 32px; }.partner-intro h2 { font-size: 41px; }.partner-links { align-items: stretch; }.partner-links a { justify-content: center; flex: 1 1 210px; }.partner-form { padding: 20px 16px; border-radius: 15px; }
   .transparency-grid { grid-template-columns: 1fr; }.transparency { padding: 45px 0; }.evidence-grid { grid-template-columns: 1fr; }footer { display: block; }.attribution { text-align: left; margin-top: 18px; }
 }
 

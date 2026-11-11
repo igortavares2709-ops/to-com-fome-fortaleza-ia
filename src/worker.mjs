@@ -784,6 +784,7 @@ export default {
       if (url.pathname === "/" || url.pathname === "/index.html") return assetResponse("index.html", "text/html");
       if (url.pathname === "/terms.html") return assetResponse("terms.html", "text/html");
       if (url.pathname === "/privacy.html") return assetResponse("privacy.html", "text/html");
+      if (url.pathname === "/templates/cardapio.csv") return assetResponse("templates/cardapio.csv", "text/csv");
       if (url.pathname === "/styles.css") return assetResponse("styles.css", "text/css");
       if (url.pathname === "/app.js") return assetResponse("app.js", "text/javascript");
       if (url.pathname === "/favicon.svg") return assetResponse("favicon.svg", "image/svg+xml");
@@ -812,6 +813,8 @@ export default {
           ...dataset.meta,
           neighborhoods: knownNeighborhoods().sort((a, b) => a.localeCompare(b)),
           cuisines: knownCuisines(),
+          restaurant_options: RESTAURANTS.map(({ id, name, neighborhood }) => ({ id, name, neighborhood }))
+            .sort((a, b) => a.name.localeCompare(b.name, "pt-BR")),
           coverage: {
             opening_hours: RESTAURANTS.filter((item) => item.opening_hours).length,
             delivery: RESTAURANTS.filter((item) => item.delivery).length,

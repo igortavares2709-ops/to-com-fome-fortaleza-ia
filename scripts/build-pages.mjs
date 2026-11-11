@@ -101,6 +101,8 @@ fs.writeFileSync(path.join(output, "index.html"), html);
 fs.writeFileSync(path.join(output, ".nojekyll"), "");
 fs.copyFileSync(path.join(root, "src/terms.html"), path.join(output, "terms.html"));
 fs.copyFileSync(path.join(root, "src/privacy.html"), path.join(output, "privacy.html"));
+fs.mkdirSync(path.join(output, "templates"), { recursive: true });
+fs.copyFileSync(path.join(root, "src/templates/cardapio.csv"), path.join(output, "templates/cardapio.csv"));
 fs.copyFileSync(path.join(root, "src/favicon.svg"), path.join(output, "favicon.svg"));
 fs.mkdirSync(path.join(output, "data"), { recursive: true });
 fs.copyFileSync(

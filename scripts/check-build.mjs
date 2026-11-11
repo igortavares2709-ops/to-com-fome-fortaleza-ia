@@ -12,6 +12,7 @@ for (const relative of [
   "pages/index.html",
   "pages/terms.html",
   "pages/privacy.html",
+  "pages/templates/cardapio.csv",
   "pages/favicon.svg",
   "pages/data/fortaleza-basemap.json",
   "pages/vendor/leaflet/leaflet.js",
@@ -37,6 +38,11 @@ for (const policyPath of ["/terms.html", "/privacy.html"]) {
   assert.match(policyResponse.headers.get("content-type") ?? "", /text\/html/);
 }
 
+const templateResponse = await worker.fetch(new Request("https://build.local/templates/cardapio.csv"), {});
+assert.equal(templateResponse.status, 200);
+assert.match(templateResponse.headers.get("content-type") ?? "", /text\/csv/);
+assert.match(await templateResponse.text(), /^name,price,description,category,available,currency/m);
+
 const metaResponse = await worker.fetch(new Request("https://build.local/api/meta"), {});
 assert.equal(metaResponse.status, 200);
 const meta = await metaResponse.json();
@@ -51,6 +57,8 @@ assert.match(await licenseResponse.text(), /Redistribution and use in source and
 
 const pagesHtml = read("pages/index.html");
 assert.match(pagesHtml, /globalThis\.__STATIC_PAGES__ = true/);
+assert.match(pagesHtml, /id="menu-source-form"/);
+assert.match(pagesHtml, /templates\/cardapio\.csv/);
 assert.doesNotMatch(
   pagesHtml,
   /(?:href|src)="\/(?:favicon\.svg|styles\.css|app\.js|vendor\/leaflet\/)/,

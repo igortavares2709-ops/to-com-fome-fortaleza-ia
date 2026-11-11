@@ -1,0 +1,54 @@
+name: Cadastrar cardápio oficial
+description: Envie uma fonte estruturada autorizada para atualização diária.
+title: "Cardápio: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por contribuir. A fonte será revisada antes de entrar na coleta diária. Não envie páginas do iFood, credenciais ou informações privadas.
+  - type: input
+    id: restaurant
+    attributes:
+      label: Restaurante
+      description: Nome público do restaurante em Fortaleza.
+    validations:
+      required: true
+  - type: input
+    id: restaurant_id
+    attributes:
+      label: ID do restaurante
+      description: Identificador exibido pelo formulário do aplicativo, como n123456.
+    validations:
+      required: true
+  - type: input
+    id: source_url
+    attributes:
+      label: URL pública do cardápio
+      description: Use HTTPS e publique apenas dados do cardápio. Não inclua credenciais na URL.
+      placeholder: https://docs.google.com/spreadsheets/d/.../pub?output=csv
+    validations:
+      required: true
+  - type: dropdown
+    id: format
+    attributes:
+      label: Formato
+      options:
+        - csv_v1
+        - json_v1
+        - jsonld_menu
+    validations:
+      required: true
+  - type: checkboxes
+    id: authorization
+    attributes:
+      label: Autorização
+      options:
+        - label: Confirmo que represento o restaurante ou tenho autorização para disponibilizar e atualizar esta fonte.
+          required: true
+        - label: Confirmo que a fonte não contém dados pessoais, credenciais nem conteúdo copiado do iFood.
+          required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Observações
+      description: Informe, se necessário, como a autorização pode ser confirmada.

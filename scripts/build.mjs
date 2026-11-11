@@ -14,6 +14,7 @@ const assets = {
   "index.html": read("src/index.html"),
   "terms.html": read("src/terms.html"),
   "privacy.html": read("src/privacy.html"),
+  "templates/cardapio.csv": read("src/templates/cardapio.csv"),
   "styles.css": read("src/styles.css"),
   "app.js": read("src/app.js"),
   "data/fortaleza-basemap.json": read("data/fortaleza-basemap.json"),

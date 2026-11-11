@@ -10,7 +10,7 @@
     <title>Tô com Fome Fortaleza IA</title>
     <link rel="icon" href="/favicon.svg?v=20261111-brand1" type="image/svg+xml" />
     <link rel="stylesheet" href="/vendor/leaflet/leaflet.css?v=20261111-map4" />
-    <link rel="stylesheet" href="/styles.css?v=20261111-google1" />
+    <link rel="stylesheet" href="/styles.css?v=20261111-partners1" />
   </head>
   <body>
     <a class="skip-link" href="#busca">Ir para a busca</a>
@@ -240,6 +240,59 @@
         </article>
       </section>
 
+      <section id="cadastre-cardapio" class="partner-onboarding" aria-labelledby="partner-title">
+        <div class="partner-intro">
+          <span class="step">CARDÁPIO DIRETO DA FONTE</span>
+          <h2 id="partner-title">Seu restaurante também pode aparecer com preços.</h2>
+          <p>
+            Publique uma planilha simples, envie a fonte para análise e mantenha o cardápio atualizado
+            diariamente sem depender de marketplaces.
+          </p>
+          <ol class="partner-steps">
+            <li><b>01</b><span><strong>Baixe o modelo</strong>Preencha somente pratos, preços e disponibilidade.</span></li>
+            <li><b>02</b><span><strong>Publique a planilha</strong>No Google Sheets, use “Publicar na web” no formato CSV.</span></li>
+            <li><b>03</b><span><strong>Envie para revisão</strong>A fonte só entra após validação técnica e autorização.</span></li>
+          </ol>
+          <div class="partner-links">
+            <a class="partner-download" href="templates/cardapio.csv" download>Baixar modelo CSV ↓</a>
+            <a href="https://support.google.com/docs/answer/183965" target="_blank" rel="noopener">Como publicar no Google Sheets ↗</a>
+          </div>
+        </div>
+
+        <form id="menu-source-form" class="partner-form">
+          <div class="partner-form-heading">
+            <span>CADASTRO DA FONTE</span>
+            <strong>Enviar cardápio para análise</strong>
+          </div>
+          <label for="partner-restaurant">Restaurante em Fortaleza</label>
+          <select id="partner-restaurant" required>
+            <option value="">Selecione o restaurante</option>
+          </select>
+
+          <label for="partner-source-url">URL pública do cardápio</label>
+          <input id="partner-source-url" type="url" required maxlength="1000" placeholder="https://docs.google.com/.../pub?output=csv" />
+
+          <label for="partner-format">Formato da fonte</label>
+          <select id="partner-format" required>
+            <option value="csv_v1">Google Sheets ou arquivo CSV</option>
+            <option value="json_v1">Feed JSON oficial</option>
+            <option value="jsonld_menu">Página oficial com JSON-LD</option>
+          </select>
+
+          <label for="partner-notes">Observações <span>(opcional)</span></label>
+          <textarea id="partner-notes" maxlength="500" rows="3" placeholder="Como podemos confirmar a autorização?"></textarea>
+
+          <label class="partner-consent">
+            <input id="partner-authorization" type="checkbox" required />
+            <span>Confirmo que represento o restaurante ou tenho autorização, e que a fonte não contém credenciais nem conteúdo copiado do iFood.</span>
+          </label>
+
+          <button type="submit">Continuar no GitHub <span aria-hidden="true">↗</span></button>
+          <p class="partner-form-note">A solicitação será aberta no repositório público para revisão. É necessário entrar no GitHub e confirmar o envio.</p>
+          <p id="partner-form-status" class="partner-form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
       <section class="transparency" aria-labelledby="transparency-title">
         <div>
           <span class="step">03 / SAIBA DE ONDE VEM</span>
@@ -255,10 +308,10 @@
     </main>
 
     <footer>
-      <div><strong>Tô com Fome Fortaleza IA</strong><span>Projeto independente inspirado no ecossistema de delivery. Sem vínculo com o iFood.</span><span><a href="terms.html">Termos</a> · <a href="privacy.html">Privacidade</a></span></div>
+      <div><strong>Tô com Fome Fortaleza IA</strong><span>Projeto independente inspirado no ecossistema de delivery. Sem vínculo com o iFood.</span><span><a href="#cadastre-cardapio">Cadastrar cardápio</a> · <a href="terms.html">Termos</a> · <a href="privacy.html">Privacidade</a></span></div>
       <div class="attribution">Dados: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a> · ODbL 1.0<br />Fotografias ilustrativas geradas para o projeto.</div>
     </footer>
     <script src="/vendor/leaflet/leaflet.js?v=20261111-map4"></script>
-    <script src="/app.js?v=20261111-google1"></script>
+    <script src="/app.js?v=20261111-partners1"></script>
   </body>
 </html>

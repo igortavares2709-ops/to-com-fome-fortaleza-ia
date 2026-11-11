@@ -1,0 +1,100 @@
+name: Aprovar fonte de cardápio
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Número do issue de cadastro revisado
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: restaurant-data-write
+  cancel-in-progress: false
+
+jobs:
+  approve:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validar autorização e importar fonte
+        id: import
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
+        run: python scripts/import_menu_feed_issue.py --issue-number "$ISSUE_NUMBER"
+
+      - name: Atualizar cardápios
+        run: python scripts/update_menu_feeds.py
+
+      - name: Confirmar o novo cardápio
+        env:
+          RESTAURANT_ID: ${{ steps.import.outputs.restaurant_id }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+
+          restaurant_id = os.environ["RESTAURANT_ID"]
+          menus = json.load(open("data/menu-items.json", encoding="utf-8"))["menus"]
+          menu = menus.get(restaurant_id)
+          if not menu or menu.get("stale") or not menu.get("items"):
+              raise SystemExit(f"O cardápio {restaurant_id} não produziu itens válidos.")
+          print(f"{restaurant_id}: {len(menu['items'])} itens confirmados.")
+          PY
+
+      - name: Validar projeto
+        run: |
+          python -m py_compile scripts/*.py
+          npm test
+          npm run test:python
+          npm run check:data
+          npm run build
+          npm run build:pages
+          npm run check:build
+
+      - name: Publicar fonte aprovada
+        env:
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
+          RESTAURANT_ID: ${{ steps.import.outputs.restaurant_id }}
+        run: |
+          set -euo pipefail
+          validated_revision="$(git rev-parse HEAD)"
+          git fetch --no-tags origin "${GITHUB_REF_NAME}"
+          remote_revision="$(git rev-parse "origin/${GITHUB_REF_NAME}")"
+          if [[ "$validated_revision" != "$remote_revision" ]]; then
+            echo "O branch remoto avançou durante a validação; aprovação cancelada." >&2
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/official-menu-feeds.json data/menu-items.json
+          git commit -m "Adiciona cardápio autorizado ${RESTAURANT_ID} (#${ISSUE_NUMBER})"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Encerrar solicitação
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
+          RESTAURANT_ID: ${{ steps.import.outputs.restaurant_id }}
+          ITEM_COUNT: ${{ steps.import.outputs.item_count }}
+        run: >-
+          gh issue close "$ISSUE_NUMBER"
+          --comment "Fonte aprovada para ${RESTAURANT_ID}: ${ITEM_COUNT} itens validados e incluídos na atualização diária."
