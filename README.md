@@ -188,6 +188,5 @@ Monte um conjunto de 30 pedidos com intenção esperada e meça: extração corr
 - `.github/workflows/daily-update.yml`: atualização diária e GitHub Pages.
 - `scripts/check-data.mjs`: validação da base.
 - `tests/`: testes de regras e rotas.
-- `.openai/hosting.json`: configuração do Sites.
 
 O código está sob licença MIT. A base derivada mantém a ODbL 1.0. O mapa usa Leaflet sob BSD-2-Clause e mantém a atribuição exigida pelo OpenStreetMap visível.

@@ -1,0 +1,12 @@
+data/raw/*.json
+dist/
+pages/
+work/
+node_modules/
+__pycache__/
+*.py[cod]
+.openai/
+.env
+.env.*
+!.env.example
+*.tgz

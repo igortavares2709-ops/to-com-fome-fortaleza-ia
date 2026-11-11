@@ -1,0 +1,21 @@
+name: Verificações
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m py_compile scripts/*.py
+      - run: npm test
+      - run: npm run test:python
+      - run: npm run check:data
+      - run: npm run build
+      - run: npm run build:pages
+      - run: npm run check:build

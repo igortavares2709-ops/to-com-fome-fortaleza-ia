@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Encontre restaurantes reais de Fortaleza com busca em linguagem natural e dados abertos explicáveis."
+    />
+    <title>Tô com Fome Fortaleza IA</title>
+    <link rel="icon" href="/favicon.svg?v=20261111-brand1" type="image/svg+xml" />
+    <link rel="stylesheet" href="/vendor/leaflet/leaflet.css?v=20261111-map4" />
+    <link rel="stylesheet" href="/styles.css?v=20261111-map4" />
+  </head>
+  <body>
+    <a class="skip-link" href="#busca">Ir para a busca</a>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Tô com Fome Fortaleza IA, início">
+        <span class="brand-mark" aria-hidden="true">T</span>
+        <span>Tô com <strong>Fome</strong> Fortaleza IA</span>
+      </a>
+      <div class="topbar-meta">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span>Fortaleza, Ceará</span>
+        <span class="data-pill">DADOS LOCAIS · FONTES ABERTAS</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="kicker"><span aria-hidden="true">✦</span> ASSISTENTE DE DESCOBERTA LOCAL</div>
+          <h1 id="hero-title">A fome bateu?<br /><em>Fortaleza serve.</em></h1>
+          <p>
+            Conte o que deu vontade de comer. A gente cruza seu desejo com dados reais e encontra
+            restaurantes perto de você, com fonte e explicação.
+          </p>
+          <div class="hero-proof" aria-label="Destaques da aplicação">
+            <span><b aria-hidden="true">✓</b> Restaurantes reais</span>
+            <span><b aria-hidden="true">✓</b> Preços com fonte</span>
+            <span><b aria-hidden="true">✓</b> Busca explicável</span>
+          </div>
+        </div>
+        <figure class="hero-visual">
+          <img
+            src="assets/hero-fortaleza.webp"
+            width="1200"
+            height="750"
+            alt=""
+            fetchpriority="high"
+            decoding="async"
+          />
+          <figcaption class="hero-caption">
+            <span>Sabores de Fortaleza</span>
+            <strong>Escolha pelo desejo</strong>
+          </figcaption>
+          <span class="hero-stamp" aria-hidden="true">IMAGEM<br />ILUSTRATIVA</span>
+        </figure>
+      </section>
+
+      <section id="busca" class="search-shell" aria-labelledby="search-title">
+        <div class="search-heading">
+          <div>
+            <span class="step">01 / FALE O QUE PROCURA</span>
+            <h2 id="search-title">O que combina com você hoje?</h2>
+          </div>
+          <button id="location-button" class="location-button" type="button">
+            <span aria-hidden="true">⌖</span> Usar minha localização
+          </button>
+        </div>
+        <form id="search-form" class="search-form">
+          <label class="sr-only" for="query">Pedido em linguagem natural</label>
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input
+            id="query"
+            name="query"
+            maxlength="300"
+            autocomplete="off"
+            placeholder="Ex.: pizza no Meireles com delivery"
+          />
+          <button type="submit">Encontrar <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="examples" aria-label="Exemplos de busca">
+          <span>Experimente:</span>
+          <button type="button" data-query="pizza no Meireles com delivery">Pizza no Meireles</button>
+          <button type="button" data-query="vegano no Benfica">Vegano no Benfica</button>
+          <button type="button" data-query="restaurantes com cardápio disponível">Com cardápio disponível</button>
+          <button type="button" data-query="comida regional na Aldeota">Regional na Aldeota</button>
+        </div>
+      </section>
+
+      <section class="cravings" aria-labelledby="cravings-title">
+        <div class="cravings-heading">
+          <div>
+            <span class="step">ESCOLHA PELO DESEJO</span>
+            <h2 id="cravings-title">O que daria gosto agora?</h2>
+          </div>
+          <p>Toque em uma inspiração e deixe a busca fazer o resto.</p>
+        </div>
+        <div class="craving-grid">
+          <button class="craving-card" type="button" data-query="comida regional em Fortaleza">
+            <img src="assets/comida-regional.webp" width="640" height="480" alt="" loading="lazy" decoding="async" />
+            <span class="craving-shade" aria-hidden="true"></span>
+            <span class="craving-copy">
+              <small>Sabores da terra</small>
+              <strong>Comida regional</strong>
+              <span>Encontrar agora <b aria-hidden="true">→</b></span>
+            </span>
+          </button>
+          <button class="craving-card" type="button" data-query="pizza artesanal com delivery">
+            <img src="assets/pizza-artesanal.webp" width="640" height="480" alt="" loading="lazy" decoding="async" />
+            <span class="craving-shade" aria-hidden="true"></span>
+            <span class="craving-copy">
+              <small>Quentinha e crocante</small>
+              <strong>Pizza artesanal</strong>
+              <span>Encontrar agora <b aria-hidden="true">→</b></span>
+            </span>
+          </button>
+          <button class="craving-card" type="button" data-query="restaurante vegano em Fortaleza">
+            <img src="assets/prato-vegano.webp" width="640" height="480" alt="" loading="lazy" decoding="async" />
+            <span class="craving-shade" aria-hidden="true"></span>
+            <span class="craving-copy">
+              <small>Fresco e colorido</small>
+              <strong>Prato vegano</strong>
+              <span>Encontrar agora <b aria-hidden="true">→</b></span>
+            </span>
+          </button>
+        </div>
+        <p class="image-note">Imagens ilustrativas, criadas para inspirar a busca. Os pratos de cada restaurante são confirmados apenas pelo cardápio oficial.</p>
+      </section>
+
+      <section class="numbers" aria-label="Resumo da base">
+        <article><strong id="stat-restaurants">—</strong><span>restaurantes reais</span></article>
+        <article><strong id="stat-neighborhoods">—</strong><span>bairros representados</span></article>
+        <article><strong id="stat-menus">—</strong><span>cardápios / fontes com preços</span></article>
+        <article><strong id="stat-date">—</strong><span>snapshot da base</span></article>
+      </section>
+
+      <section class="explorer" aria-labelledby="results-title">
+        <div class="explorer-head">
+          <div>
+            <span class="step">02 / CONFIRA O QUE FOI ENTENDIDO</span>
+            <h2 id="results-title" tabindex="-1">Opções fundamentadas nos dados.</h2>
+          </div>
+          <div id="mode-badge" class="mode-badge" role="status" aria-live="polite" aria-atomic="true">Carregando interpretação…</div>
+        </div>
+
+        <div class="filter-row">
+          <label>Bairro<select id="neighborhood-filter"><option value="">Todos os bairros</option></select></label>
+          <label>Culinária<select id="cuisine-filter"><option value="">Todas as culinárias</option></select></label>
+          <div class="interpreted">
+            <span>Pedido interpretado</span>
+            <div id="intent-chips" class="intent-chips" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div id="unsupported" class="unsupported" role="status" hidden></div>
+        <div id="notice" class="notice" role="status" aria-live="polite"></div>
+
+        <div class="explorer-grid">
+          <section class="map-card" aria-labelledby="map-title">
+            <div class="map-topline">
+              <div><span class="eyebrow">VISÃO GEOGRÁFICA</span><h3 id="map-title">Fortaleza</h3></div>
+              <span class="schematic">MAPA INTERATIVO</span>
+            </div>
+            <div class="map-canvas-wrap">
+              <div id="result-map" role="region" aria-label="Mapa interativo dos restaurantes encontrados em Fortaleza"></div>
+              <div id="map-status" class="map-status" role="status" hidden></div>
+            </div>
+            <div class="map-legend">
+              <span><i class="dot coral"></i> resultado</span>
+              <span><i class="dot navy"></i> selecionado</span>
+              <span id="location-legend" hidden><i class="dot user"></i> sua localização</span>
+              <span class="map-help">Arraste e use +/− para explorar</span>
+            </div>
+          </section>
+
+          <section id="results-panel" class="results-panel" aria-label="Restaurantes encontrados" aria-busy="false">
+            <div class="results-topline">
+              <span id="result-count" role="status" aria-live="polite" aria-atomic="true">—</span>
+              <span>Ordenação: evidência e proximidade</span>
+            </div>
+            <div id="results" class="results-list"></div>
+            <div id="suggestions" class="suggestions" hidden></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="food-story" aria-label="Inspirações gastronômicas ilustrativas">
+        <article class="food-story-panel">
+          <img
+            src="assets/moqueca-fortaleza.webp"
+            width="1440"
+            height="810"
+            alt=""
+            decoding="async"
+          />
+          <div class="food-story-copy">
+            <span>IMAGEM ILUSTRATIVA · SABOR DA COSTA</span>
+            <h2>Da praia para o prato.</h2>
+            <p>Peixes, camarões e temperos que combinam com Fortaleza.</p>
+          </div>
+        </article>
+        <article class="food-story-panel">
+          <img
+            src="assets/sobremesas-tropicais.webp"
+            width="1440"
+            height="810"
+            alt=""
+            decoding="async"
+          />
+          <div class="food-story-copy">
+            <span>IMAGEM ILUSTRATIVA · FINAL DOCE</span>
+            <h2>Sempre cabe um desejo a mais.</h2>
+            <p>Coco, manga, maracujá e café para inspirar a próxima busca.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="transparency" aria-labelledby="transparency-title">
+        <div>
+          <span class="step">03 / SAIBA DE ONDE VEM</span>
+          <h2 id="transparency-title">Informação boa mostra suas lacunas.</h2>
+        </div>
+        <div class="transparency-grid">
+          <article><span>01</span><h3>Base local</h3><p>Estabelecimentos do município de Fortaleza extraídos do OpenStreetMap.</p></article>
+          <article><span>02</span><h3>Regras verificáveis</h3><p>A IA interpreta o pedido. Código calcula distância e aplica cada filtro.</p></article>
+          <article><span>03</span><h3>Sem adivinhação</h3><p>Campo ausente aparece como “não informado”. Nenhum preço ou serviço é inventado.</p></article>
+          <article><span>04</span><h3>Cardápio com origem</h3><p>O botão só aparece quando existe um link público registrado para o restaurante.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div><strong>Tô com Fome Fortaleza IA</strong><span>Projeto independente inspirado no ecossistema de delivery. Sem vínculo com o iFood.</span></div>
+      <div class="attribution">Dados: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a> · ODbL 1.0<br />Fotografias ilustrativas geradas para o projeto.</div>
+    </footer>
+    <script src="/vendor/leaflet/leaflet.js?v=20261111-map4"></script>
+    <script src="/app.js?v=20261111-map4"></script>
+  </body>
+</html>

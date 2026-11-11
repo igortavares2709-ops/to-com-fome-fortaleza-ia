@@ -1,0 +1,156 @@
+name: Atualização diária dos dados
+
+on:
+  schedule:
+    - cron: "15 9 * * *" # 06:15 em America/Fortaleza (UTC-3)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-restaurant-data
+  cancel-in-progress: false
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Resolver versão do OpenStreetMap
+        id: release
+        shell: bash
+        run: |
+          set -euo pipefail
+          latest="https://download.geofabrik.de/south-america/brazil/nordeste-latest.osm.pbf"
+          resolved="$(curl --fail --silent --show-error --location --head \
+            --connect-timeout 20 --max-time 120 --retry 4 --retry-all-errors \
+            --output /dev/null --write-out '%{url_effective}' "$latest")"
+          filename="${resolved##*/}"
+          if [[ ! "$filename" =~ ^nordeste-([0-9]{2})([0-9]{2})([0-9]{2})\.osm\.pbf$ ]]; then
+            echo "Unexpected Geofabrik release: $resolved" >&2
+            exit 1
+          fi
+          snapshot="20${BASH_REMATCH[1]}-${BASH_REMATCH[2]}-${BASH_REMATCH[3]}"
+          current="$(node -p 'JSON.parse(require("fs").readFileSync("data/restaurants.json","utf8")).meta.source_url')"
+          mkdir -p work
+          printf 'url=%s\nfilename=%s\nsnapshot=%s\nchanged=%s\n' \
+            "$resolved" "$filename" "$snapshot" "$([[ "$resolved" != "$current" ]] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
+      - name: Restaurar PBF em cache
+        if: steps.release.outputs.changed == 'true'
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: work/${{ steps.release.outputs.filename }}
+          key: geofabrik-${{ steps.release.outputs.filename }}
+
+      - name: Baixar e verificar PBF
+        if: steps.release.outputs.changed == 'true' && steps.cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="${{ steps.release.outputs.url }}"
+          file="work/${{ steps.release.outputs.filename }}"
+          curl --fail --show-error --location --retry 4 --retry-all-errors \
+            --connect-timeout 30 --max-time 1800 --output "$file" "$url"
+          curl --fail --show-error --location --retry 4 --retry-all-errors \
+            --connect-timeout 20 --max-time 120 --output "$file.md5" "$url.md5"
+          (cd work && md5sum --check "${{ steps.release.outputs.filename }}.md5")
+
+      - name: Salvar PBF em cache
+        if: steps.release.outputs.changed == 'true' && steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: work/${{ steps.release.outputs.filename }}
+          key: geofabrik-${{ steps.release.outputs.filename }}
+
+      - name: Instalar GDAL
+        if: steps.release.outputs.changed == 'true'
+        run: sudo apt-get update && sudo apt-get install --yes gdal-bin
+
+      - name: Atualizar restaurantes do OSM
+        if: steps.release.outputs.changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp data/restaurants.json work/restaurants.previous.json
+          python scripts/extract_geofabrik.py \
+            --pbf "work/${{ steps.release.outputs.filename }}" \
+            --boundary data/fortaleza-boundary.geojson \
+            --snapshot-date "${{ steps.release.outputs.snapshot }}" \
+            --source-url "${{ steps.release.outputs.url }}"
+          python scripts/extract_basemap.py \
+            --pbf "work/${{ steps.release.outputs.filename }}" \
+            --boundary data/fortaleza-boundary.geojson \
+            --snapshot-date "${{ steps.release.outputs.snapshot }}" \
+            --source-url "${{ steps.release.outputs.url }}"
+          node scripts/check-drift.mjs work/restaurants.previous.json data/restaurants.json
+
+      - name: Atualizar cardápios e preços oficiais
+        run: python scripts/update_menu_feeds.py
+
+      - name: Validar
+        run: |
+          python -m py_compile scripts/*.py
+          npm test
+          npm run test:python
+          npm run check:data
+          npm run build
+          npm run build:pages
+          npm run check:build
+
+      - name: Registrar dados alterados
+        id: commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- data/restaurants.json data/menu-items.json data/fortaleza-basemap.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/restaurants.json data/menu-items.json data/fortaleza-basemap.json
+          git commit -m "Atualiza dados locais (${{ steps.release.outputs.snapshot }})"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Confirmar revisão publicada
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "${GITHUB_REF_NAME}"
+          local_revision="$(git rev-parse HEAD)"
+          remote_revision="$(git rev-parse "origin/${GITHUB_REF_NAME}")"
+          if [[ "$local_revision" != "$remote_revision" ]]; then
+            echo "O branch remoto avançou durante a validação; publicação cancelada." >&2
+            exit 1
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: pages
+
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

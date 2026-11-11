@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "description": "Feeds autorizados pelos restaurantes. Não adicionar páginas do iFood nem fontes sem permissão de atualização automatizada.",
+  "feeds": [
+    {
+      "restaurant_id": "n13758923940",
+      "url": "https://m.odionisio.com/cocina-378/menu/view",
+      "format": "jsonld_menu",
+      "permission_basis": "restaurant_public_feed",
+      "notes": "JSON-LD MenuItem/Offer publicado na página oficial; caminho permitido pelo robots.txt."
+    },
+    {
+      "restaurant_id": "n13344640161",
+      "url": "https://barracanossapraia.ola.click/products",
+      "format": "jsonld_menu",
+      "permission_basis": "restaurant_public_feed",
+      "notes": "JSON-LD MenuItem/Offer publicado na página oficial; caminho permitido pelo robots.txt."
+    }
+  ]
+}

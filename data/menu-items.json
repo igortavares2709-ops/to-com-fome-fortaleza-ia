@@ -1,0 +1,2552 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "generated_at": "2026-11-11T17:32:01+00:00",
+    "feed_count": 2,
+    "successful_feeds": 2,
+    "failed_feeds": 0,
+    "restaurants_with_prices": 2
+  },
+  "menus": {
+    "n13758923940": {
+      "source_url": "https://m.odionisio.com/cocina-378/menu/view",
+      "permission_basis": "restaurant_public_feed",
+      "source_updated_at": null,
+      "fetched_at": "2026-11-11T17:32:00+00:00",
+      "stale": false,
+      "last_error": null,
+      "items": [
+        {
+          "name": "CEVICHE DE LAGOSTA",
+          "description": "Lagosta marinada em leite de tigre, manga, cebola roxa, pimenta dedo-de-moça, limão e coentro, finalizada com crisps de batata-doce.",
+          "category": "FESTIVAL DA LAGOSTA",
+          "price_cents": 6200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "ESPETADA DE LAGOSTAS",
+          "description": "Filé de lagosta, pimentões coloridos e cebolas intercalados no espeto, assados e servidos com manteiga de alcaparras e limão.",
+          "category": "FESTIVAL DA LAGOSTA",
+          "price_cents": 8900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "CEVICHE MEDITERRÂNEO",
+          "description": "Lagosta, camarão e polvo cozidos e marinados em leite de tigre, com tomate-cereja confitado, cebola roxa, alcaparras fritas, azeite extravirgem e raspas de limão, finalizado com crisp de batata-doce.",
+          "category": "FESTIVAL DA LAGOSTA",
+          "price_cents": 5800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "LINGUINI DE LAGOSTA",
+          "description": "Linguini envolvido em delicado molho de vinho branco e manteiga, com tomates confitados, manjericão fresco e generosos pedaços de lagosta.",
+          "category": "FESTIVAL DA LAGOSTA",
+          "price_cents": 9800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "RISOTO DE LAGOSTA E LAGOSTIM",
+          "description": "Cremoso risoto preparado com bisque de crustáceos, finalizado com generosos pedaços de lagosta e um lagostim grelhado.",
+          "category": "FESTIVAL DA LAGOSTA",
+          "price_cents": 11200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "MEDALHÃO DE LAGOSTA E CAMARÕES",
+          "description": "Medalhão de lagosta e camarões, molho cremoso de açafrão e delicado risoto de parmesão e aspargos.",
+          "category": "FESTIVAL DA LAGOSTA",
+          "price_cents": 11200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "GRATIN DE LAGOSTA AO THERMIDOR",
+          "description": "Cubos de filé de lagosta e batatas gratinados ao molho Thermidor, preparado com vinho branco, mostarda Dijon, queijo gruyère e ervas frescas.",
+          "category": "FESTIVAL DA LAGOSTA",
+          "price_cents": 11600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "TORRE DE LAGOSTA",
+          "description": "Caudas de lagosta grelhadas na manteiga de ervas, servidas em elegante apresentação vertical, acompanhadas de batatas ao murro e delicado molho à base de vinho branco, ervas frescas e creme fresco. Acompanha arroz primavera.",
+          "category": "FESTIVAL DA LAGOSTA",
+          "price_cents": 25900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "TACHO COCINA COM LAGOSTA",
+          "description": "Arroz caldoso preparado lentamente com lagosta, camarões, polvo, mexilhões, lulas e sirigado, batatas baby, brócolis e tomates cereja confitados, finalizado com ervas frescas.",
+          "category": "FESTIVAL DA LAGOSTA",
+          "price_cents": 31900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "PAELLA COCINA COM LAGOSTA",
+          "description": "Tradicional arroz espanhol preparado com açafrão, lagosta, camarões, mexilhões, lulas e polvo, pimentões coloridos, ervilhas frescas, limão siciliano e pimenta dedo-de-moça, finalizado com ervas frescas.",
+          "category": "FESTIVAL DA LAGOSTA",
+          "price_cents": 32900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "PAELLA NEGRA COM LAGOSTA E LAGOSTINS",
+          "description": "Arroz negro preparado em caldo aromático de tomates, cebola, pimentões e açafrão, com lulas, camarões, lagosta e lagostins.",
+          "category": "FESTIVAL DA LAGOSTA",
+          "price_cents": 38900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Paleta de Cordeiro",
+          "description": "Paleta de cordeiro com osso, bem temperada e cozida lentamente atraves do método sous vide. Produto congelado para finalizacao em casa.",
+          "category": "COCINA EM CASA",
+          "price_cents": 19900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Camarão al Ajillo (500g)",
+          "description": "Camarões graúdos descascados ao forno com azeite, páprica picante e alho. Acompanha pão português. 500g de proteína",
+          "category": "COCINA EM CASA",
+          "price_cents": 12000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Vinagrete de camarão (500g)",
+          "description": "camarões graúdos marinados com vegetais, emulsão de azeite e limão. acompanha torradas.",
+          "category": "COCINA EM CASA",
+          "price_cents": 12000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Carpaccio de polvo (200g)",
+          "description": "finas lâminas de polvo cozido, emulsão de azeite extra virgem e limão, vinagrete de tomate e cebola roxa. acompanha torradas amanteigadas",
+          "category": "COCINA EM CASA",
+          "price_cents": 9900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Polvo confitado (150g)",
+          "description": "Tentáculos de polvo confitados com azeitonas e cebolas",
+          "category": "COCINA EM CASA",
+          "price_cents": 7500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Carpaccio de carne (200g)",
+          "description": "finas lâminas de carne bovina, molho de mostardas com toque de mel, alcaparras, parmesão e rúculas. acompanha torradas amanteigadas.",
+          "category": "COCINA EM CASA",
+          "price_cents": 6900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Pimenta da casa (150ml)",
+          "description": null,
+          "category": "COCINA EM CASA",
+          "price_cents": 1900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Geleia de morangos (240g)",
+          "description": null,
+          "category": "COCINA EM CASA",
+          "price_cents": 2900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Pavlova Cocina de Morangos",
+          "description": "Serve 10 a 12 pessoas",
+          "category": "COCINA EM CASA",
+          "price_cents": 16900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Ceviche com manga e crisps de batata doce",
+          "description": "Salmão e peixe branco em cubos, leite de tigre, cebola roxa, pimenta dedo de moça, coentro, manga e crispa de batata doce.",
+          "category": "CRUDOS",
+          "price_cents": 4900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Vieiras Marinadas (2 unidades)",
+          "description": "Dupla de vieiras desconchadas, tamanho 20/30, marinadas em emulsão de azeite extra virgem, limão e dill",
+          "category": "CRUDOS",
+          "price_cents": 5700,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Crudo Especial Cocina",
+          "description": "Lâminas de salmão, peixe branco, polvo cozido, atum e camarões salteados. Seleção dos melhores carpaccios e crudos da casa. Acompanha torradas amanteigadas.",
+          "category": "CRUDOS",
+          "price_cents": 9900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Carpaccio de Polvo",
+          "description": "Finas lâminas do polvo cozido, emulsão de azeite extra virgem e limão, vinagrete de tomate e cebola roxa. Acompanha torradas amanteigadas.",
+          "category": "CRUDOS",
+          "price_cents": 7400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Carpaccio de Carne",
+          "description": "Finas lâminas de carne bovina, molho de mostardas com toque de mel, alcaparras, parmesão e rúculas. Acompanha torradas amanteigadas.",
+          "category": "CRUDOS",
+          "price_cents": 6400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Gambas al Ajillo",
+          "description": "Camarões graúdos descascados ao forno com azeite, páprica picante e  alho. Acompanha pão português.",
+          "category": "TAPAS E BOCADILLOS",
+          "price_cents": 6700,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Bolinho de Bacalhau (6 unidades)",
+          "description": "Acompanha mayo de ervas frescas e limao.",
+          "category": "TAPAS E BOCADILLOS",
+          "price_cents": 5800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Mexilhões ao Vinho Branco",
+          "description": "Mexilhões refogados ao alho, cebola e vinho branco finalizados com creme de leite fresco e salsa. Acompanha pão português.",
+          "category": "TAPAS E BOCADILLOS",
+          "price_cents": 6900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Camembert Brûlée com Figos",
+          "description": "Camembert caramelizado com açúcar, mel e figos. Acompanha torradas amanteigadas.",
+          "category": "TAPAS E BOCADILLOS",
+          "price_cents": 7600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Burrata com Molho de Tomate",
+          "description": "Burrata de búfala, molho de tomate da casa, tomates cereja e manjericão da casa. Acompanha torradas amanteigadas.",
+          "category": "TAPAS E BOCADILLOS",
+          "price_cents": 7400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Mignon Maçaricado com Grana Padano",
+          "description": "Cubos de filé mignon com molho roto gratinado com grana padano. Acompanha torradas amanteigadas.",
+          "category": "TAPAS E BOCADILLOS",
+          "price_cents": 6400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Caldinho de Sirigado com Dendê, Vegetais e Leite de Coco",
+          "description": "Caldo de moqueca de sirigado com vegetais, azeite de dendê e leite de coco",
+          "category": "TAPAS E BOCADILLOS",
+          "price_cents": 2400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Pão Português",
+          "description": null,
+          "category": "TAPAS E BOCADILLOS",
+          "price_cents": 1400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Cesta de Torradas Amanteigadas",
+          "description": null,
+          "category": "TAPAS E BOCADILLOS",
+          "price_cents": 1400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Risoto Cítrico de Camarões",
+          "description": "Arroz arbóreo, cebola, vinho branco, camarões graúdos salteados e finalizados na manteiga, parmesão e toque de limão siciliano.",
+          "category": "DO MAR",
+          "price_cents": 9100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Atum Semicrudo com Risotto Negro",
+          "description": "Filé alto de atum selado com risoto de arroz negro e salsa verde",
+          "category": "DO MAR",
+          "price_cents": 8400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Salmão com Purê de Banana da Terra",
+          "description": "Filé de salmão grelhado com purê de banana da terra e arroz com castanhas de caju",
+          "category": "DO MAR",
+          "price_cents": 8900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Sirigado com Brócolis Tostados e Molho Romesco",
+          "description": "Filé de sirigado com brócolis tostados, batatas portuguesas, azeitonas pretas, molho romesco e amêndoas",
+          "category": "DO MAR",
+          "price_cents": 9100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Polvo à Lagareiro",
+          "description": "Polvo ao forno com batatas ao murro, cebolas, azeitonas, alho confit e aioli",
+          "category": "DO MAR",
+          "price_cents": 9200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Camarões ao Molho de Maçã e Cava",
+          "description": "Camarões graúdos com batatas portuguesas ao molho de maçã e cava",
+          "category": "DO MAR",
+          "price_cents": 8900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Lulas à Provençal com Risotto Negro",
+          "description": "Mini lulas salteadas com alho, cebola e tomate regado com vinho branco. Acompanha risotto de arroz negro e manjericão.",
+          "category": "DO MAR",
+          "price_cents": 8900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Nhoque com Polvo e Molho de Tomate Picante",
+          "description": null,
+          "category": "DO MAR",
+          "price_cents": 8900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Nhoque com Camarões, Aspargos e Brie",
+          "description": "Nhoque de batatas da casa com camarões, aspargos e fonduta de queijo brie gratinados",
+          "category": "DO MAR",
+          "price_cents": 9400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Spaghetti Negro de Frutos do Mar",
+          "description": "Massa italiana grano duro com camarões, lulas, polvo e mexilhões salteados e refogados com molho de tomate da casa e manjericão.",
+          "category": "DO MAR",
+          "price_cents": 9800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Spaghetti Negro de Frutos do Mar com Vieiras",
+          "description": null,
+          "category": "DO MAR",
+          "price_cents": 12900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Risoto de Aspargos com Toque Tartufado",
+          "description": null,
+          "category": "VEGETARIANO",
+          "price_cents": 8100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Salada de Figo com Brie e Amêndoas",
+          "description": null,
+          "category": "VEGETARIANO",
+          "price_cents": 6400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Mignon e Brie",
+          "description": "Tornedor de filé mignon com queijo brie, mil folhas de batatas e molho roti",
+          "category": "DA TERRA",
+          "price_cents": 9800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Mignon ao Molho de Pimentas Negras",
+          "description": "Tornedor de filé mignon ao molho de pimenta negra e batatas portuguesas douradas",
+          "category": "DA TERRA",
+          "price_cents": 9400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Mignon com Talharim",
+          "description": "Medalhões de filé mignon com talharim e molho de queijo",
+          "category": "DA TERRA",
+          "price_cents": 9600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Risoto de Filé Mignon com Parmesão e Tomilho",
+          "description": "Arroz arbóreo, cebola, vinho branco e cubos de filé mignon refogados e  finalizados com manteiga, parmesão e tomilho",
+          "category": "DA TERRA",
+          "price_cents": 8900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Cordeiro Prensado com Risotto de Parmesão",
+          "description": "Paleta de cordeiro cozida lentamente, desfiada e prensada servida com risotto de parmesão, molho roti e rúculas.",
+          "category": "DA TERRA",
+          "price_cents": 8900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Magret de Pato com Batatas Douradas e Figo",
+          "description": "Peito de pato selado com batatas douradas e molho de figo, laranja e vinho.",
+          "category": "DA TERRA",
+          "price_cents": 11900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Batatas Fritas",
+          "description": null,
+          "category": "ADICIONAIS",
+          "price_cents": 3100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Arroz com Brócolis ou Arroz com Castanhas",
+          "description": null,
+          "category": "ADICIONAIS",
+          "price_cents": 2100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Purê de Batatas",
+          "description": null,
+          "category": "ADICIONAIS",
+          "price_cents": 2400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Purê de Banana da Terra",
+          "description": null,
+          "category": "ADICIONAIS",
+          "price_cents": 2900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Adicional de Camarão (100g)",
+          "description": null,
+          "category": "ADICIONAIS",
+          "price_cents": 3900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Adicional de Polvo (100g)",
+          "description": null,
+          "category": "ADICIONAIS",
+          "price_cents": 4900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Paella de Frutos do Mar",
+          "description": "Camarões, lulas, mexilhões, polvo, cebola e pimentões coloridos, ervilhas, arroz arbóreo refogados no caldo de açafrão",
+          "category": "ESPECIALIDADES DA CASA",
+          "price_cents": 24900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Tacho de Frutos do Mar",
+          "description": "Camarões, filé de peixe branco, lulas, mexilhões, polvo, brócolis, batata inglesa, tomates cereja salteados com ervas e vinho branco. Acompanha arroz branco.",
+          "category": "ESPECIALIDADES DA CASA",
+          "price_cents": 24500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Bacalhau Real",
+          "description": "Lombo de bacalhau ao forno, camarões, brócolis, batata inglesa e cebolas. Acompanha arroz de castanha.",
+          "category": "ESPECIALIDADES DA CASA",
+          "price_cents": 28900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Bacalhau à Portuguesa",
+          "description": "Lombo de bacalhau ao forno,batata inglesa, cebolas, brócolis, pimentões, ovo cozido e alho. Acompanha arroz branco.",
+          "category": "ESPECIALIDADES DA CASA",
+          "price_cents": 25400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Bacalhau com Natas",
+          "description": "Bacalhau gratinado, batatas em rodelas e molho de natas da casa. Acompanha arroz branco",
+          "category": "ESPECIALIDADES DA CASA",
+          "price_cents": 24900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Sirigado com Natas Gratinado",
+          "description": "Filé de sirigado gratinado, batatas em rodelas e molho de natas da casa. Acompanha arroz branco.",
+          "category": "ESPECIALIDADES DA CASA",
+          "price_cents": 17900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Paleta de Cordeiro com alecrim, cebola assada e batatas ao murro",
+          "description": "Paleta com osso cozida lentamente por 24h com cebola assada, batatas ao murro e arroz de alho.",
+          "category": "ESPECIALIDADES DA CASA",
+          "price_cents": 26900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Escalopinhos de Filé Mignon",
+          "description": "Acompanha talharim ao molho de queijo.",
+          "category": "ESPECIALIDADES DA CASA",
+          "price_cents": 18600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Churros com Doce de Leite",
+          "description": null,
+          "category": "SOBREMESA",
+          "price_cents": 3200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Pavlova Cocina de Morangos",
+          "description": "Suspiro, morangos frescos, brigadeiro branco, chantilly e calda de morango",
+          "category": "SOBREMESA",
+          "price_cents": 3800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Bolinho quente de dulce de leche",
+          "description": "Bolo quente de doce de leite, sorvete de creme e crocante de nozes",
+          "category": "SOBREMESA",
+          "price_cents": 3500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Pêra ao Vinho com Gelato",
+          "description": "Pêras cozidas no vinho, açúcar e especiarias servidas com gelato de creme e emulsão de vinho",
+          "category": "SOBREMESA",
+          "price_cents": 3400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Creme Bruleé de Café",
+          "description": "Creme a base de leite e ovos, toque de café e casquinha crocante de açúcar.",
+          "category": "SOBREMESA",
+          "price_cents": 3200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Abacaxi, raspas de limão siciliano, hortelã e mel",
+          "description": null,
+          "category": "SOBREMESA",
+          "price_cents": 1700,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Torta de Manzana",
+          "description": "Base de biscoito com maçã cozida e canela, sorvete de creme e crocante de nozes",
+          "category": "SOBREMESA",
+          "price_cents": 3200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Bolinho quente de chocolate",
+          "description": "Bolo quente de chocolate, sorvete de creme e crocante de castanha",
+          "category": "SOBREMESA",
+          "price_cents": 3500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Limoncello 33 (artesanal)",
+          "description": null,
+          "category": "LICORES (35ml)",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Licor 43",
+          "description": null,
+          "category": "LICORES (35ml)",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Frangelico",
+          "description": null,
+          "category": "LICORES (35ml)",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Cointreau",
+          "description": null,
+          "category": "LICORES (35ml)",
+          "price_cents": 2600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Peach Tree",
+          "description": null,
+          "category": "LICORES (35ml)",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Limoncello Villa Massa",
+          "description": null,
+          "category": "LICORES (35ml)",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Carioca",
+          "description": "Café expresso com maior diluição",
+          "category": "CAFÉ",
+          "price_cents": 1000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Nespresso",
+          "description": "Ristretto, Leggero ou Descafeinado",
+          "category": "CAFÉ",
+          "price_cents": 1000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Capuccino",
+          "description": null,
+          "category": "CAFÉ",
+          "price_cents": 1000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Água de Coco",
+          "description": null,
+          "category": "ÁGUAS E REFRI",
+          "price_cents": 1200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Refrigerante",
+          "description": null,
+          "category": "ÁGUAS E REFRI",
+          "price_cents": 1100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Água San Pelegrino com gás 505ml",
+          "description": null,
+          "category": "ÁGUAS E REFRI",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Água Mineral e Água Mineral com Gás",
+          "description": null,
+          "category": "ÁGUAS E REFRI",
+          "price_cents": 900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "FYZ Limao Siciliano Zero",
+          "description": null,
+          "category": "TÔNICAS E ENERGÉTICOS",
+          "price_cents": 1200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "FYZ Tônica Zero",
+          "description": null,
+          "category": "TÔNICAS E ENERGÉTICOS",
+          "price_cents": 1200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Schweeps Tônica Citrus",
+          "description": null,
+          "category": "TÔNICAS E ENERGÉTICOS",
+          "price_cents": 1200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Red Bull/Red BullZero",
+          "description": null,
+          "category": "TÔNICAS E ENERGÉTICOS",
+          "price_cents": 2000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Suco Natural (Laranja ou Morango)",
+          "description": null,
+          "category": "SUCOS",
+          "price_cents": 1600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Suco Natural de Laranja c/ Morango",
+          "description": null,
+          "category": "SUCOS",
+          "price_cents": 1800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Suco de Polpa (Cajá ou Goiaba)",
+          "description": null,
+          "category": "SUCOS",
+          "price_cents": 1200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Limonada Suiça",
+          "description": null,
+          "category": "SUCOS",
+          "price_cents": 1800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Suco Naturais (Limão ou Abacaxi)",
+          "description": null,
+          "category": "SUCOS",
+          "price_cents": 1400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Cerveja Pray",
+          "description": "Lager Premium Sem Glúten",
+          "category": "CERVEJAS",
+          "price_cents": 1800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Blue Moon Belgium White",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 2100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Cerveja Heineken 330ml",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 1600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Eisenbahn Ipa, Pilsen e Weizenbier (355ml)",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 1500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Baden Baden Ipa, Cristal e Witbier (600ml)",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Heineken e Heineken 0.00 Long Neck (330ml)",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 1600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Cerpa Export (350ml)",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 1800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Rum Bacardi",
+          "description": null,
+          "category": "DESTILADOS (50ml)",
+          "price_cents": 1200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Cachaça Ypioca 150",
+          "description": null,
+          "category": "DESTILADOS (50ml)",
+          "price_cents": 1700,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Campari",
+          "description": null,
+          "category": "DESTILADOS (50ml)",
+          "price_cents": 1400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Cachaça Ypioca 160",
+          "description": null,
+          "category": "DESTILADOS (50ml)",
+          "price_cents": 2200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Vodka Smirnoff",
+          "description": null,
+          "category": "DESTILADOS (50ml)",
+          "price_cents": 1600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Vodka Absolut",
+          "description": null,
+          "category": "DESTILADOS (50ml)",
+          "price_cents": 2400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Tequila Jose Cuervo Prata/Ouro",
+          "description": null,
+          "category": "DESTILADOS (50ml)",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Gin Bombay",
+          "description": null,
+          "category": "DESTILADOS (50ml)",
+          "price_cents": 2600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Whisky J. W. Black Label",
+          "description": null,
+          "category": "WHISKY (50ml)",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Whisky J. W. Red Label",
+          "description": null,
+          "category": "WHISKY (50ml)",
+          "price_cents": 1900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Whisky Grand Old Parr",
+          "description": null,
+          "category": "WHISKY (50ml)",
+          "price_cents": 2400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Whisky Jack Daniel's",
+          "description": null,
+          "category": "WHISKY (50ml)",
+          "price_cents": 2400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Whisky Black & White",
+          "description": null,
+          "category": "WHISKY (50ml)",
+          "price_cents": 1500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Fitzgerald",
+          "description": null,
+          "category": "DRINKS CLÁSSICOS",
+          "price_cents": 3400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Bloody Mary",
+          "description": null,
+          "category": "DRINKS CLÁSSICOS",
+          "price_cents": 3400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Mojito",
+          "description": "Rum | Soda | Hortelã | Sumo de Limão | Açúcar",
+          "category": "DRINKS CLÁSSICOS",
+          "price_cents": 3100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Marguerita",
+          "description": "Tequila | Sal | Suco de Limão | Triple Sec",
+          "category": "DRINKS CLÁSSICOS",
+          "price_cents": 3800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Moscow Mule",
+          "description": "Vodka | Limão | Espuma de Gengibre | Gelo",
+          "category": "DRINKS CLÁSSICOS",
+          "price_cents": 3200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Gin Tônica",
+          "description": "Personalize com especiarias, frutas e ervas",
+          "category": "DRINKS CLÁSSICOS",
+          "price_cents": 3400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Cosmo Tangerina",
+          "description": "Vodka | Xarope Tangerina | Triple Sec | Limão",
+          "category": "DRINKS CLÁSSICOS",
+          "price_cents": 3400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Negroni",
+          "description": "Campari | Vermuth | Gin | Zest Laranja",
+          "category": "DRINKS CLÁSSICOS",
+          "price_cents": 3400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Cosmopolitan",
+          "description": "Vodka | Cranberries | Triple Sec | Limão",
+          "category": "DRINKS CLÁSSICOS",
+          "price_cents": 3400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Sangria (1l)",
+          "description": "Vinho Tinto | Frutas | Triple Sec | Especiarias | Gelo",
+          "category": "DRINKS ESPECIAIS",
+          "price_cents": 9600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Clericot (1l)",
+          "description": "Vinho Branco | Frutas | Triple Sec | Especiarias | Gelo",
+          "category": "DRINKS ESPECIAIS",
+          "price_cents": 9600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Lichia e Hortelã",
+          "description": null,
+          "category": "MOCKTAILS — Drinks sem Álcool",
+          "price_cents": 2100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Gengibre e Hortelã",
+          "description": null,
+          "category": "MOCKTAILS — Drinks sem Álcool",
+          "price_cents": 2100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Tangerina e Manjericão",
+          "description": null,
+          "category": "MOCKTAILS — Drinks sem Álcool",
+          "price_cents": 2100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Caipifruta (Cachaça)",
+          "description": "*Consultar frutas do dia.",
+          "category": "CAIPIFRUTAS (50ml)",
+          "price_cents": 2200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Caipifruta (Smirnoff)",
+          "description": "*Consultar frutas do dia.",
+          "category": "CAIPIFRUTAS (50ml)",
+          "price_cents": 2900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        },
+        {
+          "name": "Caipifruta (Absolut)",
+          "description": "*Consultar frutas do dia.",
+          "category": "CAIPIFRUTAS (50ml)",
+          "price_cents": 3400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://m.odionisio.com/cocina-378/menu/view"
+        }
+      ]
+    },
+    "n13344640161": {
+      "source_url": "https://barracanossapraia.ola.click/products",
+      "permission_basis": "restaurant_public_feed",
+      "source_updated_at": null,
+      "fetched_at": "2026-11-11T17:32:01+00:00",
+      "stale": false,
+      "last_error": null,
+      "items": [
+        {
+          "name": "Blue Ginger",
+          "description": "Gin, xarope de curação blue, xarope de abacaxi, schweppes citrus e  espuma de gengibre",
+          "category": "⭐️NOVIDADES E PROMOÇÕES⭐️",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Vivaldi",
+          "description": "Vodka, suco de laranja, xarope de maracujá e xarope de curacão blue",
+          "category": "⭐️NOVIDADES E PROMOÇÕES⭐️",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Citrus Sunshine",
+          "description": "Ballantine´s Sunshine, schweppes citrus e gelo",
+          "category": "⭐️NOVIDADES E PROMOÇÕES⭐️",
+          "price_cents": 2200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Bombay Beach",
+          "description": "(Gin Bombay, sumo de limão, xarope de limão, Schweppes tônica e gelo)",
+          "category": "⭐️NOVIDADES E PROMOÇÕES⭐️",
+          "price_cents": 3000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Bombay Beach",
+          "description": "Gin Bombay, sumo de limão, xarope de limão e água tônica",
+          "category": "DRINKS ESPECIAIS NOSSA PRAIA",
+          "price_cents": 3000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Drink Nossa Praia",
+          "description": "Gin Bombay, sumo de limão, xarope de limão, Schweppes Citrus",
+          "category": "DRINKS ESPECIAIS NOSSA PRAIA",
+          "price_cents": 3000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Pitaya Gin",
+          "description": "Drink de pitaya com gin Beefeater e Schweppes tônica",
+          "category": "DRINKS ESPECIAIS NOSSA PRAIA",
+          "price_cents": 3000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Blue Ginger",
+          "description": "Gin, xarope de curação blue, xarope de abacaxi, schweppes citrus e  espuma de gengibre",
+          "category": "DRINKS ESPECIAIS NOSSA PRAIA",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Vivaldi",
+          "description": "Vodka, suco de laranja, xarope de maracujá e xarope de curacão blue",
+          "category": "DRINKS ESPECIAIS NOSSA PRAIA",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Caribbean Sunshine",
+          "description": "Ballantine´s Sunshine, schweppes citrus e gelo",
+          "category": "DRINKS ESPECIAIS NOSSA PRAIA",
+          "price_cents": 2200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Passion",
+          "description": "Gin, xarope de morango, licor de pessego, schweppes citrus",
+          "category": "DRINKS ESPECIAIS NOSSA PRAIA",
+          "price_cents": 2700,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "TRÓPICOS",
+          "description": "(Vodka, suco de laranja, xarope de manga, sprite e gelo)",
+          "category": "DRINKS ESPECIAIS NOSSA PRAIA",
+          "price_cents": 2300,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "BALLANTINE´S COCO",
+          "description": "(Ballantine´s Sunshine, água de coco e gelo)",
+          "category": "DRINKS ESPECIAIS NOSSA PRAIA",
+          "price_cents": 2200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Carangueijo 03 unidades",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 3900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Casquinha de Carangueijo 100g",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 3190,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Patinha de Carangueijo 12 unidades",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 4690,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Isca de Peixe  (250 gramas)",
+          "description": "Palitos de peixe empanados e fritos. Acompanha molho tártaro.",
+          "category": "ENTRADA",
+          "price_cents": 5690,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Manjubinha Frita 350g",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 3500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Caldo de Peixe com torradas",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 1850,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Caldo de Carangueijo com torradas",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 2100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Batata Frita 350g",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 2690,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Macaxeira Frita 350g",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 2390,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Bolinha de Queijo 12 unidades",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 3390,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Bolinha de Carne do Sol 12 unidades",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 3490,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Bolinha de Peixe 12 unidades",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 3390,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Pastel de Queijo 06 unidades",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 3890,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Pastel de Carne do Sol 06 unidades",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 4290,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Pastel de Camarão c/ Catupiry 06 unidades",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 4790,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Queijo Crocante com Melaço 200g",
+          "description": "Queijo Empanado com Melaço",
+          "category": "ENTRADA",
+          "price_cents": 2890,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "feijão Verde",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 3290,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Frango à Passarinha  c/ Fritas 600g",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 5590,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Carne do Sol Trinchada C/ Macaxeira 300g",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 6990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Filé Trinchado C/ Molho madeira C/Fritas 300g",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 7590,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Camarão no Alho e Óleo 500g",
+          "description": null,
+          "category": "ENTRADA",
+          "price_cents": 5990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Filezinho de Camarão(Sem casca-330g)",
+          "description": "Filezinho de camarão ao alho e óleo - 330 gramas peso em natura",
+          "category": "ENTRADA",
+          "price_cents": 6990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Camarão Crocante Recheado (6 unid.)",
+          "description": "Camarão recheado com creamcheese, empanado na panko e frito. Acompanha molho aioli.",
+          "category": "ENTRADA",
+          "price_cents": 4990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Dadinho de Tapioca (12 unidades)",
+          "description": "Recheados com quejo. Acompanha geleia de pimenta",
+          "category": "ENTRADA",
+          "price_cents": 2500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "MOQUECA DE MARISCOS 300 GR",
+          "description": "Ensopado de camarão, polvo, mexilhões e sururu, com molho de tomate, pimenta e verduras. Acompanha Arroz Branco.",
+          "category": "PRATOS INDIVIDUAIS",
+          "price_cents": 5800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Moqueca de Arraia 350g",
+          "description": "Ensopado de Arraia desfiada, com leite de coco, dendê e verduras. \nAcompanha Arroz Branco.",
+          "category": "PRATOS INDIVIDUAIS",
+          "price_cents": 4990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "MOQUECA DE PEIXE 300 GR",
+          "description": "Ensopado de Peixe, com leite de coco, dendê e verduras. \nAcompanha Arroz Branco.",
+          "category": "PRATOS INDIVIDUAIS",
+          "price_cents": 5390,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Risotos Nordestino (250g)",
+          "description": "Cremoso risoto com carne de sol e queijo coalho.",
+          "category": "PRATOS INDIVIDUAIS",
+          "price_cents": 4800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Risoto de Camarão (250g)",
+          "description": "Arroz Arboréo, Camarão.\nCremoso risoto com camarão.",
+          "category": "PRATOS INDIVIDUAIS",
+          "price_cents": 5700,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Risoto de Frutos do Mar (250g)",
+          "description": "Cremoso risoto com camarão, polvo, lula e mexilhões.",
+          "category": "PRATOS INDIVIDUAIS",
+          "price_cents": 6700,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "VINAGRETE DE POLVO",
+          "description": "Delicioso polvo em pedaços 150 gr, com vinagrete de verduras.",
+          "category": "PRATOS INDIVIDUAIS",
+          "price_cents": 7500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "POLVO AO CREME DE BATATA DOCE",
+          "description": "Polvo grelhado 150 gr, com fundo de creme de batata doce e tomate cereja confit.",
+          "category": "PRATOS INDIVIDUAIS",
+          "price_cents": 7990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "POLVO Á LAGAREIO",
+          "description": "tentaculos de polvo grelhado, com batatas ao forno e pimentão.",
+          "category": "PRATOS INDIVIDUAIS",
+          "price_cents": 8500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Tilápia Frita no Forno (sém óleo)",
+          "description": "Tilápia de 1,100kg c/ Fritas e Baião de Dois",
+          "category": "Peixes  (para 02 pessoas)",
+          "price_cents": 13990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Peixe Frito 1,1 kg  (sem oléo)",
+          "description": "Peixe vermelho de 1,100kg, frito no forno combinado. Acompanha batata frita e baião de Dois",
+          "category": "Peixes  (para 02 pessoas)",
+          "price_cents": 18990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Peixe Frito Grande (sem óleo)",
+          "description": "Peixe vermelho á partir de 1,5 kg,  frito no forno combinado. Acompanha batata frita e duas porções de baião de dois)",
+          "category": "Peixes  (para 02 pessoas)",
+          "price_cents": 22990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Peixada Cearense",
+          "description": "Peixe vermelho de 1,100kg cozido com verduras, leite de coco, ovos cozidos, arroz branco e pirão.",
+          "category": "Peixes  (para 02 pessoas)",
+          "price_cents": 19990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Filé de Peixe à Delícia 400g",
+          "description": "Filé de peixe da estação grelhado, com molho branco, banana e queijo mussarela gratinado.\nAcompanha arroz branco.",
+          "category": "Peixes  (para 02 pessoas)",
+          "price_cents": 13190,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Sirigado à moda do Chef 400g",
+          "description": "Filé de sirigado grelhado, camarões no vapor, batata souté e pimentão colorido salteados no azeite. Acompanha palmito e arroz de alho.",
+          "category": "Peixes  (para 02 pessoas)",
+          "price_cents": 17000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SIRIGADO AO MOLHO DE CAMARÃO",
+          "description": "Filé de sirigado grelhado (400 gr), no molho especial de camarão com leite de coco, tomate, pimentão e coentro.\nAcompanha arroz branco.",
+          "category": "Peixes  (para 02 pessoas)",
+          "price_cents": 17000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SIRIGADO Á BELLE MEUNIÉRE",
+          "description": "Filé de sirigado grelhado (400 gr), regado com molho a base cítrica, alecrim, champignon e manteiga.\nAcompanha arroz de brócolis.",
+          "category": "Peixes  (para 02 pessoas)",
+          "price_cents": 15200,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "PEIXADA NOSSA PRAIA",
+          "description": "Filé de peixe da estação (400 gr), cozido no molho de leite de coco, verduras, ovos e dendê.\nAcompanha arroz branco.",
+          "category": "Peixes  (para 02 pessoas)",
+          "price_cents": 14990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Mariscada Nossa Praia 800g",
+          "description": "Camarão inteiro, Filé de Peixe Grelhado, lula e polvo , acompanhada com arroz de alho e legumes.",
+          "category": "Frutos do mar (para 2 pessoas)",
+          "price_cents": 20990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Camarão no Coco 350g",
+          "description": "Filé de camarão ensopado com verduras, leite de coco, servido no coco verde, arroz de castanha.",
+          "category": "Frutos do mar (para 2 pessoas)",
+          "price_cents": 13000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Camarão Nossa Praia 350g",
+          "description": "Filé de camarão refogado, servido sobre o arroz cremoso c/ ervilhas, presunto, molho branco gratinado c/ queijo mussarela e batata palha",
+          "category": "Frutos do mar (para 2 pessoas)",
+          "price_cents": 13500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Bobó de camarão (PICANTE) 350G",
+          "description": "Camarões apimentados em purê de macaxeiras, acompanhada arroz branco.",
+          "category": "Frutos do mar (para 2 pessoas)",
+          "price_cents": 13000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "CAMARÃO A GRÉGA",
+          "description": "Arroz a gréga gratinado com mussarela, coberto com batata palha e 6 camarões recheados com creamcheese e empanados.",
+          "category": "Frutos do mar (para 2 pessoas)",
+          "price_cents": 13000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "CAMARÃO THERMIDOR",
+          "description": "Camarões ao molho thermidor, com bechamel, mostarda e champignon. Gratinado com mussarela.\nAcompanha arroz branco.",
+          "category": "Frutos do mar (para 2 pessoas)",
+          "price_cents": 13000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Picanha Grelhada400g",
+          "description": "Picanha grelhada, com fritas e arroz branco.",
+          "category": "Carnes e Aves (para 2 pessoas)",
+          "price_cents": 12890,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Filé à parmegiana 300g",
+          "description": "Filé mignon, servido c/ purê de batatas, macarrão e molho de tomate. Acompanha arroz branco",
+          "category": "Carnes e Aves (para 2 pessoas)",
+          "price_cents": 13000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Carne de Sol da Casa 400g",
+          "description": "Carne de Sol Grelhada com queijo, Baião de dois, macaxeira frita e paçoca.",
+          "category": "Carnes e Aves (para 2 pessoas)",
+          "price_cents": 11590,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Filé de Frango Grelhado 400g",
+          "description": "Peito de frango grelhado na manteiga de ervas c/ legumes e arroz branco.",
+          "category": "Carnes e Aves (para 2 pessoas)",
+          "price_cents": 8090,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Filé ao molho poivre",
+          "description": "Filé mignon ao molho de pimenta verde servido com arroz puxado no próprio molho.",
+          "category": "Carnes e Aves (para 2 pessoas)",
+          "price_cents": 13000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Franguinho Kid´s 150g",
+          "description": "Filé de frango Grelhado com fritas e arroz branco.",
+          "category": "PRATOS KID´S",
+          "price_cents": 3990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Bifinho KID´S 150g",
+          "description": "Filé Mignon Grelhado, c/ fritas e arroz branco.",
+          "category": "PRATOS KID´S",
+          "price_cents": 5590,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Iscazinha de peixe kid's 150g",
+          "description": "Filézinhos de Peixe empanado e fritos. Acompanha fritas e arroz branco.",
+          "category": "PRATOS KID´S",
+          "price_cents": 4690,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Salada Verde",
+          "description": "Folhas de Estação, Tomate, cebola, cenoura.",
+          "category": "SALADAS",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Salada Tropical",
+          "description": "Folhas verdes, manga, abacaxi, tomate cereja, e uvas passas.",
+          "category": "SALADAS",
+          "price_cents": 3500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SALADA MEDITERRANEA",
+          "description": "Folhas verdes macias, tomate cereja, azeitonas pretas, abacate e queijo Minas.\nAcompanha vinagrete balsâmico.",
+          "category": "SALADAS",
+          "price_cents": 4990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Arroz Branco",
+          "description": null,
+          "category": "GUARNIÇÕES",
+          "price_cents": 1190,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Baião de Dois",
+          "description": null,
+          "category": "GUARNIÇÕES",
+          "price_cents": 1990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Arroz de Brócolis",
+          "description": null,
+          "category": "GUARNIÇÕES",
+          "price_cents": 1690,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Arroz á Grega",
+          "description": null,
+          "category": "GUARNIÇÕES",
+          "price_cents": 1590,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Purê de Batata",
+          "description": null,
+          "category": "GUARNIÇÕES",
+          "price_cents": 1590,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Pirão de Peixe",
+          "description": null,
+          "category": "GUARNIÇÕES",
+          "price_cents": 1590,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Vinagrete",
+          "description": null,
+          "category": "GUARNIÇÕES",
+          "price_cents": 490,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Torradas",
+          "description": "12 unidades de torradas",
+          "category": "GUARNIÇÕES",
+          "price_cents": 690,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Pudim de Leite",
+          "description": "Tradicional Pudim de Leite condensado, servido com caramelo de laranja",
+          "category": "SOBREMESAS DA CASA",
+          "price_cents": 1500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Brownie",
+          "description": "Bolinho de Brownie com castanha, servido com sorvete de creme e calda de chocolate",
+          "category": "SOBREMESAS DA CASA",
+          "price_cents": 2500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Cocadinha do Chef.",
+          "description": "Leve massa de coco sobre leito de calda de chocolate, coberto com açúcar maçaricado.\nServido com sorvete de créme.",
+          "category": "SOBREMESAS DA CASA",
+          "price_cents": 2500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "CARTOLA NOSSA PRAIA",
+          "description": "Fatias de banana fritas sobre calda de melaço, cobertas com queijo coalho com açucar e canela maçaricados.",
+          "category": "SOBREMESAS DA CASA",
+          "price_cents": 2400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "APEROL SPRITZ",
+          "description": "Aperol, espumante seco, laranja, agua com gás e gelo",
+          "category": "DRINKS",
+          "price_cents": 3100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "PIÑA COLADA",
+          "description": "Rum Bacardi, leite de coco, abacaxi e gelo.",
+          "category": "DRINKS",
+          "price_cents": 2500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SEX ON THE BEACH",
+          "description": "Vodka, licor de pessego, suco de laranja, grenadine e gelo triturado",
+          "category": "DRINKS",
+          "price_cents": 2500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "PINK",
+          "description": "Beefeater Pink, xarope de amora, água tônica",
+          "category": "DRINKS",
+          "price_cents": 2900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "GIN TONIC",
+          "description": "Gin Tanqueray, Beefeater ou Bombay",
+          "category": "DRINKS",
+          "price_cents": 2900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "CAIPÍRINHA DE LIMÃO",
+          "description": "Cachaça branca, limão,açucar e  gelo",
+          "category": "DRINKS",
+          "price_cents": 1500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "CAIPIROSKA DE LIMÃO",
+          "description": "Vodka, limão, açucar e gelo",
+          "category": "CAIPIROSKA",
+          "price_cents": 1790,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "CAIPIROSKA DE FRUTAS",
+          "description": "Abacaxi, Cajá, Cajú, Tangerina, Maracujá e Siriguela",
+          "category": "CAIPIROSKA",
+          "price_cents": 1990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "CAIPIROSKA DE MORANGO",
+          "description": "Vodka, Morango, gelo",
+          "category": "CAIPIROSKA",
+          "price_cents": 2390,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "CAIPIROSKA DE KIWI",
+          "description": "Vodka, Kiwi, gelo",
+          "category": "CAIPIROSKA",
+          "price_cents": 2390,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "CANCUN",
+          "description": "Kiwi, Morango, Maracujá, sumo de limão e xarope",
+          "category": "SEM ALCOOL",
+          "price_cents": 2490,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "HAWAII",
+          "description": "Morango, suco de laranja, leite condensado e gelo.",
+          "category": "SEM ALCOOL",
+          "price_cents": 2490,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "HEINEKEN (600ml)",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 2390,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "EISENBAHN (600ml)",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 1900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Amstel Puro Malte (600ml)",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 1800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SKOL (600ml)",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 1750,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "BOHEMIA (600ml)",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 1750,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "BUDWEISER (600ml)",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 1900,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "STELLA ARTOIS (600ml)",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 2100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "ITAIPAVA PILSEN (600ml)",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 1500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "PETRA PURO MALTE (600ml)",
+          "description": null,
+          "category": "CERVEJAS",
+          "price_cents": 1700,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "HEINEKEN 330 ml",
+          "description": null,
+          "category": "LONG NECK",
+          "price_cents": 1600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "HEINEKEN ZERO( 330 ml)",
+          "description": null,
+          "category": "LONG NECK",
+          "price_cents": 1600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "Corona (330ml)",
+          "description": null,
+          "category": "LONG NECK",
+          "price_cents": 1600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "STELLA ARTOIS (290ml)",
+          "description": null,
+          "category": "LONG NECK",
+          "price_cents": 1500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "STELLA ARTOIS GOLD (290ml)",
+          "description": "Sém gluten",
+          "category": "LONG NECK",
+          "price_cents": 1500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "AGUA SEM GÁS(500ML)",
+          "description": null,
+          "category": "BEBIDAS",
+          "price_cents": 590,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "AGUA COM GÁS (500ML)",
+          "description": null,
+          "category": "BEBIDAS",
+          "price_cents": 590,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "COCO VERDE",
+          "description": null,
+          "category": "BEBIDAS",
+          "price_cents": 640,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "ÁGUA DE COCO JARRA",
+          "description": "Jarra (700ml)",
+          "category": "BEBIDAS",
+          "price_cents": 1700,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SCHWEPPES TONICA",
+          "description": null,
+          "category": "BEBIDAS",
+          "price_cents": 1000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SCHWEPPES CITRUS",
+          "description": null,
+          "category": "BEBIDAS",
+          "price_cents": 1000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "REFRIGERANTE",
+          "description": "(Garrafa 290ml)",
+          "category": "BEBIDAS",
+          "price_cents": 890,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "RED BULL",
+          "description": "Consultar os sabores disponiveis",
+          "category": "BEBIDAS",
+          "price_cents": 2000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SUCO COPO",
+          "description": "(300ml)abacaxi, acerola, cajú, goiaba, laranja, limão, manga",
+          "category": "BEBIDAS",
+          "price_cents": 990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SUCO JARRA (700ml)",
+          "description": "(700 ml) abacaxi, acerola, cajú, goiaba, laranja, limão, manga",
+          "category": "BEBIDAS",
+          "price_cents": 1800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SUCO GRAVIOLA OU CAJÁ",
+          "description": "(copo 300 ml ) graviola ou cajá",
+          "category": "BEBIDAS",
+          "price_cents": 1190,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SUCO JARRA GRAVIOLA OU CAJÁ",
+          "description": "(jarra 700 ml) Graviola ou Cajá",
+          "category": "BEBIDAS",
+          "price_cents": 2100,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SUCO COPO MARACUJÁ",
+          "description": "(300 ml) maracujá",
+          "category": "BEBIDAS",
+          "price_cents": 1490,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SUCO JARRA MARACUJÁ",
+          "description": "(700 ml) maracujá",
+          "category": "BEBIDAS",
+          "price_cents": 2800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SUCO DE LARANJA COPO (300ML)",
+          "description": null,
+          "category": "BEBIDAS",
+          "price_cents": 990,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "SUCO DE LARANJA JARRA (700 ML)",
+          "description": null,
+          "category": "BEBIDAS",
+          "price_cents": 1800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "GIN BOMBAY",
+          "description": null,
+          "category": "DESTILADOS",
+          "price_cents": 1700,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "GIN BEEFEATER",
+          "description": null,
+          "category": "DESTILADOS",
+          "price_cents": 1800,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "GIN TANQUERAY",
+          "description": null,
+          "category": "DESTILADOS",
+          "price_cents": 2000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "VODKA GREYGOOSE",
+          "description": null,
+          "category": "DESTILADOS",
+          "price_cents": 2000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "VODKA ABSOLUT",
+          "description": null,
+          "category": "DESTILADOS",
+          "price_cents": 1300,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "CAMPARI",
+          "description": "DOSE",
+          "category": "DESTILADOS",
+          "price_cents": 850,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "YPIOCA 150",
+          "description": null,
+          "category": "DESTILADOS",
+          "price_cents": 1000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "YPIOCA 160",
+          "description": null,
+          "category": "DESTILADOS",
+          "price_cents": 1400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "TEQUILA  JOSÉ CUERVO ESPECIAL GOLD",
+          "description": "Amarela",
+          "category": "DESTILADOS",
+          "price_cents": 2000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "TEQUILA JOSÉ CUERVO ESPECIAL SILVER",
+          "description": null,
+          "category": "DESTILADOS",
+          "price_cents": 2000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "BLACK AND WHITE",
+          "description": null,
+          "category": "WHISKIES",
+          "price_cents": 1000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "JOHNNIE WALKER RED LABEL",
+          "description": null,
+          "category": "WHISKIES",
+          "price_cents": 1600,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "JOHNNIE WALKER BLACK LABEL",
+          "description": "12 ANOS",
+          "category": "WHISKIES",
+          "price_cents": 2300,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "JOHNNIE WALKER GOLD LABEL",
+          "description": null,
+          "category": "WHISKIES",
+          "price_cents": 3400,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "OLD PARR 12 anos",
+          "description": null,
+          "category": "WHISKIES",
+          "price_cents": 2000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "CHIVAS REAGAL 12 anos",
+          "description": null,
+          "category": "WHISKIES",
+          "price_cents": 2000,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "BAILEYS",
+          "description": null,
+          "category": "LICORES",
+          "price_cents": 1690,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "COINTREAU",
+          "description": null,
+          "category": "LICORES",
+          "price_cents": 1690,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "LICOR 43",
+          "description": null,
+          "category": "LICORES",
+          "price_cents": 1890,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        },
+        {
+          "name": "CABARÉ ICE (275ML)",
+          "description": "SABOR LIMÃO",
+          "category": "CABARÉ ICE",
+          "price_cents": 1500,
+          "currency": "BRL",
+          "available": true,
+          "source_url": "https://barracanossapraia.ola.click/products"
+        }
+      ]
+    }
+  }
+}
