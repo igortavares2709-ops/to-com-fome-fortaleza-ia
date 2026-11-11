@@ -4,6 +4,16 @@ import menuData from "../data/menu-items.json" with { type: "json" };
 const ASSETS = /*__ASSETS__*/ null;
 const RESTAURANTS = dataset.restaurants;
 const OFFICIAL_MENUS = menuData.menus || {};
+const GOOGLE_PLACES_ENDPOINT = "https://places.googleapis.com/v1/places:searchText";
+const GOOGLE_PLACES_FIELD_MASK = [
+  "places.id",
+  "places.displayName",
+  "places.formattedAddress",
+  "places.googleMapsUri",
+  "places.primaryTypeDisplayName",
+  "places.businessStatus",
+  "places.attributions",
+].join(",");
 const DAY_ORDER = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 const CUISINE_ALIASES = {
   pizza: ["pizza"],
@@ -327,6 +337,109 @@ function isHttpUrl(value) {
     return (url.protocol === "https:" || url.protocol === "http:") && Boolean(url.hostname);
   } catch {
     return false;
+  }
+}
+
+function googleMapsUrl(value) {
+  if (typeof value !== "string") return null;
+  try {
+    const url = new URL(value);
+    const hostname = url.hostname.toLowerCase();
+    const trustedHost =
+      hostname === "google.com" ||
+      hostname.endsWith(".google.com") ||
+      hostname === "maps.app.goo.gl";
+    return url.protocol === "https:" && trustedHost ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+function googlePlacesResult(place) {
+  if (!place || typeof place !== "object") return null;
+  if (place.businessStatus === "CLOSED_PERMANENTLY") return null;
+  const placeId = typeof place.id === "string" ? place.id.trim().slice(0, 255) : "";
+  const name = typeof place.displayName?.text === "string"
+    ? place.displayName.text.trim().slice(0, 200)
+    : "";
+  if (!placeId || !name) return null;
+  const mapsUrl = googleMapsUrl(place.googleMapsUri) ||
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}&query_place_id=${encodeURIComponent(placeId)}`;
+  const attributions = Array.isArray(place.attributions)
+    ? place.attributions.slice(0, 8).map((attribution) => ({
+        name: typeof attribution?.displayName === "string"
+          ? attribution.displayName.trim().slice(0, 120)
+          : null,
+        url: isHttpUrl(attribution?.uri) ? attribution.uri : null,
+      })).filter((attribution) => attribution.name)
+    : [];
+  return {
+    placeId,
+    name,
+    address: typeof place.formattedAddress === "string"
+      ? place.formattedAddress.trim().slice(0, 300)
+      : null,
+    primaryType: typeof place.primaryTypeDisplayName?.text === "string"
+      ? place.primaryTypeDisplayName.text.trim().slice(0, 100)
+      : null,
+    businessStatus: typeof place.businessStatus === "string"
+      ? place.businessStatus.slice(0, 40)
+      : null,
+    mapsUrl,
+    attributions,
+  };
+}
+
+export async function searchGooglePlaces(query, env = {}, { enabled = false } = {}) {
+  if (!enabled) return { status: "disabled", results: [], resultCount: 0 };
+  const apiKey = typeof env.GOOGLE_PLACES_API_KEY === "string"
+    ? env.GOOGLE_PLACES_API_KEY.trim()
+    : "";
+  if (!apiKey) return { status: "not_configured", results: [], resultCount: 0 };
+
+  const userQuery = typeof query === "string" && query.trim() ? query.trim() : "restaurantes";
+  const textQuery = `${userQuery.slice(0, 300)}, Fortaleza, Ceará, Brasil`;
+  const requestBody = {
+    textQuery,
+    includedType: "restaurant",
+    strictTypeFiltering: true,
+    languageCode: "pt-BR",
+    regionCode: "BR",
+    pageSize: 8,
+    locationRestriction: {
+      rectangle: {
+        low: { latitude: -3.91, longitude: -38.66 },
+        high: { latitude: -3.68, longitude: -38.38 },
+      },
+    },
+  };
+
+  try {
+    const response = await fetch(GOOGLE_PLACES_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": apiKey,
+        "X-Goog-FieldMask": GOOGLE_PLACES_FIELD_MASK,
+      },
+      body: JSON.stringify(requestBody),
+      signal: AbortSignal.timeout(8_000),
+    });
+    if (!response.ok) throw new Error("Google Places unavailable");
+    const payload = await response.json();
+    const results = Array.isArray(payload?.places)
+      ? payload.places.map(googlePlacesResult).filter(Boolean).slice(0, 8)
+      : [];
+    return {
+      status: "ok",
+      results,
+      resultCount: results.length,
+      retrievedAt: new Date().toISOString(),
+      attribution: "Google Maps",
+      ranking: "O Google Maps ordena estes resultados por relevância para o texto pesquisado.",
+    };
+  } catch {
+    return { status: "unavailable", results: [], resultCount: 0 };
   }
 }
 
@@ -669,6 +782,8 @@ export default {
     const url = new URL(request.url);
     if (request.method === "GET") {
       if (url.pathname === "/" || url.pathname === "/index.html") return assetResponse("index.html", "text/html");
+      if (url.pathname === "/terms.html") return assetResponse("terms.html", "text/html");
+      if (url.pathname === "/privacy.html") return assetResponse("privacy.html", "text/html");
       if (url.pathname === "/styles.css") return assetResponse("styles.css", "text/css");
       if (url.pathname === "/app.js") return assetResponse("app.js", "text/javascript");
       if (url.pathname === "/favicon.svg") return assetResponse("favicon.svg", "image/svg+xml");
@@ -681,6 +796,7 @@ export default {
       if (url.pathname === "/assets/prato-vegano.webp") return assetResponse("assets/prato-vegano.webp", "image/webp");
       if (url.pathname === "/assets/moqueca-fortaleza.webp") return assetResponse("assets/moqueca-fortaleza.webp", "image/webp");
       if (url.pathname === "/assets/sobremesas-tropicais.webp") return assetResponse("assets/sobremesas-tropicais.webp", "image/webp");
+      if (url.pathname === "/assets/google-maps-attribution.png") return assetResponse("assets/google-maps-attribution.png", "image/png");
       if (url.pathname === "/vendor/leaflet/leaflet.js") return assetResponse("vendor/leaflet/leaflet.js", "text/javascript");
       if (url.pathname === "/vendor/leaflet/leaflet.css") return assetResponse("vendor/leaflet/leaflet.css", "text/css");
       if (url.pathname === "/vendor/leaflet/LICENSE") return assetResponse("vendor/leaflet/LICENSE", "text/plain");
@@ -704,6 +820,9 @@ export default {
             prices: menuData.meta.restaurants_with_prices,
           },
           menu_data_updated_at: menuData.meta.generated_at,
+          google_places_available: Boolean(
+            typeof env.GOOGLE_PLACES_API_KEY === "string" && env.GOOGLE_PLACES_API_KEY.trim(),
+          ),
         });
       }
       return json({ error: "Não encontrado." }, 404);
@@ -716,9 +835,15 @@ export default {
 
     try {
       const body = await readJson(request);
+      if (body.useGooglePlaces === true && origin !== url.origin) {
+        return json({ error: "Origem não permitida para a consulta externa." }, 403);
+      }
       const query = typeof body.query === "string" ? body.query.trim().slice(0, 300) : "";
       const fallback = parseIntent(query);
-      const interpreted = await parseWithAI(query, env, fallback);
+      const [interpreted, googlePlaces] = await Promise.all([
+        parseWithAI(query, env, fallback),
+        searchGooglePlaces(query, env, { enabled: body.useGooglePlaces === true }),
+      ]);
       if (typeof body.neighborhood === "string" && body.neighborhood)
         interpreted.intent.neighborhood = knownNeighborhoods().find(
           (item) => normalize(item) === normalize(body.neighborhood),
@@ -754,6 +879,7 @@ export default {
         suggestions: results.length
           ? []
           : relaxedSuggestions(interpreted.intent, RESTAURANTS, { radiusNeedsReference }),
+        googlePlaces,
         disclaimer:
           "Os dados podem estar incompletos ou desatualizados. Confirme horário, serviço e acessibilidade com o restaurante.",
       });

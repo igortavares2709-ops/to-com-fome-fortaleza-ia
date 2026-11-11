@@ -10,7 +10,7 @@
     <title>Tô com Fome Fortaleza IA</title>
     <link rel="icon" href="/favicon.svg?v=20261111-brand1" type="image/svg+xml" />
     <link rel="stylesheet" href="/vendor/leaflet/leaflet.css?v=20261111-map4" />
-    <link rel="stylesheet" href="/styles.css?v=20261111-map4" />
+    <link rel="stylesheet" href="/styles.css?v=20261111-google1" />
   </head>
   <body>
     <a class="skip-link" href="#busca">Ir para a busca</a>
@@ -154,6 +154,14 @@
           </div>
         </div>
 
+        <label id="google-source-option" class="google-source-option" hidden>
+          <input id="google-source" type="checkbox" checked />
+          <span>
+            <strong>Consultar também o Google Maps</strong>
+            <small>Busca ao vivo, ativada somente quando você pesquisar. Os resultados não são salvos na base.</small>
+          </span>
+        </label>
+
         <div id="unsupported" class="unsupported" role="status" hidden></div>
         <div id="notice" class="notice" role="status" aria-live="polite"></div>
 
@@ -184,6 +192,21 @@
             <div id="suggestions" class="suggestions" hidden></div>
           </section>
         </div>
+
+        <section id="google-results-section" class="google-results-section" aria-labelledby="google-results-title" hidden>
+          <div class="google-results-head">
+            <div>
+              <span class="step">CONSULTA COMPLEMENTAR EM TEMPO REAL</span>
+              <h3 id="google-results-title">Outras opções no Google Maps</h3>
+              <p id="google-results-note"></p>
+            </div>
+            <span class="google-maps-attribution" aria-label="Conteúdo fornecido pelo Google Maps">
+              <img src="assets/google-maps-attribution.png" width="98" height="18" alt="Google Maps" />
+            </span>
+          </div>
+          <div id="google-results" class="google-results-list"></div>
+          <p class="google-ranking">O Google Maps ordena os resultados por relevância para o texto pesquisado. Esta lista não é adicionada ao mapa do OpenStreetMap.</p>
+        </section>
       </section>
 
       <section class="food-story" aria-label="Inspirações gastronômicas ilustrativas">
@@ -232,10 +255,10 @@
     </main>
 
     <footer>
-      <div><strong>Tô com Fome Fortaleza IA</strong><span>Projeto independente inspirado no ecossistema de delivery. Sem vínculo com o iFood.</span></div>
+      <div><strong>Tô com Fome Fortaleza IA</strong><span>Projeto independente inspirado no ecossistema de delivery. Sem vínculo com o iFood.</span><span><a href="terms.html">Termos</a> · <a href="privacy.html">Privacidade</a></span></div>
       <div class="attribution">Dados: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a> · ODbL 1.0<br />Fotografias ilustrativas geradas para o projeto.</div>
     </footer>
     <script src="/vendor/leaflet/leaflet.js?v=20261111-map4"></script>
-    <script src="/app.js?v=20261111-map4"></script>
+    <script src="/app.js?v=20261111-google1"></script>
   </body>
 </html>

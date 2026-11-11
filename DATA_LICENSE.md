@@ -10,3 +10,5 @@ Os arquivos `data/restaurants.json` e `data/fortaleza-basemap.json` são bases d
 - A data e a URL da versão usada estão registradas em `meta.snapshot_date` e `meta.source_url` nos próprios arquivos de dados.
 
 Links de cardápio são metadados publicados nos próprios registros do OpenStreetMap. A existência do link não confirma que o conteúdo permaneça atualizado; o usuário deve verificar o site de destino.
+
+Resultados da Google Places API não fazem parte destes arquivos, não são distribuídos sob ODbL e não são gravados no repositório. Quando ativados, são consultados e exibidos transitoriamente conforme os termos e a atribuição da Google Maps Platform.

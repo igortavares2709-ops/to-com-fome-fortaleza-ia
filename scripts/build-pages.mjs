@@ -26,6 +26,7 @@ let worker = read("src/worker.mjs")
     `const menuData = ${JSON.stringify(menuData)};`,
   )
   .replace("const ASSETS = /*__ASSETS__*/ null;", "const ASSETS = null;")
+  .replaceAll("export async function ", "async function ")
   .replaceAll("export function ", "function ")
   .replace("export default {", "const worker = {");
 
@@ -98,6 +99,8 @@ fs.rmSync(output, { recursive: true, force: true });
 fs.mkdirSync(output, { recursive: true });
 fs.writeFileSync(path.join(output, "index.html"), html);
 fs.writeFileSync(path.join(output, ".nojekyll"), "");
+fs.copyFileSync(path.join(root, "src/terms.html"), path.join(output, "terms.html"));
+fs.copyFileSync(path.join(root, "src/privacy.html"), path.join(output, "privacy.html"));
 fs.copyFileSync(path.join(root, "src/favicon.svg"), path.join(output, "favicon.svg"));
 fs.mkdirSync(path.join(output, "data"), { recursive: true });
 fs.copyFileSync(

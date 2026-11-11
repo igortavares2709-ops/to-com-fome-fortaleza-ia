@@ -12,6 +12,8 @@ const dataset = JSON.parse(read("data/restaurants.json"));
 const menuData = JSON.parse(read("data/menu-items.json"));
 const assets = {
   "index.html": read("src/index.html"),
+  "terms.html": read("src/terms.html"),
+  "privacy.html": read("src/privacy.html"),
   "styles.css": read("src/styles.css"),
   "app.js": read("src/app.js"),
   "data/fortaleza-basemap.json": read("data/fortaleza-basemap.json"),
@@ -22,6 +24,7 @@ const assets = {
   "assets/prato-vegano.webp": binaryAsset("src/assets/prato-vegano.webp", "image/webp"),
   "assets/moqueca-fortaleza.webp": binaryAsset("src/assets/moqueca-fortaleza.webp", "image/webp"),
   "assets/sobremesas-tropicais.webp": binaryAsset("src/assets/sobremesas-tropicais.webp", "image/webp"),
+  "assets/google-maps-attribution.png": binaryAsset("src/assets/google-maps-attribution.png", "image/png"),
   "vendor/leaflet/leaflet.js": read("src/vendor/leaflet/leaflet.js"),
   "vendor/leaflet/leaflet.css": read("src/vendor/leaflet/leaflet.css"),
   "vendor/leaflet/LICENSE": read("src/vendor/leaflet/LICENSE"),

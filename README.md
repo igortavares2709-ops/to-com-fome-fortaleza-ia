@@ -13,6 +13,7 @@ Projeto independente inspirado no ecossistema de delivery. **Sem vínculo com o 
 - Explicação “Por que apareceu” baseada nos campos utilizados.
 - Três estados para serviços: confirmado, não oferece e não informado.
 - Links para a fonte OpenStreetMap e para cardápios públicos quando cadastrados.
+- Consulta complementar opcional e em tempo real à Google Places API, exibida em lista separada e sem copiar o conteúdo para a base pública.
 - Preços vindos de feeds oficiais autorizados, com data da fonte, data da coleta e estado de atualização.
 - Direção visual gastronômica em tela inteira, com fotografias próprias e otimizadas para inspirar buscas por categoria.
 - Interpretador local como fallback e integração opcional com um modelo generativo.
@@ -34,6 +35,8 @@ O workflow `.github/workflows/daily-update.yml` roda diariamente às **06:15 no 
 9. publica a mesma versão verificada no GitHub Pages.
 
 Fortaleza usa UTC−3 durante todo o ano, por isso `09:15 UTC` corresponde a `06:15` local. O PBF de aproximadamente 425 MB é armazenado em cache por versão e nunca é incluído no repositório.
+
+Os dados do Google Maps não entram nessa rotina nem são gravados no repositório. Quando a integração opcional está ativa, cada busca solicitada pelo visitante consulta a Google Places API em tempo real; assim, o resultado já vem da fonte atual sem criar uma cópia diária proibida pelos termos do Google.
 
 Ativar o workflow exige publicar este projeto em um repositório GitHub e habilitar **Settings → Pages → Source: GitHub Actions**. A publicação no Sites continua separada.
 
@@ -58,6 +61,17 @@ npm run dev
 ```
 
 Nunca coloque a chave no JavaScript do navegador ou em commits. O arquivo `.env.example` documenta as variáveis, mas o projeto não carrega `.env` automaticamente.
+
+### Consulta ao Google Maps
+
+A integração oficial exige uma conta Google Cloud com faturamento, a **Places API (New)** habilitada e uma chave restrita somente a essa API. Configure `GOOGLE_PLACES_API_KEY` como segredo no servidor ou no ambiente de produção do Sites. Defina também cotas de uso no Google Cloud para controlar custos.
+
+```bash
+export GOOGLE_PLACES_API_KEY='...'
+npm run dev
+```
+
+A chave é usada apenas pelo Worker. O navegador recebe no máximo oito resultados em texto, com atribuição Google Maps, e nunca recebe a credencial. O conteúdo não é salvo, não é combinado com os marcadores do OpenStreetMap e só é solicitado depois de uma ação do visitante. A versão estática do GitHub Pages continua usando apenas a base local porque não possui um servidor para guardar a chave.
 
 ## Como uma busca é decidida
 
@@ -90,6 +104,8 @@ O modelo não escolhe restaurantes. Ele converte o texto para campos como `neigh
 - Critério: `amenity=restaurant` com nome.
 - Deduplicação: mesmo nome normalizado dentro de 40 metros; fontes adicionais são preservadas.
 - Licença: ODbL 1.0. Consulte [DATA_LICENSE.md](DATA_LICENSE.md).
+
+O Google Maps não é usado para formar ou reescrever esse arquivo. Os termos da Places API proíbem copiar nomes, endereços e outros conteúdos para um banco público; por isso, a consulta oficial permanece transitória e identificada separadamente na interface.
 
 Para reproduzir a extração, baixe o PBF versionado e execute:
 
@@ -166,6 +182,7 @@ Os blocos do mapa passam pelo mesmo domínio da aplicação para evitar bloqueio
 - “Não informado” não significa que o restaurante não oferece o serviço.
 - A leitura de `opening_hours` cobre formatos simples; expressões complexas resultam em estado desconhecido.
 - A cobertura de preços ainda está limitada aos restaurantes com feed oficial autorizado; a base não possui taxa de entrega, tempo de entrega ou avaliações.
+- A consulta ao Google Maps depende de uma chave de servidor, faturamento e cota disponíveis; quando ela falha, a busca local continua funcionando.
 - Nomes de ruas e detalhes de quarteirões dependem do servidor público do OpenStreetMap; a base local com vias principais e locais selecionadas, cobertura do solo, pontos e lista continua visível quando ele falha.
 - A geolocalização depende de autorização do navegador e não é armazenada.
 - O projeto não confirma segurança para alergias.
@@ -178,7 +195,9 @@ Monte um conjunto de 30 pedidos com intenção esperada e meça: extração corr
 
 - `src/worker.mjs`: API, interpretação, busca e servidor da aplicação.
 - `src/index.html`, `styles.css`, `app.js`: interface sem frameworks.
+- `src/terms.html`, `src/privacy.html`: documentos públicos exigidos pela integração opcional do Google Maps.
 - `src/assets`: fotografias gastronômicas ilustrativas em WebP.
+- `THIRD_PARTY_NOTICES.md`: origem e condições dos elementos de terceiros, incluindo a atribuição oficial do Google Maps.
 - `src/vendor/leaflet`: Leaflet 1.9.4 hospedado localmente, sob licença BSD-2-Clause.
 - `data/restaurants.json`: snapshot OSM normalizado.
 - `data/fortaleza-basemap.json`: base vetorial local compacta com território, cobertura do solo e rede viária.

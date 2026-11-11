@@ -6,6 +6,7 @@ import worker, {
   haversineKm,
   isOpenAt,
   parseIntent,
+  searchGooglePlaces,
   searchRestaurants,
   validateAiIntent,
 } from "../src/worker.mjs";
@@ -174,6 +175,107 @@ test("API expõe metadados e busca estruturada", async () => {
   assert.equal(searchResponse.status, 200);
   assert.ok(payload.results.every((item) => item.menu_url || item.officialMenu?.items?.length));
   assert.equal(payload.mode, "interpretação local");
+  assert.equal(payload.googlePlaces.status, "disabled");
+});
+
+test("consulta Google Places somente quando solicitada e não expõe a chave", async () => {
+  const originalFetch = globalThis.fetch;
+  let upstream = null;
+  globalThis.fetch = async (url, init) => {
+    upstream = { url: String(url), init };
+    return new Response(JSON.stringify({
+      places: [
+        {
+          id: "ChIJ-fortaleza-1",
+          displayName: { text: "Restaurante Teste" },
+          formattedAddress: "Avenida Beira Mar, Fortaleza - CE, Brasil",
+          googleMapsUri: "https://maps.google.com/?cid=123",
+          primaryTypeDisplayName: { text: "Restaurante" },
+          businessStatus: "OPERATIONAL",
+          attributions: [{ displayName: "Fonte parceira", uri: "https://example.org/fonte" }],
+        },
+        {
+          id: "ChIJ-fechado-2",
+          displayName: { text: "Restaurante Encerrado" },
+          businessStatus: "CLOSED_PERMANENTLY",
+        },
+        { id: "sem-nome" },
+      ],
+    }), { status: 200, headers: { "Content-Type": "application/json" } });
+  };
+
+  try {
+    const result = await searchGooglePlaces("pizza no Meireles", {
+      GOOGLE_PLACES_API_KEY: "server-secret",
+    }, { enabled: true });
+    assert.equal(result.status, "ok");
+    assert.equal(result.resultCount, 1);
+    assert.equal(result.results[0].name, "Restaurante Teste");
+    assert.equal(result.results[0].mapsUrl, "https://maps.google.com/?cid=123");
+    assert.equal("latitude" in result.results[0], false);
+    assert.equal(JSON.stringify(result).includes("server-secret"), false);
+    assert.equal(upstream.url, "https://places.googleapis.com/v1/places:searchText");
+    assert.equal(upstream.init.headers["X-Goog-Api-Key"], "server-secret");
+    assert.match(upstream.init.headers["X-Goog-FieldMask"], /places\.displayName/);
+    const requestBody = JSON.parse(upstream.init.body);
+    assert.equal(requestBody.includedType, "restaurant");
+    assert.equal(requestBody.strictTypeFiltering, true);
+    assert.match(requestBody.textQuery, /Fortaleza, Ceará, Brasil$/);
+    assert.deepEqual(requestBody.locationRestriction.rectangle.low, {
+      latitude: -3.91,
+      longitude: -38.66,
+    });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("Google Places permanece desativado sem opção ou sem chave", async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => { throw new Error("não deveria consultar a rede"); };
+  try {
+    assert.equal((await searchGooglePlaces("pizza", {}, { enabled: true })).status, "not_configured");
+    assert.equal((await searchGooglePlaces("pizza", { GOOGLE_PLACES_API_KEY: "secret" })).status, "disabled");
+
+    const response = await worker.fetch(new Request("https://example.test/api/search", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Origin: "https://example.test" },
+      body: JSON.stringify({ query: "pizza", useGooglePlaces: false }),
+    }), { GOOGLE_PLACES_API_KEY: "secret" });
+    const payload = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(payload.googlePlaces.status, "disabled");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("consulta externa exige origem do próprio aplicativo", async () => {
+  const response = await worker.fetch(new Request("https://example.test/api/search", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query: "pizza", useGooglePlaces: true }),
+  }), { GOOGLE_PLACES_API_KEY: "secret" });
+  assert.equal(response.status, 403);
+  assert.equal((await response.json()).error, "Origem não permitida para a consulta externa.");
+});
+
+test("falha do Google Places não interrompe a busca local", async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => new Response("quota exceeded", { status: 429 });
+  try {
+    const response = await worker.fetch(new Request("https://example.test/api/search", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Origin: "https://example.test" },
+      body: JSON.stringify({ query: "pizza", useGooglePlaces: true }),
+    }), { GOOGLE_PLACES_API_KEY: "secret" });
+    const payload = await response.json();
+    assert.equal(response.status, 200);
+    assert.ok(payload.results.length > 0);
+    assert.equal(payload.googlePlaces.status, "unavailable");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
 
 test("API bloqueia POST de outra origem", async () => {

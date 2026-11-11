@@ -90,6 +90,7 @@ function populateMeta(meta) {
   $("stat-date").textContent = formatSnapshot(meta.snapshot_date);
   for (const neighborhood of meta.neighborhoods) $("neighborhood-filter").append(option(neighborhood));
   for (const cuisine of meta.cuisines) $("cuisine-filter").append(option(cuisine, cuisine.replace(/\b\w/g, (letter) => letter.toUpperCase())));
+  $("google-source-option").hidden = !meta.google_places_available;
 }
 
 function intentEntries(intent) {
@@ -449,6 +450,56 @@ function renderSuggestions(values) {
   box.append(list);
 }
 
+function googleBusinessStatus(value) {
+  return {
+    OPERATIONAL: "em funcionamento",
+    CLOSED_TEMPORARILY: "fechado temporariamente",
+    CLOSED_PERMANENTLY: "fechado permanentemente",
+  }[value] || null;
+}
+
+function renderGooglePlaces(provider) {
+  const section = $("google-results-section");
+  const list = $("google-results");
+  const note = $("google-results-note");
+  list.replaceChildren();
+  if (!provider || provider.status === "disabled" || provider.status === "not_configured") {
+    section.hidden = true;
+    return;
+  }
+
+  section.hidden = false;
+  if (provider.status !== "ok") {
+    note.textContent = "A consulta ao Google Maps está temporariamente indisponível. Os resultados da base local continuam válidos.";
+    return;
+  }
+
+  note.textContent = provider.resultCount
+    ? `${provider.resultCount} ${provider.resultCount === 1 ? "resultado consultado" : "resultados consultados"} agora, sem armazenamento local.`
+    : "O Google Maps não retornou outra opção para esta busca.";
+  for (const place of provider.results || []) {
+    const card = make("article", undefined, "google-result-card");
+    card.append(make("h4", place.name), make("p", place.address || "Endereço não informado pelo Google Maps"));
+    const meta = make("div", undefined, "google-result-meta");
+    for (const value of [place.primaryType, googleBusinessStatus(place.businessStatus)].filter(Boolean)) {
+      meta.append(make("span", value));
+    }
+    if (meta.childElementCount) card.append(meta);
+    const mapsUrl = safeUrl(place.mapsUrl);
+    if (mapsUrl) card.append(actionLink("Abrir no Google Maps ↗", mapsUrl));
+    if (place.attributions?.length) {
+      const attribution = make("div", "Fonte adicional: ", "google-attributions");
+      place.attributions.forEach((source, index) => {
+        if (index) attribution.append(document.createTextNode(" · "));
+        const sourceUrl = safeUrl(source.url);
+        attribution.append(sourceUrl ? actionLink(source.name, sourceUrl) : document.createTextNode(source.name));
+      });
+      card.append(attribution);
+    }
+    list.append(card);
+  }
+}
+
 function renderResponse(payload) {
   state.results = payload.results;
   state.selected = 0;
@@ -461,6 +512,7 @@ function renderResponse(payload) {
   if (!payload.results.length) list.append(make("p", "A base não confirmou nenhuma opção com todos esses critérios.", "address"));
   renderMap(payload.results);
   renderSuggestions(payload.suggestions);
+  renderGooglePlaces(payload.googlePlaces);
 }
 
 async function search() {
@@ -479,6 +531,9 @@ async function search() {
       cuisine: $("cuisine-filter").value,
       latitude: state.location?.latitude,
       longitude: state.location?.longitude,
+      useGooglePlaces: Boolean(
+        state.userInteracted && state.meta?.google_places_available && $("google-source").checked,
+      ),
     }, controller.signal);
     if (sequence !== state.searchSequence || controller.signal.aborted) return false;
     renderResponse(payload);
@@ -516,6 +571,7 @@ for (const button of document.querySelectorAll("[data-query]")) {
 }
 $("neighborhood-filter").addEventListener("change", () => { state.userInteracted = true; search(); });
 $("cuisine-filter").addEventListener("change", () => { state.userInteracted = true; search(); });
+$("google-source").addEventListener("change", () => { state.userInteracted = true; search(); });
 $("location-button").addEventListener("click", () => {
   state.userInteracted = true;
   if (!navigator.geolocation) {

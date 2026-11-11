@@ -10,6 +10,8 @@ const read = (relative) => fs.readFileSync(resolve(relative), "utf8");
 for (const relative of [
   "dist/server/index.js",
   "pages/index.html",
+  "pages/terms.html",
+  "pages/privacy.html",
   "pages/favicon.svg",
   "pages/data/fortaleza-basemap.json",
   "pages/vendor/leaflet/leaflet.js",
@@ -28,6 +30,12 @@ const { default: worker } = await import(`${pathToFileURL(resolve("dist/server/i
 const homeResponse = await worker.fetch(new Request("https://build.local/"), {});
 assert.equal(homeResponse.status, 200);
 assert.match(homeResponse.headers.get("content-type") ?? "", /text\/html/);
+
+for (const policyPath of ["/terms.html", "/privacy.html"]) {
+  const policyResponse = await worker.fetch(new Request(`https://build.local${policyPath}`), {});
+  assert.equal(policyResponse.status, 200);
+  assert.match(policyResponse.headers.get("content-type") ?? "", /text\/html/);
+}
 
 const metaResponse = await worker.fetch(new Request("https://build.local/api/meta"), {});
 assert.equal(metaResponse.status, 200);
