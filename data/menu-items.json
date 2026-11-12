@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": 1,
-    "generated_at": "2026-11-11T17:32:01+00:00",
+    "generated_at": "2026-11-12T17:37:40+00:00",
     "feed_count": 2,
     "successful_feeds": 2,
     "failed_feeds": 0,
@@ -12,7 +12,7 @@
       "source_url": "https://m.odionisio.com/cocina-378/menu/view",
       "permission_basis": "restaurant_public_feed",
       "source_updated_at": null,
-      "fetched_at": "2026-11-11T17:32:00+00:00",
+      "fetched_at": "2026-11-12T17:37:40+00:00",
       "stale": false,
       "last_error": null,
       "items": [
@@ -323,19 +323,19 @@
           "source_url": "https://m.odionisio.com/cocina-378/menu/view"
         },
         {
-          "name": "Risoto Cítrico de Camarões",
-          "description": "Arroz arbóreo, cebola, vinho branco, camarões graúdos salteados e finalizados na manteiga, parmesão e toque de limão siciliano.",
+          "name": "Atum Semicrudo com Risotto Negro",
+          "description": "Filé alto de atum selado com risoto de arroz negro e salsa verde",
           "category": "DO MAR",
-          "price_cents": 9100,
+          "price_cents": 8400,
           "currency": "BRL",
           "available": true,
           "source_url": "https://m.odionisio.com/cocina-378/menu/view"
         },
         {
-          "name": "Atum Semicrudo com Risotto Negro",
-          "description": "Filé alto de atum selado com risoto de arroz negro e salsa verde",
+          "name": "Risoto Cítrico de Camarões",
+          "description": "Arroz arbóreo, cebola, vinho branco, camarões graúdos salteados e finalizados na manteiga, parmesão e toque de limão siciliano.",
           "category": "DO MAR",
-          "price_cents": 8400,
+          "price_cents": 9100,
           "currency": "BRL",
           "available": true,
           "source_url": "https://m.odionisio.com/cocina-378/menu/view"
@@ -746,8 +746,8 @@
           "source_url": "https://m.odionisio.com/cocina-378/menu/view"
         },
         {
-          "name": "Carioca",
-          "description": "Café expresso com maior diluição",
+          "name": "Nespresso",
+          "description": "Ristretto, Leggero ou Descafeinado",
           "category": "CAFÉ",
           "price_cents": 1000,
           "currency": "BRL",
@@ -755,8 +755,8 @@
           "source_url": "https://m.odionisio.com/cocina-378/menu/view"
         },
         {
-          "name": "Nespresso",
-          "description": "Ristretto, Leggero ou Descafeinado",
+          "name": "Carioca",
+          "description": "Café expresso com maior diluição",
           "category": "CAFÉ",
           "price_cents": 1000,
           "currency": "BRL",
@@ -890,10 +890,10 @@
           "source_url": "https://m.odionisio.com/cocina-378/menu/view"
         },
         {
-          "name": "Cerveja Pray",
-          "description": "Lager Premium Sem Glúten",
+          "name": "Cerveja Heineken 330ml",
+          "description": null,
           "category": "CERVEJAS",
-          "price_cents": 1800,
+          "price_cents": 1600,
           "currency": "BRL",
           "available": true,
           "source_url": "https://m.odionisio.com/cocina-378/menu/view"
@@ -908,10 +908,10 @@
           "source_url": "https://m.odionisio.com/cocina-378/menu/view"
         },
         {
-          "name": "Cerveja Heineken 330ml",
-          "description": null,
+          "name": "Cerveja Pray",
+          "description": "Lager Premium Sem Glúten",
           "category": "CERVEJAS",
-          "price_cents": 1600,
+          "price_cents": 1800,
           "currency": "BRL",
           "available": true,
           "source_url": "https://m.odionisio.com/cocina-378/menu/view"
@@ -1070,7 +1070,7 @@
           "source_url": "https://m.odionisio.com/cocina-378/menu/view"
         },
         {
-          "name": "Fitzgerald",
+          "name": "Bloody Mary",
           "description": null,
           "category": "DRINKS CLÁSSICOS",
           "price_cents": 3400,
@@ -1079,7 +1079,7 @@
           "source_url": "https://m.odionisio.com/cocina-378/menu/view"
         },
         {
-          "name": "Bloody Mary",
+          "name": "Fitzgerald",
           "description": null,
           "category": "DRINKS CLÁSSICOS",
           "price_cents": 3400,
@@ -1228,7 +1228,7 @@
       "source_url": "https://barracanossapraia.ola.click/products",
       "permission_basis": "restaurant_public_feed",
       "source_updated_at": null,
-      "fetched_at": "2026-11-11T17:32:01+00:00",
+      "fetched_at": "2026-11-12T17:37:38+00:00",
       "stale": false,
       "last_error": null,
       "items": [
