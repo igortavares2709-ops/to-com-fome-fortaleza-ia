@@ -1,0 +1,386 @@
+{
+  "artifact": {
+    "algorithm": "multinomial_naive_bayes",
+    "path": "ml/artifacts/menu-category-nb.json",
+    "training_examples": 280,
+    "vocabulary_size": 2198
+  },
+  "data": {
+    "corpus_fields": [
+      "restaurant_id",
+      "name",
+      "description",
+      "source_category",
+      "weak_label"
+    ],
+    "corpus_sha256": "b68b64b9d03abaae19365ea9d5fe990892aad9361f2acb0c64979b4d126a8b6d",
+    "excluded_items": 0,
+    "path": "data/menu-items.json",
+    "source_restaurants": 2,
+    "total_items": 280,
+    "weakly_labeled_items": 280
+  },
+  "experiment": "menu-category-nb-v1",
+  "intended_use": "baseline experimental para normalização ampla de categorias de cardápio",
+  "metrics": {
+    "leave_one_restaurant_out": {
+      "aggregate": {
+        "accuracy": 0.689286,
+        "confusion_matrix": {
+          "bebida_alcoolica": {
+            "bebida_alcoolica": 85,
+            "bebida_sem_alcool": 3,
+            "entrada_acompanhamento": 4,
+            "prato_principal": 4,
+            "sobremesa": 1
+          },
+          "bebida_sem_alcool": {
+            "bebida_alcoolica": 16,
+            "bebida_sem_alcool": 20,
+            "entrada_acompanhamento": 0,
+            "prato_principal": 1,
+            "sobremesa": 0
+          },
+          "entrada_acompanhamento": {
+            "bebida_alcoolica": 1,
+            "bebida_sem_alcool": 0,
+            "entrada_acompanhamento": 12,
+            "prato_principal": 42,
+            "sobremesa": 0
+          },
+          "prato_principal": {
+            "bebida_alcoolica": 1,
+            "bebida_sem_alcool": 0,
+            "entrada_acompanhamento": 6,
+            "prato_principal": 72,
+            "sobremesa": 0
+          },
+          "sobremesa": {
+            "bebida_alcoolica": 2,
+            "bebida_sem_alcool": 0,
+            "entrada_acompanhamento": 0,
+            "prato_principal": 6,
+            "sobremesa": 4
+          }
+        },
+        "examples": 280,
+        "macro_f1": 0.599282,
+        "per_class": {
+          "bebida_alcoolica": {
+            "f1": 0.841584,
+            "precision": 0.809524,
+            "recall": 0.876289,
+            "support": 97
+          },
+          "bebida_sem_alcool": {
+            "f1": 0.666667,
+            "precision": 0.869565,
+            "recall": 0.540541,
+            "support": 37
+          },
+          "entrada_acompanhamento": {
+            "f1": 0.311688,
+            "precision": 0.545455,
+            "recall": 0.218182,
+            "support": 55
+          },
+          "prato_principal": {
+            "f1": 0.705882,
+            "precision": 0.576,
+            "recall": 0.911392,
+            "support": 79
+          },
+          "sobremesa": {
+            "f1": 0.470588,
+            "precision": 0.8,
+            "recall": 0.333333,
+            "support": 12
+          }
+        }
+      },
+      "folds": [
+        {
+          "held_out_restaurant_id": "n13344640161",
+          "metrics": {
+            "accuracy": 0.712329,
+            "confusion_matrix": {
+              "bebida_alcoolica": {
+                "bebida_alcoolica": 48,
+                "bebida_sem_alcool": 3,
+                "entrada_acompanhamento": 1,
+                "prato_principal": 4,
+                "sobremesa": 1
+              },
+              "bebida_sem_alcool": {
+                "bebida_alcoolica": 2,
+                "bebida_sem_alcool": 16,
+                "entrada_acompanhamento": 0,
+                "prato_principal": 0,
+                "sobremesa": 0
+              },
+              "entrada_acompanhamento": {
+                "bebida_alcoolica": 0,
+                "bebida_sem_alcool": 0,
+                "entrada_acompanhamento": 8,
+                "prato_principal": 27,
+                "sobremesa": 0
+              },
+              "prato_principal": {
+                "bebida_alcoolica": 0,
+                "bebida_sem_alcool": 0,
+                "entrada_acompanhamento": 3,
+                "prato_principal": 29,
+                "sobremesa": 0
+              },
+              "sobremesa": {
+                "bebida_alcoolica": 0,
+                "bebida_sem_alcool": 0,
+                "entrada_acompanhamento": 0,
+                "prato_principal": 1,
+                "sobremesa": 3
+              }
+            },
+            "examples": 146,
+            "macro_f1": 0.695229,
+            "per_class": {
+              "bebida_alcoolica": {
+                "f1": 0.897196,
+                "precision": 0.96,
+                "recall": 0.842105,
+                "support": 57
+              },
+              "bebida_sem_alcool": {
+                "f1": 0.864865,
+                "precision": 0.842105,
+                "recall": 0.888889,
+                "support": 18
+              },
+              "entrada_acompanhamento": {
+                "f1": 0.340426,
+                "precision": 0.666667,
+                "recall": 0.228571,
+                "support": 35
+              },
+              "prato_principal": {
+                "f1": 0.623656,
+                "precision": 0.47541,
+                "recall": 0.90625,
+                "support": 32
+              },
+              "sobremesa": {
+                "f1": 0.75,
+                "precision": 0.75,
+                "recall": 0.75,
+                "support": 4
+              }
+            }
+          },
+          "status": "evaluated",
+          "test_examples": 146,
+          "train_examples": 134
+        },
+        {
+          "held_out_restaurant_id": "n13758923940",
+          "metrics": {
+            "accuracy": 0.664179,
+            "confusion_matrix": {
+              "bebida_alcoolica": {
+                "bebida_alcoolica": 37,
+                "bebida_sem_alcool": 0,
+                "entrada_acompanhamento": 3,
+                "prato_principal": 0,
+                "sobremesa": 0
+              },
+              "bebida_sem_alcool": {
+                "bebida_alcoolica": 14,
+                "bebida_sem_alcool": 4,
+                "entrada_acompanhamento": 0,
+                "prato_principal": 1,
+                "sobremesa": 0
+              },
+              "entrada_acompanhamento": {
+                "bebida_alcoolica": 1,
+                "bebida_sem_alcool": 0,
+                "entrada_acompanhamento": 4,
+                "prato_principal": 15,
+                "sobremesa": 0
+              },
+              "prato_principal": {
+                "bebida_alcoolica": 1,
+                "bebida_sem_alcool": 0,
+                "entrada_acompanhamento": 3,
+                "prato_principal": 43,
+                "sobremesa": 0
+              },
+              "sobremesa": {
+                "bebida_alcoolica": 2,
+                "bebida_sem_alcool": 0,
+                "entrada_acompanhamento": 0,
+                "prato_principal": 5,
+                "sobremesa": 1
+              }
+            },
+            "examples": 134,
+            "macro_f1": 0.478087,
+            "per_class": {
+              "bebida_alcoolica": {
+                "f1": 0.778947,
+                "precision": 0.672727,
+                "recall": 0.925,
+                "support": 40
+              },
+              "bebida_sem_alcool": {
+                "f1": 0.347826,
+                "precision": 1.0,
+                "recall": 0.210526,
+                "support": 19
+              },
+              "entrada_acompanhamento": {
+                "f1": 0.266667,
+                "precision": 0.4,
+                "recall": 0.2,
+                "support": 20
+              },
+              "prato_principal": {
+                "f1": 0.774775,
+                "precision": 0.671875,
+                "recall": 0.914894,
+                "support": 47
+              },
+              "sobremesa": {
+                "f1": 0.222222,
+                "precision": 1.0,
+                "recall": 0.125,
+                "support": 8
+              }
+            }
+          },
+          "status": "evaluated",
+          "test_examples": 134,
+          "train_examples": 146
+        }
+      ],
+      "status": "evaluated"
+    },
+    "stratified_group_holdout": {
+      "accuracy": 0.814286,
+      "confusion_matrix": {
+        "bebida_alcoolica": {
+          "bebida_alcoolica": 24,
+          "bebida_sem_alcool": 0,
+          "entrada_acompanhamento": 0,
+          "prato_principal": 0,
+          "sobremesa": 0
+        },
+        "bebida_sem_alcool": {
+          "bebida_alcoolica": 3,
+          "bebida_sem_alcool": 6,
+          "entrada_acompanhamento": 0,
+          "prato_principal": 0,
+          "sobremesa": 0
+        },
+        "entrada_acompanhamento": {
+          "bebida_alcoolica": 0,
+          "bebida_sem_alcool": 0,
+          "entrada_acompanhamento": 5,
+          "prato_principal": 9,
+          "sobremesa": 0
+        },
+        "prato_principal": {
+          "bebida_alcoolica": 0,
+          "bebida_sem_alcool": 0,
+          "entrada_acompanhamento": 0,
+          "prato_principal": 20,
+          "sobremesa": 0
+        },
+        "sobremesa": {
+          "bebida_alcoolica": 1,
+          "bebida_sem_alcool": 0,
+          "entrada_acompanhamento": 0,
+          "prato_principal": 0,
+          "sobremesa": 2
+        }
+      },
+      "examples": 70,
+      "macro_f1": 0.773144,
+      "per_class": {
+        "bebida_alcoolica": {
+          "f1": 0.923077,
+          "precision": 0.857143,
+          "recall": 1.0,
+          "support": 24
+        },
+        "bebida_sem_alcool": {
+          "f1": 0.8,
+          "precision": 1.0,
+          "recall": 0.666667,
+          "support": 9
+        },
+        "entrada_acompanhamento": {
+          "f1": 0.526316,
+          "precision": 1.0,
+          "recall": 0.357143,
+          "support": 14
+        },
+        "prato_principal": {
+          "f1": 0.816327,
+          "precision": 0.689655,
+          "recall": 1.0,
+          "support": 20
+        },
+        "sobremesa": {
+          "f1": 0.8,
+          "precision": 1.0,
+          "recall": 0.666667,
+          "support": 3
+        }
+      }
+    }
+  },
+  "not_for": [
+    "alergias",
+    "restrições médicas",
+    "decisões automáticas sobre disponibilidade"
+  ],
+  "schema_version": 1,
+  "split": {
+    "requested_test_ratio": 0.25,
+    "seed": "fortaleza-menu-nb-v1",
+    "strategy": "stratified_group_holdout_by_normalized_name_fingerprint",
+    "test_examples": 70,
+    "train_examples": 210,
+    "train_test_fingerprint_overlap": 0
+  },
+  "weak_supervision": {
+    "distribution_by_restaurant": {
+      "n13344640161": {
+        "bebida_alcoolica": 57,
+        "bebida_sem_alcool": 18,
+        "entrada_acompanhamento": 35,
+        "prato_principal": 32,
+        "sobremesa": 4
+      },
+      "n13758923940": {
+        "bebida_alcoolica": 40,
+        "bebida_sem_alcool": 19,
+        "entrada_acompanhamento": 20,
+        "prato_principal": 47,
+        "sobremesa": 8
+      }
+    },
+    "exact_duplicate_records_beyond_first": 10,
+    "excluded_by_category": {},
+    "feature_fields": [
+      "name",
+      "description"
+    ],
+    "label_distribution": {
+      "bebida_alcoolica": 97,
+      "bebida_sem_alcool": 37,
+      "entrada_acompanhamento": 55,
+      "prato_principal": 79,
+      "sobremesa": 12
+    },
+    "label_source": "campo category dos feeds oficiais"
+  }
+}

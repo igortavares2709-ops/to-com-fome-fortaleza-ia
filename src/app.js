@@ -167,9 +167,13 @@ function renderIntent(intent) {
   for (const value of entries) container.append(make("span", value, "intent-chip"));
   const unsupported = intent.unsupported || [];
   $("unsupported").hidden = !unsupported.length;
-  $("unsupported").textContent = unsupported.length
-    ? `Este snapshot não possui ${unsupported.join(" ou ")}; esses critérios não foram usados.`
-    : "";
+  const unsupportedMessages = {
+    "preço": "O filtro de preço exige um valor máximo e só usa cardápios oficiais com preços; esse critério não foi aplicado.",
+    "avaliações": "Avaliações não fazem parte desta base; esse critério não foi aplicado.",
+  };
+  $("unsupported").textContent = unsupported
+    .map((item) => unsupportedMessages[item] || `${item} não faz parte desta base; esse critério não foi aplicado.`)
+    .join(" ");
 }
 
 function evidenceRow(label, value) {
@@ -549,6 +553,45 @@ function renderGooglePlaces(provider) {
   }
 }
 
+function renderDiagnostics(diagnostics) {
+  const panel = $("ai-diagnostics");
+  const inference = diagnostics?.inference;
+  if (!diagnostics || !inference) {
+    panel.hidden = true;
+    panel.open = false;
+    return;
+  }
+
+  const outcomeLabels = {
+    success: "saída estruturada aceita",
+    not_configured: "interpretação local",
+    timeout: "timeout · fallback local",
+    rate_limited: "limite do provedor · fallback local",
+    provider_error: "provedor indisponível · fallback local",
+    malformed_response: "resposta inválida · fallback local",
+    schema_rejected: "saída rejeitada · fallback local",
+  };
+  const provider = inference.provider === "openai"
+    ? `OpenAI${inference.model ? ` · ${inference.model}` : ""}`
+    : "Interpretador local";
+  const contract = [inference.promptVersion, inference.schemaVersion].filter(Boolean).join(" · ") || "contrato local";
+  const total = diagnostics.timingsMs?.total;
+  const latency = Number.isFinite(total)
+    ? `${Math.round(total)} ms total`
+    : Number.isFinite(inference.latencyMs)
+      ? `${Math.round(inference.latencyMs)} ms na interpretação`
+      : "não medida";
+
+  $("diag-outcome").textContent = outcomeLabels[inference.outcome] || inference.outcome || "não informado";
+  $("diag-provider").textContent = provider;
+  $("diag-contract").textContent = contract;
+  $("diag-latency").textContent = latency;
+  $("diag-note").textContent = inference.fallbackUsed
+    ? "A busca continuou com o fallback local. O modelo nunca escolhe restaurantes: filtros, distância e ordenação são aplicados em código."
+    : "O modelo interpretou o pedido dentro do contrato. Filtros, distância e ordenação foram aplicados em código.";
+  panel.hidden = false;
+}
+
 function renderResponse(payload) {
   state.results = payload.results;
   state.selected = 0;
@@ -562,6 +605,7 @@ function renderResponse(payload) {
   renderMap(payload.results);
   renderSuggestions(payload.suggestions);
   renderGooglePlaces(payload.googlePlaces);
+  renderDiagnostics(payload.diagnostics);
 }
 
 async function search() {
@@ -571,6 +615,8 @@ async function search() {
   const sequence = ++state.searchSequence;
   state.searchController = controller;
   $("notice").textContent = "";
+  $("ai-diagnostics").hidden = true;
+  $("ai-diagnostics").open = false;
   $("mode-badge").textContent = "Interpretando…";
   $("results-panel").setAttribute("aria-busy", "true");
   try {

@@ -10,7 +10,7 @@
     <title>Tô com Fome Fortaleza IA</title>
     <link rel="icon" href="/favicon.svg?v=20261111-brand1" type="image/svg+xml" />
     <link rel="stylesheet" href="/vendor/leaflet/leaflet.css?v=20261111-map4" />
-    <link rel="stylesheet" href="/styles.css?v=20261111-partners1" />
+    <link rel="stylesheet" href="/styles.css?v=20261111-ai-engineer1" />
   </head>
   <body>
     <a class="skip-link" href="#busca">Ir para a busca</a>
@@ -165,6 +165,17 @@
         <div id="unsupported" class="unsupported" role="status" hidden></div>
         <div id="notice" class="notice" role="status" aria-live="polite"></div>
 
+        <details id="ai-diagnostics" class="ai-diagnostics" hidden>
+          <summary>Como esta busca foi processada</summary>
+          <div class="ai-diagnostics-grid">
+            <span><small>Execução</small><strong id="diag-outcome">—</strong></span>
+            <span><small>Provedor</small><strong id="diag-provider">—</strong></span>
+            <span><small>Contrato</small><strong id="diag-contract">—</strong></span>
+            <span><small>Latência</small><strong id="diag-latency">—</strong></span>
+          </div>
+          <p id="diag-note"></p>
+        </details>
+
         <div class="explorer-grid">
           <section class="map-card" aria-labelledby="map-title">
             <div class="map-topline">
@@ -300,13 +311,13 @@
       <section class="transparency" aria-labelledby="transparency-title">
         <div>
           <span class="step">03 / SAIBA DE ONDE VEM</span>
-          <h2 id="transparency-title">Informação boa mostra suas lacunas.</h2>
+          <h2 id="transparency-title">IA confiável mostra como chegou lá.</h2>
         </div>
         <div class="transparency-grid">
           <article><span>01</span><h3>Base local</h3><p>Estabelecimentos do município de Fortaleza extraídos do OpenStreetMap.</p></article>
-          <article><span>02</span><h3>Regras verificáveis</h3><p>A IA interpreta o pedido. Código calcula distância e aplica cada filtro.</p></article>
-          <article><span>03</span><h3>Sem adivinhação</h3><p>Campo ausente aparece como “não informado”. Nenhum preço ou serviço é inventado.</p></article>
-          <article><span>04</span><h3>Cardápio com origem</h3><p>O botão só aparece quando existe um link público registrado para o restaurante.</p></article>
+          <article><span>02</span><h3>Interpretação híbrida</h3><p>O LLM, quando configurado, gera intenção estruturada. Um interpretador local mantém a busca disponível.</p></article>
+          <article><span>03</span><h3>Guardrails verificáveis</h3><p>Schema, valores permitidos e código determinístico aplicam distância, filtros e negações.</p></article>
+          <article><span>04</span><h3>Resultado fundamentado</h3><p>Cada opção mostra evidências e fontes. Campo ausente permanece “não informado”.</p></article>
         </div>
       </section>
     </main>
@@ -316,6 +327,6 @@
       <div class="attribution">Dados: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a> · ODbL 1.0<br />Fotografias ilustrativas geradas para o projeto.</div>
     </footer>
     <script src="/vendor/leaflet/leaflet.js?v=20261111-map4"></script>
-    <script src="/app.js?v=20261111-partners1"></script>
+    <script src="/app.js?v=20261111-ai-engineer1"></script>
   </body>
 </html>

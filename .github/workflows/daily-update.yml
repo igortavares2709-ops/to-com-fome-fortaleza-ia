@@ -120,6 +120,7 @@ jobs:
         run: |
           python -m py_compile scripts/*.py
           npm test
+          npm run eval
           npm run test:python
           npm run check:data
           npm run build
@@ -176,10 +177,14 @@ jobs:
       - name: Atualizar cardápios e preços oficiais
         run: python scripts/update_menu_feeds.py
 
+      - name: Atualizar baseline de classificação de cardápios
+        run: python scripts/train_menu_classifier.py train
+
       - name: Validar projeto
         run: |
           python -m py_compile scripts/*.py
           npm test
+          npm run eval
           npm run test:python
           npm run check:data
           npm run build
@@ -203,7 +208,10 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/menu-items.json
+          git add \
+            data/menu-items.json \
+            ml/artifacts/menu-category-nb.json \
+            ml/results/menu-classifier-baseline.json
           git commit -m "Atualiza cardápios oficiais (coleta diária)"
           git push origin HEAD:main
 

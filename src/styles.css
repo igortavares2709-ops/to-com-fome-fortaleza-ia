@@ -151,6 +151,16 @@ h2 { margin: 8px 0 18px; font: 600 clamp(29px, 3vw, 42px)/1.12 Georgia, serif; l
 .google-source-option small { color: var(--muted); font-size: 10px; line-height: 1.4; }
 .unsupported { background: #fff0cc; color: #6c5220; border: 1px solid #e9d49a; border-radius: 8px; padding: 11px 14px; margin-bottom: 14px; font-size: 12px; }
 .notice:not(:empty) { background: var(--coral-soft); color: #743b2e; border-radius: 8px; padding: 11px 14px; margin-bottom: 14px; font-size: 12px; }
+.ai-diagnostics { margin: 0 0 18px; border: 1px solid #b8d2ca; border-radius: 12px; background: rgba(240,247,244,.94); color: var(--ink); }
+.ai-diagnostics[hidden] { display: none; }
+.ai-diagnostics summary { min-height: 44px; display: flex; align-items: center; gap: 8px; padding: 10px 14px; color: var(--sea); font-size: 11px; font-weight: 800; cursor: pointer; }
+.ai-diagnostics summary::before { content: "↳"; font-size: 14px; }
+.ai-diagnostics[open] summary { border-bottom: 1px solid #cfe1dc; }
+.ai-diagnostics-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: #cfe1dc; }
+.ai-diagnostics-grid > span { min-width: 0; display: grid; gap: 4px; padding: 12px 14px; background: #f8fcfa; }
+.ai-diagnostics-grid small { color: var(--muted); font-size: 9px; font-weight: 750; letter-spacing: .7px; text-transform: uppercase; }
+.ai-diagnostics-grid strong { overflow-wrap: anywhere; font-size: 11px; font-weight: 750; }
+.ai-diagnostics > p { margin: 0; padding: 11px 14px 13px; color: var(--muted); font-size: 10px; line-height: 1.5; }
 .explorer-grid { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(380px, .88fr); gap: 18px; align-items: start; }
 .map-card, .results-panel { background: var(--white); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-soft); }
 .map-topline, .results-topline { padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); }
@@ -464,6 +474,7 @@ footer a { color: #ffd273; }
   .numbers article { padding: 19px 14px; }
   .explorer { padding: 70px 0 82px; }
   .explorer::before { background: linear-gradient(rgba(248,241,231,.90), rgba(248,241,231,.94)), url("assets/prato-vegano.webp") center / cover no-repeat; }
+  .ai-diagnostics-grid { grid-template-columns: 1fr 1fr; }
   #result-map { height: 430px; }
   .map-legend { flex-wrap: wrap; gap: 8px 15px; }
   .map-help { width: 100%; margin-left: 0; }

@@ -28,6 +28,7 @@ let worker = read("src/worker.mjs")
   .replace("const ASSETS = /*__ASSETS__*/ null;", "const ASSETS = null;")
   .replaceAll("export async function ", "async function ")
   .replaceAll("export function ", "function ")
+  .replaceAll("export const ", "const ")
   .replace("export default worker;", "");
 
 if (

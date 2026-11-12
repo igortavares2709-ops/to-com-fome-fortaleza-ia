@@ -69,10 +69,14 @@ jobs:
           print(f"{restaurant_id}: {len(menu['items'])} itens confirmados.")
           PY
 
+      - name: Atualizar baseline de classificação de cardápios
+        run: python scripts/train_menu_classifier.py train
+
       - name: Validar projeto
         run: |
           python -m py_compile scripts/*.py
           npm test
+          npm run eval
           npm run test:python
           npm run check:data
           npm run build
@@ -94,7 +98,11 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/official-menu-feeds.json data/menu-items.json
+          git add \
+            data/official-menu-feeds.json \
+            data/menu-items.json \
+            ml/artifacts/menu-category-nb.json \
+            ml/results/menu-classifier-baseline.json
           git commit -m "Adiciona cardápio autorizado ${RESTAURANT_ID} (#${ISSUE_NUMBER})"
           git push origin "HEAD:${GITHUB_REF_NAME}"
 

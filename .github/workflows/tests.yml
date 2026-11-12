@@ -16,6 +16,7 @@ jobs:
           python-version: "3.12"
       - run: python -m py_compile scripts/*.py
       - run: npm test
+      - run: npm run eval
       - run: npm run test:python
       - run: npm run check:data
       - run: npm run build
