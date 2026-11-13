@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": 1,
-    "generated_at": "2026-11-12T17:37:40+00:00",
+    "generated_at": "2026-11-13T17:12:29+00:00",
     "feed_count": 2,
     "successful_feeds": 2,
     "failed_feeds": 0,
@@ -12,7 +12,7 @@
       "source_url": "https://m.odionisio.com/cocina-378/menu/view",
       "permission_basis": "restaurant_public_feed",
       "source_updated_at": null,
-      "fetched_at": "2026-11-12T17:37:40+00:00",
+      "fetched_at": "2026-11-13T17:12:29+00:00",
       "stale": false,
       "last_error": null,
       "items": [
@@ -1228,7 +1228,7 @@
       "source_url": "https://barracanossapraia.ola.click/products",
       "permission_basis": "restaurant_public_feed",
       "source_updated_at": null,
-      "fetched_at": "2026-11-12T17:37:38+00:00",
+      "fetched_at": "2026-11-13T17:12:27+00:00",
       "stale": false,
       "last_error": null,
       "items": [
