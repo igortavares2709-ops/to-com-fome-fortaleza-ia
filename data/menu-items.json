@@ -1,10 +1,10 @@
 {
   "meta": {
     "schema_version": 1,
-    "generated_at": "2026-11-14T15:50:02+00:00",
+    "generated_at": "2026-11-15T16:21:07+00:00",
     "feed_count": 2,
-    "successful_feeds": 2,
-    "failed_feeds": 0,
+    "successful_feeds": 1,
+    "failed_feeds": 1,
     "restaurants_with_prices": 2
   },
   "menus": {
@@ -13,8 +13,8 @@
       "permission_basis": "restaurant_public_feed",
       "source_updated_at": null,
       "fetched_at": "2026-11-14T15:50:02+00:00",
-      "stale": false,
-      "last_error": null,
+      "stale": true,
+      "last_error": "HTTPError",
       "items": [
         {
           "name": "CEVICHE DE LAGOSTA",
@@ -1222,13 +1222,14 @@
           "available": true,
           "source_url": "https://m.odionisio.com/cocina-378/menu/view"
         }
-      ]
+      ],
+      "last_attempt_at": "2026-11-15T16:21:07+00:00"
     },
     "n13344640161": {
       "source_url": "https://barracanossapraia.ola.click/products",
       "permission_basis": "restaurant_public_feed",
       "source_updated_at": null,
-      "fetched_at": "2026-11-14T15:50:00+00:00",
+      "fetched_at": "2026-11-15T16:21:05+00:00",
       "stale": false,
       "last_error": null,
       "items": [
