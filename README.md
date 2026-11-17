@@ -8,8 +8,18 @@ Sistema de busca gastronômica que transforma pedidos em português em uma inten
 O desenho separa a parte probabilística da decisão final: um LLM pode interpretar a linguagem natural, mas código determinístico valida a saída, calcula distância, aplica cada restrição e monta as evidências. Sem chave, em timeout ou diante de uma saída inválida, o mesmo contrato é atendido por um interpretador local.
 
 - **Demo:** [perto-no-prato-fortaleza.botanicalanchovy2.chatgpt.site](https://perto-no-prato-fortaleza.botanicalanchovy2.chatgpt.site)
+- **Case AI Builder:** [problema, jornada, valor, métricas e experimentos](docs/AI_BUILDER_CASE.md)
 - **System card e estudo técnico:** [docs/AI_ENGINEERING.md](docs/AI_ENGINEERING.md)
 - **Licença dos dados:** [DATA_LICENSE.md](DATA_LICENSE.md)
+
+## Visão AI Builder
+
+O protótipo parte de uma necessidade cotidiana — decidir onde comer combinando
+localização, preferências e restrições — e transforma linguagem natural em uma
+jornada explicável. A proposta de valor é reduzir busca manual, preservar as
+restrições do usuário e mostrar evidências em vez de depender de recomendações
+opacas. O case documenta hipóteses, sinais de qualidade, riscos e próximos
+testes com usuários, sem apresentar métricas técnicas como impacto comercial.
 
 Projeto independente inspirado no ecossistema de delivery. **Sem vínculo com o iFood e sem coleta de dados do iFood.**
 
