@@ -32,7 +32,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--pbf", type=Path, required=True, help="Path to a Geofabrik Nordeste .osm.pbf")
     parser.add_argument(
         "--source-url",
-        default="https://download.geofabrik.de/south-america/brazil/nordeste-latest.osm.pbf",
+        default="https://download.geofabrik.de/brazil/nordeste/nordeste-latest.osm.pbf",
     )
     parser.add_argument("--snapshot-date", required=True, help="PBF snapshot date (YYYY-MM-DD)")
     parser.add_argument("--boundary", type=Path, help="Optional cached GeoJSON for OSM relation 302588")

@@ -241,7 +241,7 @@ O Google Maps não forma nem reescreve o dataset. Sua resposta permanece transit
 python scripts/extract_geofabrik.py \
   --pbf /caminho/nordeste-AAMMDD.osm.pbf \
   --snapshot-date AAAA-MM-DD \
-  --source-url https://download.geofabrik.de/south-america/brazil/nordeste-AAMMDD.osm.pbf
+  --source-url https://download.geofabrik.de/brazil/nordeste/nordeste-AAMMDD.osm.pbf
 ```
 
 O script requer GDAL/`ogr2ogr`. O PBF, com centenas de megabytes, é armazenado em cache e não entra no Git. `data/fortaleza-restaurants.overpassql` oferece uma rota alternativa de consulta.
