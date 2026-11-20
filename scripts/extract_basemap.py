@@ -24,7 +24,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "data" / "fortaleza-basemap.json"
 DEFAULT_SOURCE_URL = (
-    "https://download.geofabrik.de/south-america/brazil/nordeste-latest.osm.pbf"
+    "https://download.geofabrik.de/brazil/nordeste/nordeste-latest.osm.pbf"
 )
 HIGHWAYS = (
     "motorway",
